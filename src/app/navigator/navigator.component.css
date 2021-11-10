@@ -1,0 +1,9 @@
+.navigation-tabs {
+    max-width: 95%;
+    display: flex;
+    margin: auto;
+  }
+.tab {
+    min-width: 10%;
+    font-family: 'Vidaloka', serif;
+}

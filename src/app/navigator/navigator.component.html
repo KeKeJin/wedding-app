@@ -1,0 +1,12 @@
+<mat-tab-group mat-stretch-tabs class="navigation-tabs"
+fitInkBarToContent=true mat-align-tabs="center" animationDuration="0ms">
+  <div *ngFor="let tab of tabs">
+    <mat-tab label={{tab.name}}> 
+      <ng-template mat-tab-label>
+        <a routerLink='home'>
+          <span class="tab">{{tab.name}} </span>
+        </a>
+      </ng-template>
+    </mat-tab>
+  </div>
+</mat-tab-group>

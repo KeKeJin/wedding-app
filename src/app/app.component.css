@@ -1,0 +1,65 @@
+:host {
+    --font1: 'Emilys Candy', 'Klee One', cursive;
+    --font2: 'Averia Serif Libre', 'Klee One';
+    --font4: 'DotGothic16', sans-serif;
+    /* --font5: 'Hina Mincho', 'Hina Mincho'; */
+    --font6: 'Kaisei Decol';
+    --font7: 'Kaisei HarunoUmi';
+    --font8: 'Kaisei Opti';
+    --font9: 'Klee One', cursive;
+    /* type writer  */
+    --font10: 'New Tegomin', serif; 
+    --font13: 'Shippori Mincho', 'DotGothic16';
+    --font14: 'Shippori Mincho B1';
+    --font15: 'Train One', cursive;
+    --font16: 'ZCOOL XiaoWei', serif;
+    --font-selected:var(--font9);
+    --color1: #f7bdd5;
+    --color2: #5a2f55;
+    --color3: #feceba;
+    --color4: #01618b;
+    --color5: #0f0a17;
+}
+
+.header-main{
+    text-align: center;
+    font-family: var(--font-selected);
+    font-size: 4vw;
+    padding-top: 1.8%;
+    padding-bottom: 1.8%;
+    color: var(--color5);
+}
+
+.header-sub{
+    border-left: 2%;
+    font-family: var(--font-selected);
+    color: var(--color5);
+    font-size: 1vw;
+    top:2vh
+}
+
+.nav-bar {
+    position: sticky;
+    top: 0;
+    background: white;
+}
+.navigation-tabs {
+    margin: 0 auto;
+  }
+.tab {
+    width: 16vw;
+    font-family: var(--font-selected);
+    background: white;
+    color: var(--color5);
+    font-size: 1.5vw;
+}
+.language-selector {
+    top: 2vh;
+    right: 1vw;
+    position: absolute;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
