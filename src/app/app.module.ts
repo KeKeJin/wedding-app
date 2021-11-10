@@ -20,6 +20,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatButtonModule} from '@angular/material/button';
+import { CountDownComponent } from './count-down/count-down.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FaqsComponent,
     RsvpComponent,
     AboutUsComponent,
+    CountDownComponent,
 
   ],
   imports: [

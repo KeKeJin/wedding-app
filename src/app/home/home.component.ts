@@ -20,6 +20,6 @@ export class HomeComponent implements OnInit {
   } else {
     opacity = 0;
   }
-  document.getElementById("header")!.style.opacity = String(opacity);
+  // document.getElementById("header")!.style.opacity = String(opacity);
   }
 }

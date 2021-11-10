@@ -1,0 +1,37 @@
+.timer {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 1.4em;
+    letter-spacing: -1px;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    display: flex;
+    justify-content: space-evenly;
+    width: 48vw;
+    margin: auto;
+  }
+
+.timer span {
+    margin: 2vh 2vw 2vh 2vw;
+    font-family: var(--font2);
+    color: var(--color3);
+  }
+
+  .countdown_block {
+    width: 10vw;
+    height: 20vh;
+    opacity: 0.5;
+    background-color: beige;
+
+  }
+  .time {
+      display:block;
+    padding-top: 5vh;
+    font-size: 3em;
+  }
+  .text {
+    display:block;
+      padding-top: 5vh;
+      font-size: 1em;
+      padding-bottom: 2vh;
+  }

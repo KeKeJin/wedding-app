@@ -103,11 +103,6 @@ img {
     margin-top:2vh;
 }
 
-.background {
-    width: 20vw;
-    left: 0%;
-}
-
 .photo{
     z-index: -1;
     position: absolute;
