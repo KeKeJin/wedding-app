@@ -64,3 +64,24 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
+
+.floating-rsvp {
+    background-color: var(--color1);
+    font-family: var(--font-selected);
+    color: beige;
+    position: fixed;
+    font-size: 1.5em;
+    bottom: 20vh;
+    right: -1vh;
+    vertical-align:top;
+    width: 10vh;
+	transform:rotate(7deg);
+  -ms-transform:rotate(90deg); /* IE 9 */
+  -moz-transform:rotate(90deg); /* Firefox */
+  -webkit-transform:rotate(90deg); /* Safari and Chrome */
+  -o-transform:rotate(90deg); /* Opera */
+}
+
+.floating-rsvp:hover {
+    background-color: var(--color2);
+}
