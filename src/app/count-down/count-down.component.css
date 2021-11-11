@@ -14,7 +14,7 @@
 .timer span {
     margin: 2vh 2vw 2vh 2vw;
     font-family: var(--font2);
-    color: var(--color3);
+    color: var(--color4);
   }
 
   .countdown_block {
@@ -22,12 +22,13 @@
     height: 20vh;
     opacity: 0.5;
     background-color: beige;
-
+    display: block
   }
   .time {
       display:block;
     padding-top: 5vh;
-    font-size: 3em;
+    font-size: 2.4em;
+    text-align: center;
   }
   .text {
     display:block;
