@@ -1,18 +1,18 @@
 <div class="timer">
-    <div class="countdown_block">
+    <button mat-raised-button class="countdown_block" [disableRipple]=true>
         <span class="time"> {{delta_days}} </span>
         <span class="text" i18n> {{'SCHEDULE.DAYS' | translate}}</span>
-    </div>
-    <div class="countdown_block">
+    </button>
+    <button mat-raised-button class="countdown_block" [disableRipple]=true>
         <span class="time"> {{delta_hours}} </span>
         <span class="text" i18n> {{'SCHEDULE.HOURS' | translate}}</span>
-    </div>
-    <div class="countdown_block">
+    </button>
+    <button mat-raised-button class="countdown_block" [disableRipple]=true>
         <span class="time"> {{delta_mins}} </span>
         <span class="text" i18n> {{'SCHEDULE.MINS' | translate}}</span>
-    </div>
-    <div class="countdown_block">
+    </button>
+    <button mat-raised-button class="countdown_block" [disableRipple]=true>
         <span class="time"> {{delta_secs}} </span>
         <span class="text" i18n> {{'SCHEDULE.SECS' | translate}}</span>
-    </div>
+    </button>
 </div>
