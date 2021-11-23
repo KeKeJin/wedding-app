@@ -7,6 +7,7 @@
 <div class="nav-bar">
 <button mat-flat-button class="tab" (click)="scrollToElement(home, '/home')">{{'APP.HOME' | translate}}</button>
 <button mat-flat-button class="tab" (click)="scrollToElement(schedule, '/schedule')">{{'APP.SCHEDULE' | translate}}</button>
+<button mat-flat-button class="tab" (click)="scrollToElement(us, '/us')">{{'APP.ABOUT_US' | translate}}</button>
 <button mat-flat-button class="tab" (click)="scrollToElement(travel, '/travel')">{{'APP.TRAVEL' | translate}}</button>
 <button mat-flat-button class="tab" (click)="scrollToElement(weddingParty, '/wedding-party')">{{'APP.WEDDING_PARTY' | translate}}</button>
 <button mat-flat-button class="tab" (click)="scrollToElement(rsvp, '/rsvp')">{{'APP.RSVP' | translate}}</button>
@@ -17,11 +18,11 @@
 <div #home>
     <app-home></app-home>
 </div>
-<div #aboutUs>
-    <app-about-us></app-about-us>
-</div>
 <div #schedule>
     <app-schedule ></app-schedule>
+</div>
+<div #us>
+    <app-about-us></app-about-us>
 </div>
 <div #travel>
     <app-travel></app-travel>
