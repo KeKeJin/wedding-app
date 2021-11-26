@@ -1,21 +1,18 @@
 <div class="rsvp">
-    <mat-form-field class="rsvp-input" appearance="fill"
-    [hideRequiredMarker]="hideRequiredControl.value"
-    [floatLabel]="floatLabelControl.value">
-    <input matInput placeholder="Name" required>
+    <mat-form-field class="rsvp-input" appearance="fill">
+        <input matInput placeholder="Name" required 
+        type="text" [formControl]="nameFormControl">
     </mat-form-field>
-    <mat-form-field class="rsvp-input" appearance="fill"
-    [hideRequiredMarker]="hideRequiredControl.value"
-    [floatLabel]="floatLabelControl.value">
-    <input matInput placeholder="Email Address" required>
+    <mat-form-field class="rsvp-input" appearance="fill">
+        <input matInput placeholder="Email Address" required
+        type="email" [formControl]="emailFormControl" name="email" ngModel email> 
+        <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
-    <mat-form-field class="rsvp-input" appearance="fill"
-    [hideRequiredMarker]="hideRequiredControl.value"
-    [floatLabel]="floatLabelControl.value">
-    <input matInput placeholder="Number of Guests" required>
+    <mat-form-field class="rsvp-input" appearance="fill">
+    <input type="number" matInput placeholder="Number of Guests" required [formControl]="guestFormControl">
     </mat-form-field>
     <mat-form-field class="rsvp-textarea" appearance="fill">
-        <textarea matInput placeholder="Message"></textarea>
+        <textarea matInput placeholder="Message" type="text" [formControl]="messageFormControl"></textarea>
       </mat-form-field>
-      <button class="rsvp-submit" mat-raised-button>submit</button>
+      <button [disabled]="isValid" class="rsvp-submit" mat-raised-button (click)="submitForm()">submit</button>
     </div>

@@ -9,14 +9,37 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class RsvpComponent  {
 
   options: FormGroup;
-  hideRequiredControl = new FormControl(false);
-  floatLabelControl = new FormControl('auto');
+  nameFormControl = new FormControl('');
+  emailFormControl = new FormControl('');
+  guestFormControl = new FormControl(0);
+  messageFormControl = new FormControl('');
 
   constructor(fb: FormBuilder) {
     this.options = fb.group({
-      hideRequired: this.hideRequiredControl,
-      floatLabel: this.floatLabelControl,
+      name: this.nameFormControl,
+      email: this.emailFormControl,
+      guestNumber: this.guestFormControl,
+      message: this.messageFormControl,
     });
   }
 
+  submitForm(){
+    const value= this.options.value;
+    const isValid = this.options.valid;
+    console.log("clicked", isValid, value);
+  }
+
+  get isValid() {
+    return !this.options.valid;
+  }
+
+  getErrorMessage() {
+    if (this.emailFormControl.hasError('required')) {
+      return 'You must enter a value';
+      // search by last name, auto populate their first names,
+      // drop down on the number of attandees, populate input box 
+      // special requests:  kids meal, vegan, gluton quantity
+    }
+    return this.emailFormControl.hasError('email') ? 'Not a valid email' : '';
+  }
 }
