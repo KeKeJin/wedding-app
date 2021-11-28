@@ -1,4 +1,4 @@
-<div class="rsvp">
+<!-- <div class="rsvp">
     <mat-form-field class="rsvp-input" appearance="fill">
         <input matInput placeholder="Name" required 
         type="text" [formControl]="nameFormControl">
@@ -15,4 +15,65 @@
         <textarea matInput placeholder="Message" type="text" [formControl]="messageFormControl"></textarea>
       </mat-form-field>
       <button [disabled]="isValid" class="rsvp-submit" mat-raised-button (click)="submitForm()">submit</button>
+    </div> -->
+    <div class="rsvp">
+        <div *ngIf="_isLoading">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div *ngIf="isRSVPinitiated && !_isLoading">
+            <h1> Please enter your last name!</h1>
+            <mat-form-field class="rsvp-input" appearance="fill">
+                <input matInput required 
+                type="text" [formControl]="lastNameFormControl">
+            </mat-form-field>
+            <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button (click)="submitLastName()">submit</button>
+        </div>
+        <div *ngIf="isLastNameVerified && !_isLoading">
+            <h1> last name verified</h1>
+        </div>
+        <div *ngIf="isLastNameNotVerified && !_isLoading">
+            <h1> last name NOT verified, please try again</h1>
+            <mat-form-field class="rsvp-input" appearance="fill">
+                <input matInput required 
+                type="text" [formControl]="lastNameFormControl">
+            </mat-form-field>
+            <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button (click)="submitLastName()">submit</button>
+        </div>
+        <div *ngIf="isLastNameDuplicated && !_isLoading">
+            <h1> We found multiple guests with your last name, please select below: </h1>
+            <div *ngFor="let party of objectKeys(_guestsFromSheets)">
+                <div *ngFor="let guest of _guestsFromSheets[party]">
+                    <h1> {{guest.firstName}}</h1>
+                </div>
+                <div> 
+                    <button class="rsvp-submit" mat-raised-button (click)="selectParty(party)">select</button>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div *ngIf="isGuestsRSVPinitiated && !_isLoading">
+            <h1> rsvp initiaited</h1>
+            <div *ngFor="let guest of _guests">
+                <div class="rsvp-row">
+                <h1>{{guest.firstName}} {{guest.lastName}}</h1>
+                <button class="rsvp-guest-will-attend rsvp-button" [class.highlight-button]="isGuestAttending(guest)" mat-raised-button (click)="guestWillAttendHandler(guest)">Will Attend</button>
+                <button class="rsvp-guest-will-not-attend rsvp-button" [class.highlight-button]="isGuestNotAttending(guest)" mat-raised-button (click)="guestWillNotAttendHandler(guest)">Will Not Attend</button>
+                </div>
+                <div *ngIf="isGuestAttending(guest)">
+                    <div class = "rsvp-row">
+                        <button class="rsvp-submit rsvp-button" mat-raised-button >kid's meal?</button>
+                        <button class="rsvp-submit rsvp-button" mat-raised-button >vegan?</button>
+                        <button class="rsvp-submit rsvp-button" mat-raised-button >gluton free?</button>
+                    </div>
+                        <mat-form-field class="rsvp-input" appearance="fill">
+                        <input matInput placeholder="Email Address" required
+                        type="email" [formControl]="emailFormControl" name="email" ngModel email> 
+                        <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="rsvp-textarea" appearance="fill">
+                        <textarea matInput placeholder="Additional Requests" type="text" [formControl]="messageFormControl"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
     </div>
