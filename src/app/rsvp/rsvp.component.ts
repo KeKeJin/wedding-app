@@ -74,15 +74,40 @@ export class RsvpComponent  {
     return group;
   }
 
-  submitForm(){
+  async submitForm(){
     this.formGroupsToGuests();
     console.log("clicked", this._guests);
+    const url = new URL(this._URL);
+  url.searchParams.append('rsvpResult', JSON.stringify(this._guests));
+  this._isLoading=true;
+  return await fetch(url.href, {
+    method: 'POST'
+  })
+    .then((res) => {
+      return res.text();
+    })
+    .then((res) => {
+      if (res == 'false') {
+        this._state = RSVPState.guestsRSVPinitiated; //TODO: error handling
+        this._isLoading = false;
+        return Promise.reject();
+      }
+      else {
+        this._state = RSVPState.guestsRSVPCompleted;
+        console.log(res);
+        this._isLoading = false;
+        return res;
+      }
+    });
   }
+
+
 
   private formGroupsToGuests() {
     for (let i = 0; i < this._guests!.length; i++) {
       this._guests![i].email = this.guestsFormGroups[i].controls['email'].value;
       this._guests![i].message = this.guestsFormGroups[i].controls['message'].value;
+      this._guests![i].responseTime = new Date().toString();
     }
   }
 
