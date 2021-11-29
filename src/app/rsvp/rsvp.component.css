@@ -10,6 +10,29 @@
     margin: auto;
     padding-top: 5vh;
     padding-bottom: 5vh;
+    align-items: center;
+}
+
+.rsvp-spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: var(--color1);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.rsvp-center {
+    margin: auto
+}
+mat-spinner {
+    margin: auto
+}
+.rsvp-instruction {
+    text-align: center;
+    font-family: var(--font9);
+}
+.rsvp-name{
+    text-align: center;
+    font-family: var(--font9);
 }
 .rsvp-input {
     width: 40%;
@@ -24,7 +47,7 @@
     margin-right: auto;
 }
 
-.rsvp-rpw-item {
+.rsvp-row-item {
     display: block
 }
 
@@ -40,8 +63,7 @@
 }
 
 .rsvp-submit {
-    margin-left: auto;
-    margin-right: auto;
+    max-height: 8vh;
 }
 
 .rsvp-guest-will-attend {
