@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export interface Guest {
-  firstName : string,
-  lastName : string,
+  guestName: string,
+  guestId: number,
   partyId : number,
+  lastName : string,
+  firstName : string,
   extraGuest: number,	
   kidsMeal: boolean,
   vegan: boolean,
