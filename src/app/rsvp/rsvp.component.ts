@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import client_keys from "./../../assets/google-api-credentials.json";
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export interface Guest {
   firstName : string,
   lastName : string,
@@ -8,7 +7,11 @@ export interface Guest {
   extraGuest: number,	
   kidsMeal: boolean,
   vegan: boolean,
-  willAttend: boolean
+  glutonFree: boolean,
+  willAttend: boolean,
+  email: string,
+  message: string,
+  responseTime: string
 }
 
 export enum RSVPState {
@@ -27,54 +30,62 @@ export enum RSVPState {
 })
 export class RsvpComponent  {
 
-   // Client ID and API key from the Developer Console
-_CLIENT_ID = client_keys.client_id;
-_API_KEY = client_keys.private_key_id;
-_URL = "https://script.google.com/macros/s/AKfycbwGeYrv2TJ_WBfwip8-FAix1HDZkEAUaPyIQALFEnGu7cTDG_8idCZmPyasoHoQqsB3/exec"
+  _URL = "https://script.google.com/macros/s/AKfycbwGeYrv2TJ_WBfwip8-FAix1HDZkEAUaPyIQALFEnGu7cTDG_8idCZmPyasoHoQqsB3/exec"
 
- // Array of API discovery doc URLs for APIs used by the quickstart
-_DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+  _state = RSVPState.RSVPinitiated;
 
- // Authorization scopes required by the API; multiple scopes can be
- // included, separated by spaces.
-_SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+  _guestsFromSheets?: any;
 
-_state = RSVPState.RSVPinitiated;
+  _guests?: Guest[];
 
-_guestsFromSheets?: any;
+  _isLoading:boolean = false;
 
-_guests?: Guest[];
-
-_isLoading:boolean = false;
-
-  options: FormGroup;
+  guestsFormGroups: FormGroup[];
+  guestFG: FormGroup;
   nameFormControl = new FormControl('');
   emailFormControl = new FormControl('');
-  guestFormControl = new FormControl(0);
   messageFormControl = new FormControl('');
   lastNameFormControl = new FormControl('');
   _SHEETID = '1D8BHWpdjsce4buteqRaNyaRaz1WNG59Y7yKSWm4FiOE';
 
   objectKeys = Object.keys;
-  constructor(fb: FormBuilder) {
-    console.log('client keys', client_keys)
-    console.log('client api', this._API_KEY)
-    this.options = fb.group({
-      name: this.nameFormControl,
-      email: this.emailFormControl,
-      guestNumber: this.guestFormControl,
-      message: this.messageFormControl,
-    });
+  constructor(public fb: FormBuilder) {
+    this.guestFG = this.fb.group({});
+    this.guestsFormGroups = [];
+  }
+
+  // getGuideline() {
+  //   this.guidelines = this.data.tabObj[0];
+  //   console.log(this.guidelines);
+  //   this.form = this.createGroup();
+  // }
+
+  createGroup() {
+    const group = this.fb.group({});
+    this._guests!.forEach(guest => {
+      const guestFb = this.fb.group({
+        email: new FormControl(''),
+        message: new FormControl(''),
+      })
+      this.guestsFormGroups.push(guestFb);
+      });
+    return group;
   }
 
   submitForm(){
-    const value= this.options.value;
-    const isValid = this.options.valid;
-    console.log("clicked", isValid, value);
+    this.formGroupsToGuests();
+    console.log("clicked", this._guests);
+  }
+
+  private formGroupsToGuests() {
+    for (let i = 0; i < this._guests!.length; i++) {
+      this._guests![i].email = this.guestsFormGroups[i].controls['email'].value;
+      this._guests![i].message = this.guestsFormGroups[i].controls['message'].value;
+    }
   }
 
   get isValid() {
-    return !this.options.valid;
+    return !this.guestFG.valid;
   }
 
   get isLastNameValid() {
@@ -104,6 +115,16 @@ _isLoading:boolean = false;
   get isLastNameDuplicated() {
     return this._state == RSVPState.lastNameDuplicated;
   }
+
+
+  getEmailFormControl(i: number):FormControl {
+    return this.guestsFormGroups[i].get('email') as FormControl;
+  }
+
+  getMessageFormControl(i: number):FormControl {
+    return this.guestsFormGroups[i].get('message') as FormControl;
+  }
+
   getErrorMessage() {
     if (this.emailFormControl.hasError('required')) {
       return 'You must enter a value';
@@ -150,9 +171,10 @@ private checkIfDuplicateGuests() {
     if (Object.keys(this._guestsFromSheets).length > 1) {
       this._state = RSVPState.lastNameDuplicated;
     } else {
-      this._state = RSVPState.guestsRSVPinitiated;
       const partyId = this.objectKeys(this._guestsFromSheets)[0];
       this._guests = this._guestsFromSheets[partyId];
+      this.createGroup();
+      this._state = RSVPState.guestsRSVPinitiated;
     }
   }
 }
@@ -160,6 +182,7 @@ private checkIfDuplicateGuests() {
 selectParty(groupId: string) {
   if (this._state == RSVPState.lastNameDuplicated) {
     this._guests = this._guestsFromSheets![groupId];
+    this.createGroup();
     this._state = RSVPState.guestsRSVPinitiated;
   }
 }
@@ -171,6 +194,18 @@ guestWillAttendHandler(guest:Guest) {
 
 guestWillNotAttendHandler(guest:Guest) {
   guest.willAttend=false;
+}
+
+guestKidsMealToggle(guest:Guest) {
+  guest.kidsMeal = !guest.kidsMeal;
+}
+
+guestVeganToggle(guest:Guest) {
+  guest.vegan = !guest.vegan;
+}
+
+guestGlutonFreeToggle(guest:Guest) {
+  guest.glutonFree = !guest.glutonFree;
 }
 
 isGuestAttending(guest:Guest) {
