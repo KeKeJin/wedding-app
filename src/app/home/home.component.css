@@ -16,6 +16,7 @@ img {
   
     /* Set a specific height */
     min-height: 750px;
+    height: 100vh;
     position: relative;
     /* Create the parallax scrolling effect */
     background-attachment: fixed;

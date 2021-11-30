@@ -13,7 +13,9 @@
     --font14: 'Shippori Mincho B1';
     --font15: 'Train One', cursive;
     --font16: 'ZCOOL XiaoWei', serif;
-    --font-selected:var(--font9);
+    --font17: 'Estonia', cursive;
+    --font18: 'Special Elite', cursive;
+    --font-selected:var(--font18);
     --color1: #f7bdd5;
     --color2: #5a2f55;
     --color3: #feceba;
@@ -24,7 +26,7 @@
 
 .header-main{
     text-align: center;
-    font-family: var(--font-selected);
+    font-family: var(--font17);
     font-size: 4vw;
     padding-top: 1.8%;
     padding-bottom: 1.8%;
@@ -33,7 +35,7 @@
 
 .header-sub{
     border-left: 2%;
-    font-family: var(--font-selected);
+    font-family: var(--font18);
     color: var(--color5);
     font-size: 1vw;
     top:2vh

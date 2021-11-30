@@ -1,8 +1,8 @@
 <select #langSelect class="language-selector" (change)="translate.use(langSelect.value)">
     <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
   </select>
-<h3 i18n class="header-sub noselect"> {{ 'APP.SUB_TITLE' | translate }}</h3>
-<h1 i18n class="header-main noselect" >{{'APP.TITLE' | translate}}</h1>
+<!-- <h3 i18n class="header-sub noselect"> {{ 'APP.SUB_TITLE' | translate }}</h3>
+<h1 i18n class="header-main noselect" >{{'APP.TITLE' | translate}}</h1> -->
 
 <div class="nav-bar">
 <button mat-flat-button class="tab" (click)="scrollToElement(home, '/home')">{{'APP.HOME' | translate}}</button>
