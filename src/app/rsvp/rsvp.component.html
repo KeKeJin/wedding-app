@@ -79,16 +79,58 @@
                         (click)="guestGlutonFreeToggle(guest)"
                         [class.highlight-button]="guest.glutonFree" >gluton free?</button>
                     </div>
-                        <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
-                        <input ngDefaultControl matInput placeholder="Email Address"
-                        type="email" [formControl]="getEmailFormControl(i)" name="email" ngModel email> 
-                        <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage()}}</mat-error>
+                    <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
+                    <input ngDefaultControl matInput placeholder="Email Address"
+                    type="email" [formControl]="getEmailFormControl(i)" name="email" ngModel email> 
+                    <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
                     <mat-form-field ngDefaultControl class="rsvp-textarea rsvp-name" appearance="fill">
                         <textarea matInput placeholder="Additional Requests" type="text"
                         [formControl]="getMessageFormControl(i)"></textarea>
                     </mat-form-field>
                 </div>
+            </div>
+            <div *ngFor="let guest of _extraGuests; let i=index">
+                <div class="rsvp-row">
+                    <div class="rsvp">
+                        <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
+                            <input ngDefaultControl matInput placeholder="First Name"
+                            [formControl]="getExtraGuestFirstNameFormControl(i)" name="first_name" required> 
+                            <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
+                            <input ngDefaultControl matInput placeholder="Last Name"
+                            [formControl]="getExtraGuestLastNameFormControl(i)" name="last_name" required> 
+                            <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <button class="rsvp-submit" class="rsvp-center" mat-raised-button (click)="removeGuest(i)">Remove Guest</button>
+                </div>
+                <div class="rsvp">
+                    <div class = "rsvp-row">
+                        <button type="boolean" ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button 
+                        (click)="guestKidsMealToggle(guest)"
+                        [class.highlight-button]="guest.kidsMeal" >kid's meal?</button>
+                        <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button 
+                        (click)="guestVeganToggle(guest)"
+                        [class.highlight-button]="guest.vegan" >vegan?</button>
+                        <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button 
+                        (click)="guestGlutonFreeToggle(guest)"
+                        [class.highlight-button]="guest.glutonFree" >gluton free?</button>
+                    </div>
+                        <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
+                        <input ngDefaultControl matInput placeholder="Email Address"
+                        type="email" [formControl]="getExtraGuestEmailFormControl(i)" name="email" ngModel email> 
+                        <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field ngDefaultControl class="rsvp-textarea rsvp-name" appearance="fill">
+                        <textarea matInput placeholder="Additional Requests" type="text"
+                        [formControl]="getExtraGuestMessageFormControl(i)"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="rsvp-row" *ngIf="allowExtraGuest">
+                <button [disabled]="isValid" class="rsvp-submit" class="rsvp-center" mat-raised-button (click)="addGuest()">Add Extra Guest</button>
             </div>
             <div class="rsvp-row">
                 <button [disabled]="isValid" class="rsvp-submit" class="rsvp-center" mat-raised-button (click)="submitForm()">submit</button>

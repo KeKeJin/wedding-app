@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export interface Guest {
   guestName: string,
   guestId: number,
@@ -40,9 +40,18 @@ export class RsvpComponent  {
 
   _guests?: Guest[];
 
+  _extraGuests: Guest[] = [];
+
   _isLoading:boolean = false;
 
+  _extraGuestCount: number = 0;
+
+  _extraGuestAdded: number = 0;
+
   guestsFormGroups: FormGroup[];
+
+  extraGuestsFormGroups: FormGroup[] = [];
+
   guestFG: FormGroup;
   nameFormControl = new FormControl('');
   emailFormControl = new FormControl('');
@@ -51,7 +60,7 @@ export class RsvpComponent  {
   _SHEETID = '1D8BHWpdjsce4buteqRaNyaRaz1WNG59Y7yKSWm4FiOE';
 
   objectKeys = Object.keys;
-  constructor(public fb: FormBuilder) {
+  constructor(public fb: FormBuilder, public cdr: ChangeDetectorRef) {
     this.guestFG = this.fb.group({});
     this.guestsFormGroups = [];
   }
@@ -62,27 +71,51 @@ export class RsvpComponent  {
   //   this.form = this.createGroup();
   // }
 
+  calculateExtraGuestCount() {
+    return this._guests!.forEach(guest => {
+      this._extraGuestCount += guest.extraGuest;
+    })
+  }
+
   createGroup() {
     const group = this.fb.group({});
     this._guests!.forEach(guest => {
-      const guestFb = this.fb.group({
-        email: new FormControl(''),
-        message: new FormControl(''),
-      })
+      const guestFb = this.createFormGroup();
       this.guestsFormGroups.push(guestFb);
       });
+    this.calculateExtraGuestCount();
+    for (let i = 0; i < this._extraGuestCount; ++i) {
+      const guestFb = this.createExtraGuestFormGroup();
+      this.extraGuestsFormGroups.push(guestFb);
+    }
     return group;
+  }
+
+  createFormGroup() {
+    return this.fb.group({
+      email: new FormControl(''),
+      message: new FormControl(''),
+    })
+  }
+
+  createExtraGuestFormGroup() {
+    return this.fb.group({
+      lastName: new FormControl(''),
+      firstName: new FormControl(''),
+      email: new FormControl(''),
+      message: new FormControl(''),
+    })
   }
 
   async submitForm(){
     this.formGroupsToGuests();
     console.log("clicked", this._guests);
     const url = new URL(this._URL);
-  url.searchParams.append('rsvpResult', JSON.stringify(this._guests));
-  this._isLoading=true;
-  return await fetch(url.href, {
-    method: 'POST'
-  })
+    url.searchParams.append('rsvpResult', JSON.stringify(this._guests));
+    this._isLoading=true;
+    return await fetch(url.href, {
+      method: 'POST'
+    })
     .then((res) => {
       return res.text();
     })
@@ -104,11 +137,64 @@ export class RsvpComponent  {
 
 
   private formGroupsToGuests() {
-    for (let i = 0; i < this._guests!.length; i++) {
+    let i;
+    for (i = 0; i < this._guests!.length; i++) {
       this._guests![i].email = this.guestsFormGroups[i].controls['email'].value;
       this._guests![i].message = this.guestsFormGroups[i].controls['message'].value;
       this._guests![i].responseTime = new Date().toString();
+      this._guests![i].extraGuest = 0;
     }
+    this._guests![0].extraGuest = this._extraGuestCount;
+    for (let i = 0; i < this._extraGuests!.length; i++) {
+      const firstName = this.extraGuestsFormGroups[i].controls['firstName'].value;
+      const lastName = this.extraGuestsFormGroups[i].controls['lastName'].value;
+      this._extraGuests![i].firstName = firstName;
+      this._extraGuests![i].lastName = lastName;
+      this._extraGuests![i].guestName = lastName + ', ' + firstName;
+      this._extraGuests![i].email = this.extraGuestsFormGroups[i].controls['email'].value;
+      this._extraGuests![i].message = this.extraGuestsFormGroups[i].controls['message'].value;
+      this._extraGuests![i].responseTime = new Date().toString();
+    }
+    this._guests = this._guests?.concat(this._extraGuests);
+  }
+
+  addGuest() {
+    console.log("adding guest")
+    this._extraGuestCount--;
+    this._extraGuestAdded++;
+    this._extraGuests?.push(
+      {
+        guestName: '',
+        guestId: 0,
+        partyId : this._guests![0].partyId,
+        lastName : '',
+        firstName : '',
+        extraGuest: 0,	
+        kidsMeal: false,
+        vegan: false,
+        glutonFree: false,
+        willAttend: true,
+        email: '',
+        message: '',
+        responseTime: new Date().toString()
+      }
+    )
+    this.cdr.detectChanges();
+  }
+
+  removeGuest(i:number) {
+    this._extraGuestCount++;
+    this._extraGuestAdded--;
+    this._extraGuests?.splice(i,1)
+    this.cdr.detectChanges();
+    console.log(this._extraGuestCount, this._extraGuestAdded)
+  }
+
+  get allowExtraGuest() {
+    if (this._extraGuestCount == 0) {
+      return false;
+    }
+    return true;
   }
 
   get isValid() {
@@ -150,6 +236,22 @@ export class RsvpComponent  {
 
   getMessageFormControl(i: number):FormControl {
     return this.guestsFormGroups[i].get('message') as FormControl;
+  }
+
+  getExtraGuestFirstNameFormControl(i: number):FormControl {
+    return this.extraGuestsFormGroups[i].get('firstName') as FormControl;
+  }
+
+  getExtraGuestLastNameFormControl(i: number):FormControl {
+    return this.extraGuestsFormGroups[i].get('lastName') as FormControl;
+  }
+
+  getExtraGuestMessageFormControl(i: number):FormControl {
+    return this.extraGuestsFormGroups[i].get('message') as FormControl;
+  }
+
+  getExtraGuestEmailFormControl(i: number):FormControl {
+    return this.extraGuestsFormGroups[i].get('email') as FormControl;
   }
 
   getErrorMessage() {
