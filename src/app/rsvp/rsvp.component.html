@@ -25,7 +25,8 @@
             <div class="rsvp-row">
                 <mat-form-field class="rsvp-input" appearance="fill">
                     <input matInput required 
-                    type="text" [formControl]="lastNameFormControl">
+                    type="text" [formControl]="lastNameFormControl"
+                    (keyup.enter)="submitLastName()">
                 </mat-form-field>
                 <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button (click)="submitLastName()">submit</button>
             </div>
@@ -38,7 +39,8 @@
             <div class="rsvp-row">
                 <mat-form-field class="rsvp-input" appearance="fill">
                     <input matInput required 
-                    type="text" [formControl]="lastNameFormControl">
+                    type="text" [formControl]="lastNameFormControl"
+                    (keyup.enter)="submitLastName()">
                 </mat-form-field>
                 <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button (click)="submitLastName()">submit</button>
             </div>
