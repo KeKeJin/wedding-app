@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { truncate } from 'fs';
 export interface Guest {
   guestName: string,
   guestId: number,
@@ -13,7 +14,8 @@ export interface Guest {
   willAttend: boolean,
   email: string,
   message: string,
-  responseTime: string
+  responseTime: string,
+  guestsGuest: boolean
 }
 
 export enum RSVPState {
@@ -42,6 +44,8 @@ export class RsvpComponent  {
 
   _extraGuests: Guest[] = [];
 
+  _guestsGuestCount: number = 0;
+
   _isLoading:boolean = false;
 
   _extraGuestCount: number = 0;
@@ -65,12 +69,6 @@ export class RsvpComponent  {
     this.guestsFormGroups = [];
   }
 
-  // getGuideline() {
-  //   this.guidelines = this.data.tabObj[0];
-  //   console.log(this.guidelines);
-  //   this.form = this.createGroup();
-  // }
-
   calculateExtraGuestCount() {
     return this._guests!.forEach(guest => {
       this._extraGuestCount += guest.extraGuest;
@@ -79,22 +77,31 @@ export class RsvpComponent  {
 
   createGroup() {
     const group = this.fb.group({});
-    this._guests!.forEach(guest => {
-      const guestFb = this.createFormGroup();
-      this.guestsFormGroups.push(guestFb);
+    this._guests!.forEach((guest, i)=> {
+      if (!guest.guestsGuest) {
+        const guestFb = this.createFormGroup(guest);
+        this.guestsFormGroups.push(guestFb);
+      } else {
+        const guestFb = this.createGuestsGuestFormGroup(guest);
+        this.extraGuestsFormGroups.push(guestFb);
+        const guestsGuest = this._guests?.splice(i, 1) as Guest[];
+        this._extraGuests.push(guestsGuest[0]);
+      }
       });
     this.calculateExtraGuestCount();
     for (let i = 0; i < this._extraGuestCount; ++i) {
       const guestFb = this.createExtraGuestFormGroup();
       this.extraGuestsFormGroups.push(guestFb);
     }
+    console.log(this._guests);
+    console.log(this._extraGuests);
     return group;
   }
 
-  createFormGroup() {
+  createFormGroup(guest: Guest) {
     return this.fb.group({
-      email: new FormControl(''),
-      message: new FormControl(''),
+      email: new FormControl(guest.email),
+      message: new FormControl(guest.message),
     })
   }
 
@@ -107,12 +114,22 @@ export class RsvpComponent  {
     })
   }
 
+  createGuestsGuestFormGroup(guest: Guest) {
+    return this.fb.group({
+      lastName: new FormControl(guest.lastName),
+      firstName: new FormControl(guest.firstName),
+      email: new FormControl(guest.email),
+      message: new FormControl(guest.message),
+    })
+  }
+
   async submitForm(){
     this.formGroupsToGuests();
     console.log("clicked", this._guests);
     const url = new URL(this._URL);
     url.searchParams.append('rsvpResult', JSON.stringify(this._guests));
     this._isLoading=true;
+    console.log(JSON.stringify(this._guests))
     return await fetch(url.href, {
       method: 'POST'
     })
@@ -176,7 +193,8 @@ export class RsvpComponent  {
         willAttend: true,
         email: '',
         message: '',
-        responseTime: new Date().toString()
+        responseTime: new Date().toString(),
+        guestsGuest: true
       }
     )
     this.cdr.detectChanges();

@@ -92,7 +92,7 @@
             </div>
             <div *ngFor="let guest of _extraGuests; let i=index">
                 <div class="rsvp-row">
-                    <div class="rsvp">
+                    <div class="rsvp-row">
                         <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
                             <input ngDefaultControl matInput placeholder="First Name"
                             [formControl]="getExtraGuestFirstNameFormControl(i)" name="first_name" required> 
