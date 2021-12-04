@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { truncate } from 'fs';
+
 export interface Guest {
   guestName: string,
   guestId: number,
@@ -93,8 +93,6 @@ export class RsvpComponent  {
       const guestFb = this.createExtraGuestFormGroup();
       this.extraGuestsFormGroups.push(guestFb);
     }
-    console.log(this._guests);
-    console.log(this._extraGuests);
     return group;
   }
 
@@ -129,7 +127,6 @@ export class RsvpComponent  {
     const url = new URL(this._URL);
     url.searchParams.append('rsvpResult', JSON.stringify(this._guests));
     this._isLoading=true;
-    console.log(JSON.stringify(this._guests))
     return await fetch(url.href, {
       method: 'POST'
     })
@@ -176,7 +173,6 @@ export class RsvpComponent  {
   }
 
   addGuest() {
-    console.log("adding guest")
     this._extraGuestCount--;
     this._extraGuestAdded++;
     this._extraGuests?.push(
@@ -205,7 +201,6 @@ export class RsvpComponent  {
     this._extraGuestAdded--;
     this._extraGuests?.splice(i,1)
     this.cdr.detectChanges();
-    console.log(this._extraGuestCount, this._extraGuestAdded)
   }
 
   get allowExtraGuest() {
@@ -313,7 +308,6 @@ private async getGuestsFromSheet(): Promise<any> {
 }
 
 private checkIfDuplicateGuests() {
-  console.log("check if duplicated guests", this._guests)
   if (this._state == RSVPState.lastNameVerified) {
     if (Object.keys(this._guestsFromSheets).length > 1) {
       this._state = RSVPState.lastNameDuplicated;
