@@ -12,10 +12,11 @@ img {
 
 .parallax {
     /* The image used */
-    background-image: url("./../../assets/0N4A7715.jpg");
+    background-image: url("./../../assets/home.png");
   
     /* Set a specific height */
-    min-height: 750px;
+    /* min-height: 3000px; */
+    width: auto;
     height: 100vh;
     position: relative;
     /* Create the parallax scrolling effect */

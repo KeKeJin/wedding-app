@@ -4,30 +4,30 @@
     <div *ngFor="let story of stories, let i = index">
         <div style="padding-top:5%"></div>
         <div *ngIf="i % 2 == 0">
-            <div class="our-stories-row" >
-                <div class="our-stories-side-block">
+            <div class="our-stories-row story-row-{{i}}">
+                <div class="our-stories-side-block left" [@leftEnter]="isInview('story-row-'+i)">
                     <div style="padding-top: 3%;"></div>
                     <img class="our-stories-photo-left" src={{story.photo}}>
                 </div>
                 <div class="our-stories-mid-block">
                     <!-- <span class="dot"></span> -->
                 </div>
-                <div class="our-stories-side-block">
+                <div class="our-stories-side-block right" [@rightEnter]="isInview('story-row-'+i)">
                     <h2 class="our-stories-text-right title noselect" i18n>{{story.title| translate}}</h2>
                     <p class="our-stories-text-right noselect" i18n>{{story.body | translate}}</p>
                 </div>
             </div>
         </div>
         <div *ngIf="i % 2 == 1">
-            <div class="our-stories-row" >
-                <div class="our-stories-side-block">
+            <div class="our-stories-row story-row-{{i}}">
+                <div class="our-stories-side-block left" [@leftEnter]="isInview('story-row-'+i)">
                     <h2 class="our-stories-text-right title noselect" i18n>{{story.title| translate}}</h2>
                     <p class="our-stories-text-right noselect" i18n>{{story.body | translate}}</p>
                 </div>
                 <div class="our-stories-mid-block">
                     <!-- <span class="dot"></span> -->
                 </div>
-                <div class="our-stories-side-block">
+                <div class="our-stories-side-block right" [@rightEnter]="isInview('story-row-'+i)">
                     <div style="padding-top: 3%;"></div>
                     <img class="our-stories-photo-left" src={{story.photo}}>
                 </div>
