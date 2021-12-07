@@ -24,6 +24,11 @@
     background-color: white;
 }
 
+@font-face {
+    font-family: "black diamond";
+    src: url("./../assets/font.woff") format('woff');
+}
+
 .header-main{
     text-align: center;
     font-family: var(--font17);
