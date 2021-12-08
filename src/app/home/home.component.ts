@@ -36,10 +36,15 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
     trigger('pound', [
       transition('*=>*', [
-        animate('0.3s', style({ transform: 'scale(1.3)' })),
-        animate('0.3s', style({ transform: 'scale(1)' })),
-        animate('0.3s', style({ transform: 'scale(1.3)' })),
-        animate('0.3s', style({ transform: 'scale(1)' })),
+        animate('0.2s', style({ transform: 'scale(1.3)' })),
+        animate('0.1s', style({ transform: 'scale(1)' })),
+        animate('0.2s', style({ transform: 'scale(1.3)' })),
+        animate('0.1s', style({ transform: 'scale(1)' })),
+        animate('1s', style({ transform: 'scale(1)' })),
+        animate('0.2s', style({ transform: 'scale(1.3)' })),
+        animate('0.1s', style({ transform: 'scale(1)' })),
+        animate('0.2s', style({ transform: 'scale(1.3)' })),
+        animate('0.1s', style({ transform: 'scale(1)' })),
       ]),
     ]),
   ]
