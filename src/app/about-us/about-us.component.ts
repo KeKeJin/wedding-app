@@ -96,8 +96,6 @@ export class AboutUsComponent implements OnInit {
         rect.left >= -element.clientWidth &&
         rect.bottom <= Math.max(window.innerHeight, document.documentElement.clientHeight)+element.clientHeight &&
         rect.right <= Math.max(window.innerWidth, document.documentElement.clientWidth)+element.clientWidth
-    
-    console.log(className, " is in view? ", inView);
     return inView? "inView": "notInView";
   }
 }
