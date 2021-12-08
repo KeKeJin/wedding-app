@@ -23,8 +23,8 @@ export class AppComponent {
             link: './home',
             index: 0
         }, {
-          label: 'About Us',
-          link: './about-us',
+          label: 'Our Story',
+          link: './us',
           index: 1
         },{
             label: 'Schedule',

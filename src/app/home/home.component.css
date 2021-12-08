@@ -12,10 +12,12 @@ img {
 
 .parallax {
     /* The image used */
-    background-image: url("./../../assets/0N4A7485.jpg");
+    background-image: url("./../../assets/0N4A7715-Edit.jpg");
   
     /* Set a specific height */
-    min-height: 750px;
+    /* min-height: 3000px; */
+    width: auto;
+    height: 100vh;
     position: relative;
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -24,19 +26,39 @@ img {
     background-size: cover;
     z-index: -1;
   }
+
 .header {
-    font-family: 'Emilys Candy', 'Long Cang';
+    display: flex;
+    justify-content:center;
+}
+.header-name {
+    font-family: 'black diamond', 'Emily Candy';
     z-index: 2;
-    text-align: center;
-    height: auto;
     opacity: 1;
-    text-align: center;
     position: absolute;
+    top: 15vh;
+    color: white;
+    /* line-height: 10vh; */
+    /* max-width: 35vw; */
+    /* min-height: auto; */
+    /* width: auto; */
+    /* height: auto */
+    /* min-height: auto; */
+    width: auto;
+    height: auto;
+}
+
+.left {
+    margin-right: 40vw;
+    font-size: 10vw;
+}
+.center {
     font-size: 5vw;
-    top: 30vh;
-    left: 20vw;
-    color: var(--color3);
-    line-height: 10vh;
+}
+
+.right {
+    margin-left: 40vw;
+    font-size: 10vw;
 }
 .text-info {
     z-index: 1;
