@@ -1,0 +1,48 @@
+{
+    "APP": {
+        "TITLE": "JON & KE",
+        "SUB_TITLE": "JULY 30, 2022       YORBA LINDA, CA",
+        "HOME": "HOME",
+        "ABOUT_US": "JON + KE",
+        "SCHEDULE": "SCHEDULE",
+        "TRAVEL": "TRAVEL",
+        "REGISTRY": "REGISTRY",
+        "WEDDING_PARTY": "WEDDING PARTY",
+        "PHOTOS": "PHOTOS",
+        "THINGS_TO_DO": "THINGS TO DO",
+        "FAQS": "FAQS",
+        "RSVP": "RSVP"
+    },
+    "HOME": {
+        "JONATHAN_HAYASE": "JONATHAN HAYASE",
+        "KE_JIN": "KE JIN",
+        "YORBA_LINDA": "YORBA LINDA",
+        "CA":"CA",
+        "JULY_30": "JULY 30",
+        "WE_ARE_GETTING_MARRIED": "We are getting MARRIED!!"
+    },
+    "SCHEDULE": {
+        "DATE": "Saturday, July 30, 2022",
+        "VENUE": "The Richard Nixon Library & Museum",
+        "ADDRESS": "18001 Yorba Linda Blvd, Yorba Linda, CA 92886",
+        "DAYS": "DAYS",
+        "HOURS": "HOURS",
+        "MINS": "MINUTES",
+        "SECS": "SECONDS"
+    },
+    "OUR_STORY": {
+        "OUR_STORY": "Our Story",
+        "FIRST_TIME": "First time we met",
+        "FIRST_TIME_BODY": "We met at a bible study in college. ... ",
+        "HOW_WE_GOT_CLOSER": "How we got closer",
+        "HOW_WE_GOT_CLOSER_BODY": "One of the traditions for Bible study is for people who sit on the same couch to connect through a meal. One time Jon and Ke sat on the same couch at bible study, together with Andrew Ni and Jacqui Giese. The four of them went to grab a meal at Menkoi Ya Ramen, and friended each other on Snapchat. A day later, Jon sent Ke a snapchat photo of the 8am sun, in bold text it said, 'time to go to sleep'. Jon appearantly had just finished a hackthon the night before, and he probably did not expect anyone to respond to his Snapchat photo, because that is how Snapchat works. You share your life with your friends, and they don't respond back. But not knowing the Snapchat culture, and also feeling sorry for Jon, Ke texted Jon back on Snapchat, 'oh no.' That is how Jon and Ke started chatting.",
+        "FELL_IN_LOVE": "Jon confessed to Ke",
+        "FELL_IN_LOVE_BODY": "Jon and Ke chatted and chatted, from Snapchat to Messenger, from Anime to Kdrama, from silly things to serious topics. After chatting with Ke for a long time, Jon dreamed about confessing to Ke, for three nights in a row. So he did confessed in real life, and... Ke friendzoned him, for three times.",
+        "FELL_IN_LOVE_AGAIN": "Ke confessed to Jon",
+        "FELL_IN_LOVE_AGAIN_BODY": "",
+        "PROPOSAL": "The Proposal",
+        "PROPOSAL_BODY": "Jon asked Ke and she said yes!",
+        "WEDDING": "The Wedding",
+        "WEDDING_BODY": "."
+    }
+  }

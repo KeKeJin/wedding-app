@@ -1,7 +1,7 @@
 .timer {
     text-align: center;
     font-family: Arial, sans-serif;
-    font-size: 1.4em;
+    font-size: 20%;
     letter-spacing: -1px;
     padding-top: 5vh;
     padding-bottom: 5vh;
@@ -11,28 +11,25 @@
     margin: auto;
   }
 
-.timer span {
-    margin: 2vh 2vw 2vh 2vw;
+.timer div {
     font-family: var(--font2);
     color: var(--color1);
   }
 
   .countdown_block {
     width: 10vw;
-    height: 20vh;
+    height: 10vw;
     opacity: 0.5;
     background-color:  #F5F5F5;
     display: block
   }
   .time {
-    display:block;
-    padding-top: 4vh;
-    font-size: 6vh;
+    height: 5vw;
+    font-size: 5vw;
+    padding-top: 2vw;
     text-align: center;
   }
   .text {
-    display:block;
-      padding-top: 2vh;
-      font-size: 2vh;
-      padding-bottom: 2vh;
+    font-size: 2vw;
+    height: 3vw;
   }

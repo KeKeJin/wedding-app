@@ -12,6 +12,7 @@ export class AppComponent {
   title = 'wedding-app';
   navLinks: any[];
   activeLinkIndex = -1; 
+  languageSelected = 'en';
 
   constructor(
     private router: Router,
@@ -51,10 +52,6 @@ export class AppComponent {
           link: './things-to-do',
           index: 7
           }, {
-          label: 'FAQs',
-          link: './faqs',
-          index: 8
-          }, {
           label: 'RSVP',
           link: './rsvp',
           index: 9
@@ -73,6 +70,16 @@ ngOnInit(): void {
   });
 }
 
+  onLanguageToggled(): void {
+    if (this.languageSelected == 'en') {
+      this.translate.use('zh');
+      this.languageSelected = 'zh';
+    } else {
+      this.translate.use('en');
+      this.languageSelected = 'en';
+    }
+
+  }
 
   scrollToElement($element:HTMLElement, route: string): void {
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});

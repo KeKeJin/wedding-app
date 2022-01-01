@@ -29,10 +29,13 @@
     src: url("./../assets/font.woff") format('woff');
 }
 
+body {
+    margin: 0;
+}
 .header-main{
     text-align: center;
     font-family: var(--font17);
-    font-size: 4vw;
+    font-size: 4rem;
     padding-top: 1.8%;
     padding-bottom: 1.8%;
     color: var(--color5);
@@ -42,7 +45,7 @@
     border-left: 2%;
     font-family: var(--font18);
     color: var(--color5);
-    font-size: 1vw;
+    font-size: 1rem;
     top:2vh
 }
 
@@ -59,15 +62,40 @@
   }
 .tab {
     width: 10vw;
+    text-align: center;
     font-family: var(--font-selected);
     background: white;
     color: var(--color5);
-    font-size: 1vw;
+    font-size: 1rem;
+    height: 5ex;
+}
+
+.tab-slider {
+    text-align: center;
+    font-family: var(--font-selected);
+    background: white;
+    color: var(--color5);
+    font-size: 1rem;
+    height: 5ex;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
 }
 .language-selector {
-    top: 2vh;
-    right: 1vw;
-    position: absolute;
+    /* border-width: 0em;
+    text-align: center; */
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.language-text {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+
 }
 img {
     display: block;
@@ -80,16 +108,12 @@ img {
     font-family: var(--font-selected);
     color: beige;
     position: fixed;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     bottom: 20vh;
     right: -1vh;
     vertical-align:top;
     width: 10vh;
-	transform:rotate(7deg);
-  -ms-transform:rotate(90deg); /* IE 9 */
-  -moz-transform:rotate(90deg); /* Firefox */
-  -webkit-transform:rotate(90deg); /* Safari and Chrome */
-  -o-transform:rotate(90deg); /* Opera */
+	transform:rotate(90deg);
 }
 
 .floating-rsvp:hover {
@@ -105,3 +129,58 @@ img {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: rgba(0,0,0,.38); ;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: white ;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 3.6rem;
+    height: 1.5rem;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 1.5rem;
+    width: 1.5rem;
+    left: 0.3rem;
+    bottom: 0.6rem;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(1.5rem);
+    -ms-transform: translateX(1.5rem);
+    transform: translateX(1.5rem);
+  }
+  
