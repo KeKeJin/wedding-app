@@ -61,12 +61,6 @@ export class AboutUsComponent implements OnInit {
       body: 'OUR_STORY.HOW_WE_GOT_CLOSER_BODY',
     },
     {
-      photo: 'assets/our-story-3-cropped.jpeg',
-      when: '',
-      title: 'OUR_STORY.FELL_IN_LOVE',
-      body: 'OUR_STORY.FELL_IN_LOVE_BODY',
-    },
-    {
       photo: 'assets/our-story-4-cropped.jpeg',
       when: '',
       title: 'OUR_STORY.FELL_IN_LOVE_AGAIN',

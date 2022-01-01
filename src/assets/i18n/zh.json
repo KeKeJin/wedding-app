@@ -18,8 +18,7 @@
         "KE_JIN": "金科",
         "YORBA_LINDA": "约巴林达",
         "CA":"加州",
-        "JULY_30": "七月三十日",
-        "WE_ARE_GETTING_MARRIED": "我们要结婚啦！！"
+        "JULY_30": "七月三十日"
     },
     "SCHEDULE": {
         "DATE": "星期六·二零二二年·七月三十日",
@@ -36,13 +35,20 @@
         "FIRST_TIME_BODY": "We met at a bible study in college. ... ",
         "HOW_WE_GOT_CLOSER": "相识",
         "HOW_WE_GOT_CLOSER_BODY": "One of the traditions for Bible study is for people who sit on the same couch to connect through a meal. One time we sat on the same couch, together with Andrew Ni and Jacqui Giese. The four of us went to grab a meal as the couch group at Menkoi Ya Ramen, where we friended each other on snapchat. A day later, Jon sent Ke a snapchat photo at 8 am of the saphire blue sky, in bold text it said, 'time to go to sleep'. Ke responded, 'oh no.' That is how we started chatting.",
-        "FELL_IN_LOVE": "告白",
-        "FELL_IN_LOVE_BODY": "Jon liked Ke, so he confessed to her that he liked her, but Ke just wanted to remain friends. Ke's rejection was like a blow on Jon's head, but he didn't gave up. He confessed three times in total, and guess what, he got rejected three times in total.",
         "FELL_IN_LOVE_AGAIN": "相恋",
         "FELL_IN_LOVE_AGAIN_BODY": "God changed Ke's heart, and when Ke looked deep into her heart, she found herself falling for Jon. Luckly it wasn't too late.",
         "PROPOSAL": "求婚",
         "PROPOSAL_BODY": "It was such a surprise. It was a beautiful day. And it has been beautiful ever since.",
         "WEDDING": "婚礼",
         "WEDDING_BODY": "It will be another beautiful day."
+    },
+    "TRAVEL": {
+        "TRAVEL": "旅行"
+    },
+    "RSVP": {
+        "RSVP": "赐复"
+    },
+    "REGISTRY": {
+        "REGISTRY": "心愿单"
     }
   }
