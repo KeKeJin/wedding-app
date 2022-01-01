@@ -49,19 +49,13 @@ export class AboutUsComponent implements OnInit {
 
   stories:Story[] = [
     {
-      photo: 'assets/our-story-1.JPG',
-      when: '',
-      title: 'OUR_STORY.FIRST_TIME',
-      body: 'OUR_STORY.FIRST_TIME_BODY'
-    },
-    {
       photo: 'assets/our-story-2-cropped.jpg',
       when: '',
       title: 'OUR_STORY.HOW_WE_GOT_CLOSER',
       body: 'OUR_STORY.HOW_WE_GOT_CLOSER_BODY',
     },
     {
-      photo: 'assets/our-story-4-cropped.jpeg',
+      photo: 'assets/our-story-4.jpg',
       when: '',
       title: 'OUR_STORY.FELL_IN_LOVE_AGAIN',
       body: 'OUR_STORY.FELL_IN_LOVE_AGAIN_BODY',
