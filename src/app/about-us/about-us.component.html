@@ -1,6 +1,6 @@
 <h1 class="our-story-header noselect" i18n>{{'OUR_STORY.OUR_STORY'| translate}}</h1>
 <div style="padding-top:5%"></div>
-<div class="timeline">
+<div class="timeline" *ngIf="!shouldChangeMenu()">
     <div *ngFor="let story of stories, let i = index">
         <div style="padding-top:5%"></div>
         <div *ngIf="i % 2 == 0">
@@ -10,7 +10,7 @@
                     <img class="our-stories-photo-left" src={{story.photo}}>
                 </div>
                 <div class="our-stories-mid-block">
-                    <!-- <span class="dot"></span> -->
+                    <span class="dot"></span>
                 </div>
                 <div class="our-stories-side-block right" [@rightEnter]="isInview('story-row-'+i)">
                     <h2 class="our-stories-text-right title noselect" i18n>{{story.title| translate}}</h2>
@@ -25,7 +25,7 @@
                     <p class="our-stories-text-right noselect" i18n>{{story.body | translate}}</p>
                 </div>
                 <div class="our-stories-mid-block">
-                    <!-- <span class="dot"></span> -->
+                    <span class="dot"></span>
                 </div>
                 <div class="our-stories-side-block right" [@rightEnter]="isInview('story-row-'+i)">
                     <div style="padding-top: 3%;"></div>
@@ -34,4 +34,24 @@
             </div>
         </div>
     </div>
+</div>
+<div class="timeline-mobile" *ngIf="shouldChangeMenu()">
+<div *ngFor="let story of stories, let i = index">
+    <div class="our-stories-row-mobile story-row-{{i}}">
+        <div class="our-stories-side-block-mobile">
+            <div style="padding-top: 3%;"></div>
+            <img class="our-stories-photo-mobile" src={{story.photo}}>
+        </div>
+        <div class="our-stories-timeline-dot-mobile">
+            <div>
+                <span class="dot-mobile"></span>
+            </div>
+            <div class="our-stories-side-block-mobile right" >
+                <h2 class="our-stories-text-mobile title noselect" i18n>{{story.title| translate}}</h2>
+                <p class="our-stories-text-mobile noselect" i18n>{{story.body | translate}}</p>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top:15vh"></div>
+</div>
 </div>

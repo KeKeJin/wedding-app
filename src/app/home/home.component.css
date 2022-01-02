@@ -57,3 +57,23 @@ img {
     margin-left: 45vw;
     padding-top: 1.2rem;
 }
+
+@media only screen and (max-width: 450px) {
+    .header-name {
+        font-size: 25vw;
+    }
+    .left {
+        margin-right: 50vw;
+        padding-top: 1.2rem;
+    }
+    .center {
+        font-size: 15vw;
+        font-family: 'Gloria Hallelujah', 'Hi Melody';
+        margin-left: 4.5vw;
+    }
+    
+    .right {
+        margin-left: 60vw;
+        padding-top: 1.2rem;
+    }
+}

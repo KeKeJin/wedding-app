@@ -86,4 +86,12 @@ export class AboutUsComponent implements OnInit {
         rect.right <= Math.max(window.innerWidth, document.documentElement.clientWidth)+element.clientWidth
     return inView? "inView": "notInView";
   }
+
+  shouldChangeMenu() {
+    if ( window.innerWidth <= 450) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

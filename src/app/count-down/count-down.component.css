@@ -11,6 +11,25 @@
     margin: auto;
   }
 
+  @media only screen and (max-width: 450px) {
+    .timer {
+      width: 90vw;
+    }
+    .countdown_block {
+      width: 20vw !important;
+      height: 20vw !important;
+    }
+    .time {
+      height: 10vw !important;
+      font-size: 10vw !important;
+      padding-top: 4vw !important;
+    }
+    .text {
+      font-size: 4vw !important;
+      height: 6vw !important;
+    }
+  }
+
 .timer div {
     font-family: var(--font2);
     color: var(--color1);

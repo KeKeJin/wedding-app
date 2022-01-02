@@ -21,3 +21,9 @@
     width: 20vw;
     left: 0%;
 }
+
+@media only screen and (max-width: 450px) {
+    .doodle {
+        width: 50vw;
+    }
+}
