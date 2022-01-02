@@ -13,21 +13,23 @@ img {
 .parallax {
     /* The image used */
     background-image: url("./../../assets/0N4A7715-Edit.png");
-  
-    /* Set a specific height */
-    /* min-height: 3000px; */
+  }
+
+.sticky {
     width: auto;
     height: 100vh;
     max-width: 100%;
     max-height: auto;
-    position: relative;
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: -1;
-  }
+    top: 0;
+    z-index: 0;
+}
 
 .header {
     display: flex;
@@ -76,4 +78,16 @@ img {
         margin-left: 60vw;
         padding-top: 1.2rem;
     }
+
+    .section {
+        height: 100vh;
+    }
+}
+
+.section {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  min-height: 50vh;
+  z-index: 1
 }

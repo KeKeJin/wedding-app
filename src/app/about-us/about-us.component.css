@@ -131,9 +131,18 @@ width: 80vw
       display: flex;
   }
 
-  @media (prefers-color-scheme: dark) {
+.doodle {
+    width: 20vw;
+    left: 0;
+    position: relative;
+    z-index: 3;
+    margin-top: -10vw;
+}
 
-    .our-story-header {
-        color: white;
+@media only screen and (max-width: 450px) {
+    .doodle {
+        width: 50vw;
+        left: 0;
+        margin-top: -20vw;
     }
 }

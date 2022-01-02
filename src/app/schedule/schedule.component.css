@@ -1,7 +1,8 @@
 .text-info {
  background-color: #fffff0;
  position: relative;
- height: 100vh;
+ margin-top: -50vh;
+ z-index: 2;
 }
 
 .place {
@@ -22,16 +23,14 @@
     padding-top: 20vh;
     line-height: 4rem;
 }
-
-.doodle {
-    width: 20vw;
-    left: 40vw;
-    padding: 15vw;
+  
+.schedule-botton-padding {
+    padding-block: 10vh;
 }
 
 @media only screen and (max-width: 450px) {
-    .doodle {
-        width: 50vw;
-        left: 25vw;
+
+    .text-info {
+        margin-top: -100vh;
     }
 }
