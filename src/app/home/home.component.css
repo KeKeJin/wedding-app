@@ -18,8 +18,8 @@ img {
     /* min-height: 3000px; */
     width: auto;
     height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
+    max-width: 100%;
+    max-height: auto;
     position: relative;
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
