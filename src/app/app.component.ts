@@ -1,5 +1,4 @@
-import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
-import { Component, ElementRef, HostListener, ViewChild, ViewChildren } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -63,12 +62,12 @@ export class AppComponent {
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|zh/) ? browserLang : 'en');
 }
-ngOnInit(): void {
-  this.router.events.subscribe((res) => {
-      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
-      console.log("link: ", this.activeLinkIndex)
-  });
-}
+  ngOnInit(): void {
+    this.router.events.subscribe((res) => {
+        this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
+        console.log("link: ", this.activeLinkIndex)
+    });
+  }
 
   onLanguageToggled(): void {
     if (this.languageSelected == 'en') {
@@ -78,13 +77,11 @@ ngOnInit(): void {
       this.translate.use('en');
       this.languageSelected = 'en';
     }
-
   }
 
   scrollToElement($element:HTMLElement, route: string): void {
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     this.router.navigate([route])
-    $element.getBoundingClientRect();
   }
 
   isInViewport(element: HTMLElement): boolean {
@@ -97,5 +94,13 @@ ngOnInit(): void {
         rect.bottom <= (window.innerHeight || html.clientHeight) &&
         rect.right <= (window.innerWidth || html.clientWidth)
     );
-}
+  }
+
+  shouldChangeMenu() {
+    if ( window.innerWidth <= 450) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
