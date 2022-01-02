@@ -32,7 +32,7 @@
 
 .timer div {
     font-family: var(--font2);
-    color: var(--color1);
+    color: var(--color4);
   }
 
   .countdown_block {
@@ -40,7 +40,8 @@
     height: 10vw;
     opacity: 0.5;
     background-color:  #F5F5F5;
-    display: block
+    display: block;
+    border-radius: 0.5vw;
   }
   .time {
     height: 5vw;
@@ -52,3 +53,13 @@
     font-size: 2vw;
     height: 3vw;
   }
+
+  @media (prefers-color-scheme: dark) {
+    .our-stories-text-mobile{
+        color: white;
+    }
+
+    .our-story-header {
+        color: white;
+    }
+}

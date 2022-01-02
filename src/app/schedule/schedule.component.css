@@ -1,3 +1,9 @@
+.text-info {
+ background-color: #fffff0;
+ position: relative;
+ height: 100vh;
+}
+
 .place {
     font-size: 1.5rem;
     font-family: 'Special Elite', 'Klee One';
@@ -19,11 +25,14 @@
 
 .doodle {
     width: 20vw;
-    left: 0%;
+    left: 40vw;
+    padding: 15vw;
 }
 
 @media only screen and (max-width: 450px) {
     .doodle {
         width: 50vw;
+        left: 25vw;
+        padding: 30vw;
     }
 }

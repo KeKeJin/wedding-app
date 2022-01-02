@@ -33,7 +33,7 @@
 /* The actual timeline (the vertical ruler) */
 .timeline {
     position: relative;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 0 auto;
   }
   
@@ -130,3 +130,13 @@ width: 80vw
   .our-stories-timeline-dot-mobile {
       display: flex;
   }
+
+  @media (prefers-color-scheme: dark) {
+    .our-stories-text-mobile{
+        color: white;
+    }
+
+    .our-story-header {
+        color: white;
+    }
+}

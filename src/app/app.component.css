@@ -29,8 +29,8 @@
     src: url("./../assets/font.woff") format('woff');
 }
 
-body {
-    margin: 0;
+::ng-deep .body {
+    margin: 0px !important;
 }
 .header-main{
     text-align: center;
@@ -213,4 +213,3 @@ img {
     -ms-transform: translateX(1.5rem);
     transform: translateX(1.5rem);
   }
-  
