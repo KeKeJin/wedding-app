@@ -132,9 +132,6 @@ width: 80vw
   }
 
   @media (prefers-color-scheme: dark) {
-    .our-stories-text-mobile{
-        color: white;
-    }
 
     .our-story-header {
         color: white;

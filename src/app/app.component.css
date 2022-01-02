@@ -24,14 +24,15 @@
     background-color: white;
 }
 
+::ng-deep body {
+    margin: 0px !important;
+}
+
 @font-face {
     font-family: "black diamond";
     src: url("./../assets/font.woff") format('woff');
 }
 
-::ng-deep .body {
-    margin: 0px !important;
-}
 .header-main{
     text-align: center;
     font-family: var(--font17);
