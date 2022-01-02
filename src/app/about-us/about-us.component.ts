@@ -49,7 +49,7 @@ export class AboutUsComponent implements OnInit {
 
   stories:Story[] = [
     {
-      photo: 'assets/our-story-2-cropped.jpg',
+      photo: 'assets/our-story-1.jpg',
       when: '',
       title: 'OUR_STORY.HOW_WE_GOT_CLOSER',
       body: 'OUR_STORY.HOW_WE_GOT_CLOSER_BODY',

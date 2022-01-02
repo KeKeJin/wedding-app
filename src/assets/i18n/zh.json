@@ -21,7 +21,7 @@
         "JULY_30": "七月三十日"
     },
     "SCHEDULE": {
-        "DATE": "星期六·二零二二年·七月三十日",
+        "DATE": "5:30 PM·2022年·7月·30日",
         "VENUE": "尼克松总统图书馆暨博物馆",
         "ADDRESS": "18001 Yorba Linda Blvd, Yorba Linda, CA 92886",
         "DAYS": "日",
@@ -31,16 +31,16 @@
     },
     "OUR_STORY": {
         "OUR_STORY": "我们的故事",
-        "FIRST_TIME": "相遇",
-        "FIRST_TIME_BODY": "We met at a bible study in college. ... ",
-        "HOW_WE_GOT_CLOSER": "相识",
-        "HOW_WE_GOT_CLOSER_BODY": "One of the traditions for Bible study is for people who sit on the same couch to connect through a meal. One time we sat on the same couch, together with Andrew Ni and Jacqui Giese. The four of us went to grab a meal as the couch group at Menkoi Ya Ramen, where we friended each other on snapchat. A day later, Jon sent Ke a snapchat photo at 8 am of the saphire blue sky, in bold text it said, 'time to go to sleep'. Ke responded, 'oh no.' That is how we started chatting.",
-        "FELL_IN_LOVE_AGAIN": "相恋",
-        "FELL_IN_LOVE_AGAIN_BODY": "God changed Ke's heart, and when Ke looked deep into her heart, she found herself falling for Jon. Luckly it wasn't too late.",
-        "PROPOSAL": "求婚",
-        "PROPOSAL_BODY": "It was such a surprise. It was a beautiful day. And it has been beautiful ever since.",
-        "WEDDING": "婚礼",
-        "WEDDING_BODY": "It will be another beautiful day."
+        "FIRST_TIME": "成为友人",
+        "FIRST_TIME_BODY": "2018年3月30日，我们加了Snapchat好友",
+        "HOW_WE_GOT_CLOSER": "成为朋友",
+        "HOW_WE_GOT_CLOSER_BODY": "2018年3月30日，我们加了Snapchat好友",
+        "FELL_IN_LOVE_AGAIN": "成为恋人",
+        "FELL_IN_LOVE_AGAIN_BODY": "2019年2月21日，几经周折，我们开始交往！",
+        "PROPOSAL": "皇天不负有心人",
+        "PROPOSAL_BODY": "2021年7月17日，我们订婚啦",
+        "WEDDING": "成为新人",
+        "WEDDING_BODY": "2022年7月30日，我们邀请亲朋好友见证我们的婚礼。"
     },
     "TRAVEL": {
         "TRAVEL": "旅行"
