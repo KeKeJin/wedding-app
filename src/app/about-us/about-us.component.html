@@ -14,21 +14,21 @@
                     <span class="dot"></span>
                 </div>
                 <div class="our-stories-side-block right" [@rightEnter]="isInview('story-row-'+i)">
-                    <h2 class="our-stories-text-right title noselect" i18n>{{story.title| translate}}</h2>
-                    <p class="our-stories-text-right noselect" i18n>{{story.body | translate}}</p>
+                    <h2 class="our-stories-text-right our-story-title  noselect" i18n>{{story.title| translate}}</h2>
+                    <p class="our-stories-text-right noselect our-stories-text" i18n>{{story.body | translate}}</p>
                 </div>
             </div>
         </div>
         <div *ngIf="i % 2 == 1">
             <div class="our-stories-row story-row-{{i}}">
                 <div class="our-stories-side-block left" [@leftEnter]="isInview('story-row-'+i)">
-                    <h2 class="our-stories-text-right title noselect" i18n>{{story.title| translate}}</h2>
-                    <p class="our-stories-text-right noselect" i18n>{{story.body | translate}}</p>
+                    <h2 class="our-stories-text-right our-story-title  noselect" i18n>{{story.title| translate}}</h2>
+                    <p class="our-stories-text-right noselect our-stories-text" i18n>{{story.body | translate}}</p>
                 </div>
                 <div class="our-stories-mid-block">
                     <span class="dot"></span>
                 </div>
-                <div class="our-stories-side-block right" [@rightEnter]="isInview('story-row-'+i)">
+                <div class="our-stories-side-block " [@rightEnter]="isInview('story-row-'+i)">
                     <div style="padding-top: 3vh;"></div>
                     <img class="our-stories-photo-left" src={{story.photo}}>
                 </div>
@@ -48,8 +48,8 @@
                 <span class="dot-mobile"></span>
             </div>
             <div class="our-stories-side-block-mobile right" >
-                <h2 class="our-stories-text-mobile title noselect" i18n>{{story.title| translate}}</h2>
-                <p class="our-stories-text-mobile noselect" i18n>{{story.body | translate}}</p>
+                <h2 class="our-stories-text-mobile our-story-title  noselect" i18n>{{story.title| translate}}</h2>
+                <p class="our-stories-text-mobile noselect our-stories-text" i18n>{{story.body | translate}}</p>
             </div>
         </div>
     </div>

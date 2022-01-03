@@ -1,12 +1,12 @@
 :host {
-    --font1: 'Emilys Candy', 'Klee One', cursive;
-    --font2: 'Averia Serif Libre', 'Klee One';
+    --font1: 'Emilys Candy', 'Ma Shan Zheng', cursive;
+    --font2: 'Averia Serif Libre', 'senty tang';
     --font4: 'DotGothic16', sans-serif;
     /* --font5: 'Hina Mincho', 'Hina Mincho'; */
     --font6: 'Kaisei Decol';
     --font7: 'Kaisei HarunoUmi';
     --font8: 'Kaisei Opti';
-    --font9: 'Klee One', cursive;
+    --font9: 'Merriweather', 'Ma Shan Zheng', cursive;
     /* type writer  */
     --font10: 'New Tegomin', serif; 
     --font13: 'Shippori Mincho', 'DotGothic16';
@@ -14,7 +14,7 @@
     --font15: 'Train One', cursive;
     --font16: 'ZCOOL XiaoWei', serif;
     --font17: 'Estonia', cursive;
-    --font18: 'Special Elite', cursive;
+    --font18: 'Special Elite', 'senty tang';
     --font-selected:var(--font18);
     --color1: #f7bdd5;
     --color2: #5a2f55;
@@ -31,6 +31,11 @@
 @font-face {
     font-family: "black diamond";
     src: url("./../assets/font.woff") format('woff');
+}
+
+@font-face {
+    font-family: 'senty tang';
+    src: url("./../assets/HanyiSentyTang.ttf");
 }
 
 .header-main{
@@ -68,6 +73,10 @@
     color: var(--color5);
     font-size: 1rem;
     height: 5ex;
+}
+
+::ng-deep .chinese-tab .tab , .hamburger-menu-text, .our-stories-text {
+    font-size: 1.2rem !important;
 }
 
 .tab-slider {
@@ -140,7 +149,7 @@ img {
     align-items: center;
     display: block;
     width: 100%;
-    font-family: 'Special Elite', cursive;
+    font-family: 'Special Elite', 'senty tang';
     font-size: 1rem;
 }
 

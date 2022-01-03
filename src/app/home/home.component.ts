@@ -42,7 +42,6 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       ),
       state('notInView', style({
         opacity: 0.5,
-        transform: 'translateX(-20vw)',
       })),
       transition('notInView=>inView', animate('1000ms ease-out')),
     ]),
@@ -56,7 +55,6 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       ),
       state('notInView', style({
         opacity: 0.5,
-        transform: 'translateX(20vw)',
       })),
       transition('notInView=>inView', animate('1000ms ease-out')),
     ]),

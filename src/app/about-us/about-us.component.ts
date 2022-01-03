@@ -23,7 +23,6 @@ export interface Story {
       ),
       state('notInView', style({
         opacity: 0.5,
-        transform: 'translateX(-5vw)',
       })),
       transition('*=>*', animate('1000ms ease-out')),
     ]),
@@ -37,7 +36,6 @@ export interface Story {
       ),
       state('notInView', style({
         opacity: 0.5,
-        transform: 'translateX(5vw)',
       })),
       transition('*=>*', animate('1000ms ease-out')),
     ])

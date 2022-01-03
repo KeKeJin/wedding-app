@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -11,11 +11,12 @@ export class AppComponent {
   title = 'wedding-app';
   navLinks: any[];
   activeLinkIndex = -1; 
-  languageSelected = 'en';
+  languageSelected;
 
   constructor(
     private router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public ref: ChangeDetectorRef
     ) {
     this.navLinks = [
         {
@@ -60,7 +61,14 @@ export class AppComponent {
     translate.setDefaultLang('en');
     translate.use('en');
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|zh/) ? browserLang : 'en');
+    if (browserLang.match(/zh/)) {
+      translate.use('zh');
+      document.querySelector('body')?.classList.add('chinese-tab');
+      this.languageSelected = 'zh';
+    } else {
+      translate.use('en');
+      this.languageSelected = 'en';
+    }
 }
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
@@ -73,9 +81,12 @@ export class AppComponent {
     if (this.languageSelected == 'en') {
       this.translate.use('zh');
       this.languageSelected = 'zh';
+      document.querySelector('body')?.classList.add('chinese-tab');
+      this.ref.detectChanges();
     } else {
       this.translate.use('en');
       this.languageSelected = 'en';
+      document.querySelector('body')?.classList.remove('chinese-tab');
     }
   }
 

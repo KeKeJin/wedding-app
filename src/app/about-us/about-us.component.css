@@ -20,14 +20,19 @@
 }
 
 .right {
-    padding-left: 10vw;
+    padding-left: 5vw;
 }
 
 .left {
-    padding-right: 10vw;
+    padding-right: 5vw;
+    text-align: right;
 }
 .our-stories-side-block {
     width: 35vw;
+}
+
+.our-stories-text {
+  font-size: 1rem;
 }
 
 /* The actual timeline (the vertical ruler) */
@@ -60,9 +65,10 @@
     position: absolute;
     left: calc(50vw - 13.5px);
   }
-  .title {
+  .our-story-title {
       color: var(--color1);
       font-family: var(--font1);
+      font-size: 2rem;
   }
 
   .our-story-header{
