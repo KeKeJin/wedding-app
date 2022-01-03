@@ -88,7 +88,7 @@ export class AboutUsComponent implements OnInit {
   }
 
   shouldChangeMenu() {
-    if ( window.innerWidth <= 450) {
+    if ( window.innerWidth <= 500) {
       return true;
     } else {
       return false;

@@ -3,11 +3,11 @@
 <div style="padding-top:10vh"></div>
 <div class="timeline" *ngIf="!shouldChangeMenu()">
     <div *ngFor="let story of stories, let i = index">
-        <div style="padding-top:5%"></div>
+        <div style="padding-top:5vh"></div>
         <div *ngIf="i % 2 == 0">
             <div class="our-stories-row story-row-{{i}}">
                 <div class="our-stories-side-block left" [@leftEnter]="isInview('story-row-'+i)">
-                    <div style="padding-top: 3%;"></div>
+                    <div style="padding-top: 3vh;"></div>
                     <img class="our-stories-photo-left" src={{story.photo}}>
                 </div>
                 <div class="our-stories-mid-block">
@@ -29,7 +29,7 @@
                     <span class="dot"></span>
                 </div>
                 <div class="our-stories-side-block right" [@rightEnter]="isInview('story-row-'+i)">
-                    <div style="padding-top: 3%;"></div>
+                    <div style="padding-top: 3vh;"></div>
                     <img class="our-stories-photo-left" src={{story.photo}}>
                 </div>
             </div>
@@ -40,7 +40,7 @@
 <div *ngFor="let story of stories, let i = index">
     <div class="our-stories-row-mobile story-row-{{i}}">
         <div class="our-stories-side-block-mobile">
-            <div style="padding-top: 3%;"></div>
+            <div style="padding-top: 3vh;"></div>
             <img class="our-stories-photo-mobile" src={{story.photo}}>
         </div>
         <div class="our-stories-timeline-dot-mobile">

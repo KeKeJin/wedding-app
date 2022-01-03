@@ -1,6 +1,6 @@
 .our-stories-row{
     display: flex;
-    justify-content:center;
+    justify-content:space-around;
 }
 
 .our-stories-photo-left {
@@ -20,11 +20,11 @@
 }
 
 .right {
-    margin-left: 10vw;
+    padding-left: 10vw;
 }
 
 .left {
-    margin-right: 10vw;
+    padding-right: 10vw;
 }
 .our-stories-side-block {
     width: 35vw;
@@ -46,7 +46,6 @@
     top: 0;
     bottom: 0;
     left: 50vw;
-    margin-left: -3px;
   }
 
   
@@ -78,7 +77,7 @@
   }
 
   .our-stories-side-block-mobile {
-width: 80vw
+    width: 80vw
   }
 
   .our-stories-photo-mobile {
@@ -139,7 +138,7 @@ width: 80vw
     margin-top: -10vw;
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 500px) {
     .doodle {
         width: 50vw;
         left: 0;

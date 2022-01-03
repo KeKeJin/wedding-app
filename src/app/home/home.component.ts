@@ -6,6 +6,32 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css', './../app.component.css'],
   animations: [
+    trigger('leftEnterMobile', [
+      state(
+        'inView', 
+        style({
+          opacity: 1,
+          transform: 'translateX(10vw) ' 
+        })
+      ),
+      state('notInView', style({
+        opacity: 0.5
+      })),
+      transition('notInView=>inView', animate('1000ms ease-out')),
+    ]),
+    trigger('rightEnterMobile', [
+      state(
+        'inView', 
+        style({
+          opacity: 1,
+          transform: 'translateX(-10vw) ' 
+        })
+      ),
+      state('notInView', style({
+        opacity: 0.5
+      })),
+      transition('notInView=>inView', animate('1000ms ease-out')),
+    ]),
     trigger('leftEnter', [
       state(
         'inView', 
@@ -78,5 +104,13 @@ export class HomeComponent implements OnInit {
         rect.bottom <= Math.max(window.innerHeight, document.documentElement.clientHeight)+element.clientHeight &&
         rect.right <= Math.max(window.innerWidth, document.documentElement.clientWidth)+element.clientWidth
     return inView? "inView": "notInView";
+  }
+
+  shouldChangeMenu() {
+    if ( window.innerWidth <= 500) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
