@@ -11,28 +11,28 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
         'inView', 
         style({
           opacity: 1,
-          transform: 'translateX(12vw) ' 
+          transform: 'translateX(20vw) ' 
         })
       ),
       state('notInView', style({
         opacity: 0.5,
-        transform: 'translateX(-12vw)',
+        transform: 'translateX(-20vw)',
       })),
-      transition('*=>*', animate('1000ms ease-out')),
+      transition('notInView=>inView', animate('1000ms ease-out')),
     ]),
     trigger('rightEnter', [
       state(
         'inView', 
         style({
           opacity: 1,
-          transform: 'translateX(-12vw) ' 
+          transform: 'translateX(-20vw) ' 
         })
       ),
       state('notInView', style({
         opacity: 0.5,
-        transform: 'translateX(12vw)',
+        transform: 'translateX(20vw)',
       })),
-      transition('*=>*', animate('1000ms ease-out')),
+      transition('notInView=>inView', animate('1000ms ease-out')),
     ]),
     trigger('pound', [
       transition('*=>*', [
