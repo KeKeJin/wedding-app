@@ -33,12 +33,12 @@
         "OUR_STORY": "我们的故事",
         "FIRST_TIME": "成为友人",
         "FIRST_TIME_BODY": "2018年3月30日，我们加了Snapchat好友",
-        "HOW_WE_GOT_CLOSER": "成为朋友",
-        "HOW_WE_GOT_CLOSER_BODY": "2018年3月30日，我们加了Snapchat好友",
+        "HOW_WE_GOT_CLOSER": "成为友人",
+        "HOW_WE_GOT_CLOSER_BODY": "2018年3月30日，我们在Harvey Mudd College相遇，通过InterVarsity成为了朋友。",
         "FELL_IN_LOVE_AGAIN": "成为恋人",
-        "FELL_IN_LOVE_AGAIN_BODY": "2019年2月21日，几经周折，我们开始交往！",
-        "PROPOSAL": "皇天不负有心人",
-        "PROPOSAL_BODY": "2021年7月17日，我们订婚啦",
+        "FELL_IN_LOVE_AGAIN_BODY": "2019年2月21日，几经周折，我们开始交往♥",
+        "PROPOSAL": "成为准新人",
+        "PROPOSAL_BODY": "2021年7月17日，我们订婚啦！",
         "WEDDING": "成为新人",
         "WEDDING_BODY": "2022年7月30日，我们邀请亲朋好友见证我们的婚礼。"
     },
@@ -46,9 +46,13 @@
         "TRAVEL": "旅行"
     },
     "RSVP": {
-        "RSVP": "赐复"
+        "RSVP": "赐复",
+        "COMING_SOON": "即将上线"
+
     },
     "REGISTRY": {
-        "REGISTRY": "心愿单"
+        "REGISTRY": "心愿单",
+        "REGISTRY_TEXT": "您与我们一起庆祝是我们所能拥有的最好礼物",
+        "REGISTRY_BUTTON_TEXT": "我们的心愿单"
     }
   }

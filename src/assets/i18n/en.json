@@ -33,7 +33,7 @@
     "OUR_STORY": {
         "OUR_STORY": "Our Story",
         "HOW_WE_GOT_CLOSER": "Becoming friends",
-        "HOW_WE_GOT_CLOSER_BODY": "March 30, 2018, we became Snapchat friends.",
+        "HOW_WE_GOT_CLOSER_BODY": "March 30, 2018, we met at Harvey Mudd College and became friends through InterVarsity",
         "FELL_IN_LOVE_AGAIN": "Becoming more than just friends",
         "FELL_IN_LOVE_AGAIN_BODY": "Feb 21, 2019, after some twist and turns, we became a couple ♥",
         "PROPOSAL": "The Proposal",
@@ -45,9 +45,12 @@
         "TRAVEL": "Travel"
     },
     "RSVP": {
-        "RSVP": "RSVP"
+        "RSVP": "RSVP",
+        "COMING_SOON": "Coming soon..."
     },
     "REGISTRY": {
-        "REGISTRY": "Registry"
+        "REGISTRY": "Registry",
+        "REGISTRY_TEXT": "Your presence in celebrating with us is the greatest gift we could have.",
+        "REGISTRY_BUTTON_TEXT": "Jon & Ke's Wish List"
     }
   }

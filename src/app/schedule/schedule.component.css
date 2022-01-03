@@ -32,5 +32,10 @@
 
     .text-info {
         margin-top: -100vh;
+        min-height: 100vh;
+    }
+
+    .date {
+        padding-top: 18vh;
     }
 }
