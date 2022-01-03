@@ -33,6 +33,7 @@
 
 .our-stories-text {
   font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 /* The actual timeline (the vertical ruler) */
@@ -69,6 +70,7 @@
       color: var(--color1);
       font-family: var(--font1);
       font-size: 2rem;
+      line-height: 3rem;
   }
 
   .our-story-header{
@@ -101,7 +103,16 @@
     min-height: auto;
     height: auto;
     font-family: var(--font9);
-    margin-left: 15vw
+    margin-left: 20vw
+  }
+
+  .our-stories-title-mobile {
+    max-width: 65vw;
+    width: auto;
+    min-height: auto;
+    height: auto;
+    font-family: var(--font1);
+    margin-left: 20vw
   }
 
   .timeline-mobile {
