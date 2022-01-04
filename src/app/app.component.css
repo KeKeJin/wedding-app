@@ -158,6 +158,8 @@ img {
     display: inline-block;
     height: 1.5rem;
     right: 2rem;
+    margin-bottom: auto;
+    margin-top: auto;
 }
 
 /* The switch - the box around the slider */
