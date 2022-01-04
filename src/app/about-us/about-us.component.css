@@ -36,6 +36,10 @@
   line-height: 1.5rem;
 }
 
+.our-stories-sub-title {
+  color: #808080
+}
+
 /* The actual timeline (the vertical ruler) */
 .timeline {
     position: relative;

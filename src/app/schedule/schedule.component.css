@@ -23,6 +23,15 @@
     padding-top: 20vh;
     line-height: 4rem;
 }
+
+.time {
+    font-size: 2rem;
+    font-family: 'Special Elite', 'senty tang';
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 4rem;
+}
   
 .schedule-botton-padding {
     padding-bottom: 10vh;

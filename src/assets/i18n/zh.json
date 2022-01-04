@@ -21,9 +21,13 @@
         "JULY_30": "七月三十日"
     },
     "SCHEDULE": {
-        "DATE": "5:30PM 2022年 7月30日",
-        "VENUE": "尼克松总统图书馆暨博物馆",
-        "ADDRESS": "18001 Yorba Linda Blvd, Yorba Linda, CA 92886",
+        "DATE": "2022年 7月30日",
+        "TIME": "5:30 PM",
+        "ADDRESS": "18001 Yorba Linda Blvd",
+        "CITY": "约巴林达",
+        "STATE": "加利福尼亚州",
+        "ZIP":"92886",
+        "VENUE": "尼克松总统图书馆",
         "DAYS": "日",
         "HOURS": "时",
         "MINS": "分",
@@ -31,16 +35,18 @@
     },
     "OUR_STORY": {
         "OUR_STORY": "我们的故事",
-        "FIRST_TIME": "成为友人",
-        "FIRST_TIME_BODY": "2018年3月30日，我们加了Snapchat好友。",
         "HOW_WE_GOT_CLOSER": "成为友人",
-        "HOW_WE_GOT_CLOSER_BODY": "2018年3月30日，我们在Harvey Mudd College相遇，通过InterVarsity成为了朋友。",
-        "FELL_IN_LOVE_AGAIN": "成为恋人",
-        "FELL_IN_LOVE_AGAIN_BODY": "2019年2月21日，几经周折，我们开始交往♥",
+        "DATE_WE_GOT_CLOSER": "2018年3月30日",
+        "HOW_WE_GOT_CLOSER_BODY": "我们在Harvey Mudd College相遇，通过InterVarsity成为了朋友。",
+        "FELL_IN_LOVE": "成为恋人",
+        "DATE_FELL_IN_LOVE": "2019年2月21日",
+        "FELL_IN_LOVE_BODY": "几经周折，我们开始交往♥",
         "PROPOSAL": "成为准新人",
-        "PROPOSAL_BODY": "2021年7月17日，我们订婚啦！",
+        "PROPOSAL_DATE": "2021年7月17日",
+        "PROPOSAL_BODY": "我们订婚啦！",
         "WEDDING": "成为新人",
-        "WEDDING_BODY": "2022年7月30日，我们邀请亲朋好友见证我们的婚礼。"
+        "WEDDING_DATE": "2022年7月30日",
+        "WEDDING_BODY": "我们邀请亲朋好友见证我们的婚礼。"
     },
     "TRAVEL": {
         "TRAVEL": "旅行"

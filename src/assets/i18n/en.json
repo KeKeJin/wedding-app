@@ -22,9 +22,13 @@
         "WE_ARE_GETTING_MARRIED": "We are getting MARRIED!!"
     },
     "SCHEDULE": {
-        "DATE": "5:30 PM PST, July 30, 2022",
-        "VENUE": "The Richard Nixon Library & Museum",
-        "ADDRESS": "18001 Yorba Linda Blvd, Yorba Linda, CA 92886",
+        "DATE": "July 30, 2022",
+        "TIME": "5:30 PM",
+        "VENUE": "The Richard Nixon Presidential Library",
+        "ADDRESS": "18001 Yorba Linda Blvd",
+        "CITY": "Yorba Linda",
+        "STATE": "CA",
+        "ZIP":"92886",
         "DAYS": "DAYS",
         "HOURS": "HOURS",
         "MINS": "MINUTES",
@@ -33,13 +37,17 @@
     "OUR_STORY": {
         "OUR_STORY": "Our Story",
         "HOW_WE_GOT_CLOSER": "Becoming friends",
-        "HOW_WE_GOT_CLOSER_BODY": "March 30, 2018, we met at Harvey Mudd College and became friends through InterVarsity.",
-        "FELL_IN_LOVE_AGAIN": "Becoming more than just friends",
-        "FELL_IN_LOVE_AGAIN_BODY": "Feb 21, 2019, after some twist and turns, we became a couple ♥",
+        "DATE_WE_GOT_CLOSER": "March 30, 2018",
+        "HOW_WE_GOT_CLOSER_BODY": "We met at Harvey Mudd College and became friends through InterVarsity.",
+        "FELL_IN_LOVE": "Becoming more than just friends",
+        "DATE_FELL_IN_LOVE": "Feb 21, 2019",
+        "FELL_IN_LOVE_BODY": "After some twist and turns, we became a couple ♥",
         "PROPOSAL": "The Proposal",
-        "PROPOSAL_BODY": "July 17, 2021, Jon asked Ke to marry him, and Ke said yes!",
+        "PROPOSAL_DATE": "July 17, 2021",
+        "PROPOSAL_BODY": "Jon asked Ke to marry him, and Ke said yes!",
         "WEDDING": "The Wedding",
-        "WEDDING_BODY": "July 30, 2022, we invite friends and family to witness the beginning of our marriage."
+        "WEDDING_DATE": "July 30, 2022",
+        "WEDDING_BODY": "We invite friends and family to witness the beginning of our marriage."
     },
     "TRAVEL": {
         "TRAVEL": "Travel"

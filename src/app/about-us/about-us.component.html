@@ -15,6 +15,7 @@
                 </div>
                 <div class="our-stories-side-block right" [@rightEnter]="isInview('story-row-'+i)">
                     <h2 class="our-stories-text-right our-story-title  noselect" i18n>{{story.title| translate}}</h2>
+                    <h3 class="our-stories-text-right our-stories-sub-title noselect" i18n>{{story.when | translate}}</h3>
                     <p class="our-stories-text-right noselect our-stories-text" i18n>{{story.body | translate}}</p>
                 </div>
             </div>
@@ -23,6 +24,7 @@
             <div class="our-stories-row story-row-{{i}}">
                 <div class="our-stories-side-block left" [@leftEnter]="isInview('story-row-'+i)">
                     <h2 class="our-stories-text-right our-story-title  noselect" i18n>{{story.title| translate}}</h2>
+                    <h3 class="our-stories-text-right our-stories-sub-title noselect" i18n>{{story.when | translate}}</h3>
                     <p class="our-stories-text-right noselect our-stories-text" i18n>{{story.body | translate}}</p>
                 </div>
                 <div class="our-stories-mid-block">
@@ -50,6 +52,7 @@
             </div>
             <div class="our-stories-side-block-mobile right" >
                 <p class="our-stories-title-mobile our-story-title  noselect" i18n>{{story.title| translate}}</p>
+                <p class="our-stories-title-mobile our-stories-sub-title noselect" i18n>{{story.when | translate}}</p>
                 <p class="our-stories-text-mobile noselect our-stories-text" i18n>{{story.body | translate}}</p>
             </div>
         </div>
