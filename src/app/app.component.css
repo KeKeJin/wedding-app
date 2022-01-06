@@ -72,7 +72,7 @@
     background: white;
     color: var(--color5);
     font-size: 1rem;
-    height: 5ex;
+    line-height: initial;
 }
 
 ::ng-deep .chinese-tab .tab , .hamburger-menu-text, .our-stories-text {
@@ -85,7 +85,6 @@
     background: white;
     color: var(--color5);
     font-size: 1rem;
-    height: 5ex;
     width: 3rem;
     display: flex;
     justify-content: center;
@@ -167,7 +166,7 @@ img {
     position: relative;
     display: inline-block;
     width: 3.6rem;
-    height: 1.5rem;
+    height: auto;
   }
   
   /* Hide default HTML checkbox */
@@ -190,15 +189,15 @@ img {
   .slider:before {
     position: absolute;
     content: "";
-    height: 1.3rem;
-    width: 1.3rem;
+    height: 1.5rem;
+    width: 1.5rem;
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(1.5rem);
-    -ms-transform: translateX(1.5rem);
-    transform: translateX(1.5rem);
+    -webkit-transform: translateX(1.6rem);
+    -ms-transform: translateX(1.6rem);
+    transform: translateX(1.6rem);
   }

@@ -25,7 +25,7 @@
         </mat-menu>
         <label class="hamburger-menu-switcher">
             <input type="checkbox" (change)="onLanguageToggled()">
-            <span class="slider tab-slider">  文 EN</span>
+            <span class="slider tab-slider"> EN  文</span>
         </label>
     </div>
 
@@ -38,9 +38,9 @@
         <button mat-flat-button class="tab" (click)="scrollToElement(travel, '/travel')">{{'APP.TRAVEL' | translate}}</button>
         <button mat-flat-button class="tab" (click)="scrollToElement(rsvp, '/rsvp')">{{'APP.RSVP' | translate}}</button>
         <button mat-flat-button class="tab" (click)="scrollToElement(registry, '/registry')">{{'APP.REGISTRY' | translate}}</button>
-        <label class="switch">
+        <label class="switch mat-icon-button">
         <input type="checkbox" (change)="onLanguageToggled()">
-        <span class="slider tab-slider">  文 EN</span>
+        <span class="slider tab-slider">EN  文</span>
         </label>
     </div>
 </div>
