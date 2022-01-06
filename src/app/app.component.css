@@ -90,6 +90,7 @@
     justify-content: center;
     align-content: center;
     flex-direction: column;
+    padding-top: 0.4rem;
 }
 .language-selector {
     /* border-width: 0em;
@@ -155,7 +156,7 @@ img {
 .hamburger-menu-switcher {
     position: relative;
     display: inline-block;
-    height: 1.5rem;
+    height: 1.6rem;
     right: 2rem;
     margin-bottom: auto;
     margin-top: auto;
