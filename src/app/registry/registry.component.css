@@ -4,3 +4,26 @@
     padding-bottom: 3%;
     padding-top: 5%;
 }
+
+.registry-body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.registry-text {
+    text-align: center;
+    font-family: var(--font9);
+    font: 1rem;
+}
+
+.registry-button {
+    width: 10vw;
+    margin: auto
+}
+
+@media only screen and (max-width: 500px) {
+    .registry-button {
+        width: 20vw;
+    }
+}
