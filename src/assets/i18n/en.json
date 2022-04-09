@@ -1,0 +1,64 @@
+{
+    "APP": {
+        "TITLE": "JON & KE",
+        "SUB_TITLE": "JULY 30, 2022       YORBA LINDA, CA",
+        "HOME": "HOME",
+        "ABOUT_US": "JON + KE",
+        "SCHEDULE": "SCHEDULE",
+        "TRAVEL": "TRAVEL",
+        "REGISTRY": "REGISTRY",
+        "WEDDING_PARTY": "WEDDING PARTY",
+        "PHOTOS": "PHOTOS",
+        "THINGS_TO_DO": "THINGS TO DO",
+        "FAQS": "FAQS",
+        "RSVP": "RSVP"
+    },
+    "HOME": {
+        "JONATHAN_HAYASE": "JONATHAN HAYASE",
+        "KE_JIN": "KE JIN",
+        "YORBA_LINDA": "YORBA LINDA",
+        "CA":"CA",
+        "JULY_30": "JULY 30",
+        "WE_ARE_GETTING_MARRIED": "We are getting MARRIED!!"
+    },
+    "SCHEDULE": {
+        "DATE": "July 30, 2022",
+        "TIME": "5:30 PM",
+        "VENUE": "The Richard Nixon Presidential Library",
+        "ADDRESS": "18001 Yorba Linda Blvd",
+        "CITY": "Yorba Linda",
+        "STATE": "California",
+        "ZIP":"92886",
+        "DAYS": "DAYS",
+        "HOURS": "HOURS",
+        "MINS": "MINUTES",
+        "SECS": "SECONDS"
+    },
+    "OUR_STORY": {
+        "OUR_STORY": "Our Story",
+        "HOW_WE_GOT_CLOSER": "Becoming friends",
+        "DATE_WE_GOT_CLOSER": "March 30, 2018",
+        "HOW_WE_GOT_CLOSER_BODY": "We met at Harvey Mudd College and became friends through InterVarsity.",
+        "FELL_IN_LOVE": "Becoming more than just friends",
+        "DATE_FELL_IN_LOVE": "Feb 21, 2019",
+        "FELL_IN_LOVE_BODY": "After some twist and turns, we became a couple ♥",
+        "PROPOSAL": "The Proposal",
+        "PROPOSAL_DATE": "July 17, 2021",
+        "PROPOSAL_BODY": "Jon asked Ke to marry him, and Ke said yes!",
+        "WEDDING": "The Wedding",
+        "WEDDING_DATE": "July 30, 2022",
+        "WEDDING_BODY": "We invite friends and family to witness the beginning of our marriage."
+    },
+    "TRAVEL": {
+        "TRAVEL": "Travel"
+    },
+    "RSVP": {
+        "RSVP": "RSVP",
+        "COMING_SOON": "Coming soon..."
+    },
+    "REGISTRY": {
+        "REGISTRY": "Registry",
+        "REGISTRY_TEXT": "Your presence in celebrating with us is the greatest gift we could have.",
+        "REGISTRY_BUTTON_TEXT": "Jon & Ke's Wish List"
+    }
+  }

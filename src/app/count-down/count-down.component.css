@@ -1,38 +1,66 @@
 .timer {
     text-align: center;
     font-family: Arial, sans-serif;
-    font-size: 1.4em;
+    font-size: 20%;
     letter-spacing: -1px;
     padding-top: 5vh;
     padding-bottom: 5vh;
     display: flex;
     justify-content: space-evenly;
-    width: 48vw;
+    width: 60vw;
     margin: auto;
   }
 
-.timer span {
-    margin: 2vh 2vw 2vh 2vw;
+  @media only screen and (max-width: 500px) {
+    .timer {
+      width: 90vw;
+    }
+    .countdown_block {
+      width: 20vw !important;
+      height: 20vw !important;
+    }
+    .time {
+      height: 10vw !important;
+      font-size: 10vw !important;
+      padding-top: 4vw !important;
+    }
+    .text {
+      font-size: 4vw !important;
+      height: 6vw !important;
+    }
+  }
+
+.timer div {
     font-family: var(--font2);
-    color: var(--color1);
+    color: var(--color4);
   }
 
   .countdown_block {
     width: 10vw;
-    height: 20vh;
+    height: 10vw;
     opacity: 0.5;
     background-color:  #F5F5F5;
-    display: block
+    display: block;
+    border-radius: 0.5vw;
   }
   .time {
-    display:block;
-    padding-top: 4vh;
-    font-size: 6vh;
+    height: 7vw;
+    font-size: 6vw;
     text-align: center;
+    line-height: normal;
   }
   .text {
-    display:block;
-      padding-top: 2vh;
-      font-size: 2vh;
-      padding-bottom: 2vh;
+    font-size: 2vw;
+    height: 3vw;
+    line-height: normal;
   }
+
+  @media (prefers-color-scheme: dark) {
+    .our-stories-text-mobile{
+        color: white;
+    }
+
+    .our-story-header {
+        color: white;
+    }
+}

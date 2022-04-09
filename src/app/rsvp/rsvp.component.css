@@ -76,3 +76,10 @@ mat-spinner {
 .highlight-button {
     background-color: var(--color2);
 }
+
+.rsvp-header {
+    text-align: center;
+    font-family: var(--font1);
+    padding-bottom: 3%;
+    padding-top: 5%;
+}

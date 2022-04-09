@@ -1,5 +1,4 @@
-import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
-import { Component, ElementRef, HostListener, ViewChild, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -12,10 +11,12 @@ export class AppComponent {
   title = 'wedding-app';
   navLinks: any[];
   activeLinkIndex = -1; 
+  languageSelected;
 
   constructor(
     private router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public ref: ChangeDetectorRef
     ) {
     this.navLinks = [
         {
@@ -23,8 +24,8 @@ export class AppComponent {
             link: './home',
             index: 0
         }, {
-          label: 'About Us',
-          link: './about-us',
+          label: 'Our Story',
+          link: './us',
           index: 1
         },{
             label: 'Schedule',
@@ -51,10 +52,6 @@ export class AppComponent {
           link: './things-to-do',
           index: 7
           }, {
-          label: 'FAQs',
-          link: './faqs',
-          index: 8
-          }, {
           label: 'RSVP',
           link: './rsvp',
           index: 9
@@ -64,20 +61,38 @@ export class AppComponent {
     translate.setDefaultLang('en');
     translate.use('en');
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|zh/) ? browserLang : 'en');
+    if (browserLang.match(/zh/)) {
+      translate.use('zh');
+      document.querySelector('body')?.classList.add('chinese-tab');
+      this.languageSelected = 'zh';
+    } else {
+      translate.use('en');
+      this.languageSelected = 'en';
+    }
 }
-ngOnInit(): void {
-  this.router.events.subscribe((res) => {
-      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
-      console.log("link: ", this.activeLinkIndex)
-  });
-}
+  ngOnInit(): void {
+    this.router.events.subscribe((res) => {
+        this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
+        console.log("link: ", this.activeLinkIndex)
+    });
+  }
 
+  onLanguageToggled(): void {
+    if (this.languageSelected == 'en') {
+      this.translate.use('zh');
+      this.languageSelected = 'zh';
+      document.querySelector('body')?.classList.add('chinese-tab');
+      this.ref.detectChanges();
+    } else {
+      this.translate.use('en');
+      this.languageSelected = 'en';
+      document.querySelector('body')?.classList.remove('chinese-tab');
+    }
+  }
 
   scrollToElement($element:HTMLElement, route: string): void {
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     this.router.navigate([route])
-    $element.getBoundingClientRect();
   }
 
   isInViewport(element: HTMLElement): boolean {
@@ -90,5 +105,13 @@ ngOnInit(): void {
         rect.bottom <= (window.innerHeight || html.clientHeight) &&
         rect.right <= (window.innerWidth || html.clientWidth)
     );
-}
+  }
+
+  shouldChangeMenu() {
+    if ( window.innerWidth <= 500) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

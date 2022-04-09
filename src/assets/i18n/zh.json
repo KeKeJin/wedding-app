@@ -1,0 +1,64 @@
+{
+    "APP": {
+        "TITLE": "早瀬真 & 金科",
+        "SUB_TITLE": "7.30.2022   约巴林达·加州",
+        "HOME": "主页",
+        "ABOUT_US": "我们的故事",
+        "SCHEDULE": "婚礼日程",
+        "TRAVEL": "旅行",
+        "REGISTRY": "心愿单",
+        "WEDDING_PARTY": "伴郎伴娘",
+        "PHOTOS": "照片",
+        "THINGS_TO_DO": "周边活动",
+        "FAQS": "问答",
+        "RSVP": "赐复"
+    },
+    "HOME": {
+        "JONATHAN_HAYASE": "早瀬真",
+        "KE_JIN": "金科",
+        "YORBA_LINDA": "约巴林达",
+        "CA":"加州",
+        "JULY_30": "七月三十日"
+    },
+    "SCHEDULE": {
+        "DATE": "2022年 7月30日",
+        "TIME": "5:30 PM",
+        "ADDRESS": "18001 Yorba Linda Blvd",
+        "CITY": "约巴林达",
+        "STATE": "加利福尼亚州",
+        "ZIP":"92886",
+        "VENUE": "尼克松总统图书馆",
+        "DAYS": "日",
+        "HOURS": "时",
+        "MINS": "分",
+        "SECS": "秒"
+    },
+    "OUR_STORY": {
+        "OUR_STORY": "我们的故事",
+        "HOW_WE_GOT_CLOSER": "成为友人",
+        "DATE_WE_GOT_CLOSER": "2018年3月30日",
+        "HOW_WE_GOT_CLOSER_BODY": "我们在Harvey Mudd College相遇，通过InterVarsity成为了朋友。",
+        "FELL_IN_LOVE": "成为恋人",
+        "DATE_FELL_IN_LOVE": "2019年2月21日",
+        "FELL_IN_LOVE_BODY": "几经周折，我们开始交往♥",
+        "PROPOSAL": "成为准新人",
+        "PROPOSAL_DATE": "2021年7月17日",
+        "PROPOSAL_BODY": "我们订婚啦！",
+        "WEDDING": "成为新人",
+        "WEDDING_DATE": "2022年7月30日",
+        "WEDDING_BODY": "我们邀请亲朋好友见证我们的婚礼。"
+    },
+    "TRAVEL": {
+        "TRAVEL": "旅行"
+    },
+    "RSVP": {
+        "RSVP": "赐复",
+        "COMING_SOON": "即将上线"
+
+    },
+    "REGISTRY": {
+        "REGISTRY": "心愿单",
+        "REGISTRY_TEXT": "您与我们一起庆祝是我们所能拥有的最好礼物",
+        "REGISTRY_BUTTON_TEXT": "我们的心愿单"
+    }
+  }
