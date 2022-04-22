@@ -1,7 +1,22 @@
 .rsvp {
-    display: flex;
+    display: block;
+    /* flex-direction: column;
+    align-items: flex-start; */
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    /* background-image: url('../../assets/A7408937.jpg'); */
+    /* background-image: url('http://sweetinz.catanisthemes.com/wp-content/uploads/2018/05/orange-background_04.jpg'); */
+}
+
+.rsvp-guest {
+    display: block;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.rsvp-text {
+    color: black
 }
 
 .rsvp-row {
@@ -23,6 +38,7 @@
 .rsvp-center {
     margin: auto
 }
+
 mat-spinner {
     margin: auto
 }
@@ -38,6 +54,10 @@ mat-spinner {
     width: 40%;
     margin-left: auto;
     margin-right: auto;
+}
+
+::ng-deep .mat-focused .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color: grey !important;
 }
 
 .rsvp-textarea {
@@ -56,6 +76,13 @@ mat-spinner {
     font-family: var(--font-selected);
     color: beige;
     display: block
+}
+
+.rsvp-back {
+    position: absolute;
+    left: -1ex;
+    top: 50vh;
+    z-index: 10;
 }
 
 .rsvp-button:hover {
@@ -80,6 +107,53 @@ mat-spinner {
 .rsvp-header {
     text-align: center;
     font-family: var(--font1);
-    padding-bottom: 3%;
-    padding-top: 5%;
+    position: relative;
+    z-index: 3;
+
+}
+
+.rsvp-block {
+    /* background-color: rgba(0,0,0,.5);
+    color: #fff; */
+    margin-right: auto;
+    margin-left: auto;
+    min-width: 250px;
+    box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+    width: 80vw;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    position:absolute;
+    top: 5vh;
+    left: 0;
+    right: 0;
+    bottom: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+}   
+
+.mat-flat-button, .mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent {
+    background: var(--color1);
+}
+
+.rsvp-guest-initiated-block {
+    position: absolute;
+    overflow: scroll;
+    top:0;
+    left: 0;
+    bottom: 10vh;
+    right:0
+}
+
+.fixed-bottom {
+    position: absolute;
+    bottom: 5vh;
+}
+
+.initial-rsvp {
+    max-width: 50vw;
+    height: 25vh;
+    margin: auto
 }

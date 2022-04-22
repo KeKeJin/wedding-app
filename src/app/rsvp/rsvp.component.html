@@ -1,57 +1,65 @@
-<!-- <div class="rsvp">
-    <mat-form-field class="rsvp-input" appearance="fill">
-        <input matInput placeholder="Name" required 
-        type="text" [formControl]="nameFormControl">
-    </mat-form-field>
-    <mat-form-field class="rsvp-input" appearance="fill">
-        <input matInput placeholder="Email Address" required
-        type="email" [formControl]="emailFormControl" name="email" ngModel email> 
-        <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error>
-    </mat-form-field>
-    <mat-form-field class="rsvp-input" appearance="fill">
-    <input type="number" matInput placeholder="Number of Guests" required [formControl]="guestFormControl">
-    </mat-form-field>
-    <mat-form-field class="rsvp-textarea" appearance="fill">
-        <textarea matInput placeholder="Message" type="text" [formControl]="messageFormControl"></textarea>
-      </mat-form-field>
-      <button [disabled]="isValid" class="rsvp-submit" mat-raised-button (click)="submitForm()">submit</button>
-    </div> -->
-    <div>
-        <div *ngIf="_isLoading" class="rsvp-spinner">
-            <mat-spinner></mat-spinner>
+<div class="rsvp">
+    <h1 class="rsvp-header noselect" i18n>{{'RSVP.RSVP'| translate}}</h1>
+    <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPInitial)">
+        <button class="rsvp-submit initial-rsvp" mat-raised-button (click)="goto(rsvpState.RSVPinitiated)">
+            Click here to RSVP
+        </button>
+    </div>
+    <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.guestsRSVPCompleted)">
+        <h1> Congradulations! </h1>
+    </div>
+    <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPinitiated)">
+        <div class="rsvp-row">
+            <h1 class="rsvp-instruction"> Please enter the last name of one member of your party below.
+                <br>
+                If you're responding for you and a guest (or your family),
+                you'll be able to RSVP for your entire group on the next page.
+            </h1>
         </div>
-        <div *ngIf="isRSVPinitiated && !_isLoading">
-            <h1 class="rsvp-instruction"> Please enter your last name</h1>
-            <div class="rsvp-row">
-                <mat-form-field class="rsvp-input" appearance="fill">
-                    <input matInput required 
-                    type="text" [formControl]="lastNameFormControl"
+        <div class="rsvp-row">
+            <button class="rsvp-back" mat-mini-fab (click)="goBackto(rsvpState.RSVPInitial)">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <mat-form-field class="rsvp-input" appearance="outline">
+                <input matInput required type="text" [formControl]="lastNameFormControl"
                     (keyup.enter)="submitLastName()">
-                </mat-form-field>
-                <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button (click)="submitLastName()">submit</button>
+            </mat-form-field>
+            <div class="rsvp-row">
+                <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button
+                    (click)="submitLastName()">
+                    submit
+                </button>
             </div>
         </div>
-        <div *ngIf="isLastNameVerified && !_isLoading">
-            <h1> last name verified</h1>
-        </div>
-        <div *ngIf="isLastNameNotVerified && !_isLoading">
-            <h1 class="rsvp-instruction"> last name NOT verified, please try again</h1>
-            <div class="rsvp-row">
-                <mat-form-field class="rsvp-input" appearance="fill">
-                    <input matInput required 
-                    type="text" [formControl]="lastNameFormControl"
-                    (keyup.enter)="submitLastName()">
-                </mat-form-field>
-                <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button (click)="submitLastName()">submit</button>
+    </div>
+    <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.lastNameNotVerified)">
+        <div class="rsvp-row">
+            <h1 class="rsvp-instruction"> 
+            We could not find a guess with the last name {{_guestLastNameNotFound}}, please
+            try again below or contact us at </h1>
             </div>
+        <div class="rsvp-row">
+            <mat-form-field class="rsvp-input" appearance="outline">
+                <input matInput required type="text" [formControl]="lastNameFormControl"
+                    (keyup.enter)="submitLastName()">
+            </mat-form-field>
+            <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button
+                (click)="submitLastName()">submit</button>
         </div>
-        <div *ngIf="isLastNameDuplicated && !_isLoading">
-            <h1 class="rsvp-instruction"> We found multiple guests with your last name, please select below: </h1>
+    </div>
+    <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.lastNameDuplicated)">
+        <div class="rsvp-row">
+        <h1 class="rsvp-instruction"> We found multiple guests with your last name {{lastNameFormControl.value}}, please
+            select below: </h1>
+        </div>
+        <div *ngIf="_guestsFromSheets">
             <div *ngFor="let party of objectKeys(_guestsFromSheets)">
                 <div class="rsvp-row">
-                    <div class="rsvp">
-                        <div *ngFor="let guest of _guestsFromSheets[party]">
-                            <h1 class="rsvp-name"> {{guest.firstName}} {{guest.lastName}}</h1>
+                    <div class="rsvp-guest">
+                        <div *ngIf="_guestsFromSheets">
+                            <div *ngFor="let guest of _guestsFromSheets[party]">
+                                <h1 class="rsvp-name"> {{guest.firstName}} {{guest.lastName}}</h1>
+                            </div>
                         </div>
                     </div>
                     <button class="rsvp-submit" mat-raised-button (click)="selectParty(party)">select</button>
@@ -59,83 +67,102 @@
                 <hr>
             </div>
         </div>
-        <div *ngIf="isGuestsRSVPinitiated && !_isLoading">
-            <h1 class="rsvp-instruction"> rsvp initiaited</h1>
+        <button class="rsvp-back" mat-mini-fab (click)="goBackto(rsvpState.RSVPinitiated)">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+    </div>
+    <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.guestsRSVPinitiated)">
+        <button class="rsvp-back" mat-mini-fab (click)="goBackto(rsvpState.RSVPinitiated)">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <div class="rsvp-guest-initiated-block">
             <div *ngFor="let guest of _guests; let i=index">
                 <div class="rsvp-row">
                     <h1 class="rsvp-name">{{guest.firstName}} {{guest.lastName}}</h1>
-                    <button ngDefaultControl class="rsvp-guest-will-attend rsvp-button" 
-                        [class.highlight-button]="isGuestAttending(guest)" 
-                        mat-raised-button (click)="guestWillAttendHandler(guest)">Will Attend</button>
-                    <button class="rsvp-guest-will-not-attend rsvp-button" [class.highlight-button]="isGuestNotAttending(guest)" mat-raised-button (click)="guestWillNotAttendHandler(guest)">Will Not Attend</button>
+                    <button ngDefaultControl class="rsvp-guest-will-attend rsvp-button"
+                        [class.highlight-button]="isGuestAttending(guest)" mat-raised-button
+                        (click)="guestWillAttendHandler(guest)">Will Attend</button>
+                    <button class="rsvp-guest-will-not-attend rsvp-button"
+                        [class.highlight-button]="isGuestNotAttending(guest)" mat-raised-button
+                        (click)="guestWillNotAttendHandler(guest)">Will Not Attend</button>
                 </div>
-                <div *ngIf="isGuestAttending(guest)" class="rsvp">
-                    <div class = "rsvp-row">
-                        <button type="boolean" ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button 
-                        (click)="guestKidsMealToggle(guest)"
-                        [class.highlight-button]="guest.kidsMeal" >kid's meal?</button>
-                        <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button 
-                        (click)="guestVeganToggle(guest)"
-                        [class.highlight-button]="guest.vegan" >vegan?</button>
-                        <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button 
-                        (click)="guestGlutonFreeToggle(guest)"
-                        [class.highlight-button]="guest.glutonFree" >gluton free?</button>
-                    </div>
-                    <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
-                    <input ngDefaultControl matInput placeholder="Email Address"
-                    type="email" [formControl]="getEmailFormControl(i)" name="email" ngModel email> 
-                    <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage()}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field ngDefaultControl class="rsvp-textarea rsvp-name" appearance="fill">
-                        <textarea matInput placeholder="Additional Requests" type="text"
-                        [formControl]="getMessageFormControl(i)"></textarea>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div *ngFor="let guest of _extraGuests; let i=index">
-                <div class="rsvp-row">
+                <div *ngIf="isGuestAttending(guest)" class="rsvp-guest">
                     <div class="rsvp-row">
-                        <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
-                            <input ngDefaultControl matInput placeholder="First Name"
-                            [formControl]="getExtraGuestFirstNameFormControl(i)" name="first_name" required> 
-                            <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage()}}</mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
-                            <input ngDefaultControl matInput placeholder="Last Name"
-                            [formControl]="getExtraGuestLastNameFormControl(i)" name="last_name" required> 
-                            <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage()}}</mat-error>
-                        </mat-form-field>
+                        <button type="boolean" ngDefaultControl class="rsvp-submit rsvp-button rsvp-name"
+                            mat-raised-button (click)="guestKidsMealToggle(guest)"
+                            [class.highlight-button]="guest.kidsMeal">kid's
+                            meal?</button>
+                        <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button
+                            (click)="guestVeganToggle(guest)" [class.highlight-button]="guest.vegan">vegan?</button>
+                        <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button
+                            (click)="guestGlutonFreeToggle(guest)" [class.highlight-button]="guest.glutonFree">gluton
+                            free?</button>
                     </div>
-                    <button class="rsvp-submit" class="rsvp-center" mat-raised-button (click)="removeGuest(i)">Remove Guest</button>
-                </div>
-                <div class="rsvp">
-                    <div class = "rsvp-row">
-                        <button type="boolean" ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button 
-                        (click)="guestKidsMealToggle(guest)"
-                        [class.highlight-button]="guest.kidsMeal" >kid's meal?</button>
-                        <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button 
-                        (click)="guestVeganToggle(guest)"
-                        [class.highlight-button]="guest.vegan" >vegan?</button>
-                        <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button 
-                        (click)="guestGlutonFreeToggle(guest)"
-                        [class.highlight-button]="guest.glutonFree" >gluton free?</button>
-                    </div>
-                        <mat-form-field class="rsvp-input rsvp-name" appearance="fill">
-                        <input ngDefaultControl matInput placeholder="Email Address"
-                        type="email" [formControl]="getExtraGuestEmailFormControl(i)" name="email" ngModel email> 
-                        <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage()}}</mat-error>
+                    <mat-form-field class="rsvp-input rsvp-name" appearance="outline">
+                        <mat-label>Email Address</mat-label>
+                        <input ngDefaultControl matInput type="email" [formControl]="getEmailFormControl(i)"
+                            name="email" ngModel email>
+                        <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage(i)}}
+                        </mat-error>
                     </mat-form-field>
-                    <mat-form-field ngDefaultControl class="rsvp-textarea rsvp-name" appearance="fill">
-                        <textarea matInput placeholder="Additional Requests" type="text"
-                        [formControl]="getExtraGuestMessageFormControl(i)"></textarea>
+                    <mat-form-field ngDefaultControl class="rsvp-textarea rsvp-name" appearance="outline">
+                        <mat-label>Additional Requests</mat-label>
+                        <textarea matInput type="text" [formControl]="getMessageFormControl(i)"></textarea>
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="rsvp-row" *ngIf="allowExtraGuest">
-                <button [disabled]="isValid" class="rsvp-submit" class="rsvp-center" mat-raised-button (click)="addGuest()">Add Extra Guest</button>
-            </div>
-            <div class="rsvp-row">
-                <button [disabled]="isValid" class="rsvp-submit" class="rsvp-center" mat-raised-button (click)="submitForm()">submit</button>
             </div>
         </div>
+        <div *ngFor="let guest of _extraGuests; let i=index">
+            <div class="rsvp-row">
+                <div class="rsvp-row">
+                    <mat-form-field class="rsvp-input rsvp-name" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input ngDefaultControl matInput [formControl]="getExtraGuestFirstNameFormControl(i)"
+                            name="first_name" required>
+                        <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage(i)}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="rsvp-input rsvp-name" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input ngDefaultControl matInput [formControl]="getExtraGuestLastNameFormControl(i)"
+                            name="last_name" required>
+                        <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage(i)}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <button class="rsvp-submit" class="rsvp-center" mat-raised-button (click)="removeGuest(i)">Remove
+                    Guest</button>
+            </div>
+            <div class="rsvp-guest">
+                <div class="rsvp-row">
+                    <button type="boolean" ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button
+                        (click)="guestKidsMealToggle(guest)" [class.highlight-button]="guest.kidsMeal">kid's
+                        meal?</button>
+                    <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button
+                        (click)="guestVeganToggle(guest)" [class.highlight-button]="guest.vegan">vegan?</button>
+                    <button ngDefaultControl class="rsvp-submit rsvp-button rsvp-name" mat-raised-button
+                        (click)="guestGlutonFreeToggle(guest)" [class.highlight-button]="guest.glutonFree">gluton
+                        free?</button>
+                </div>
+                <mat-form-field class="rsvp-input rsvp-name" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input ngDefaultControl matInput type="email" [formControl]="getExtraGuestEmailFormControl(i)"
+                        name="email" ngModel email>
+                    <mat-error *ngIf="guestsFormGroups[i].controls['email'].invalid">{{getErrorMessage(i)}}</mat-error>
+                </mat-form-field>
+                <mat-form-field ngDefaultControl class="rsvp-textarea rsvp-name" appearance="outline">
+                    <mat-label>Additional Requests</mat-label>
+                    <textarea matInput type="text" [formControl]="getExtraGuestMessageFormControl(i)"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="rsvp-row" *ngIf="allowExtraGuest">
+            <button [disabled]="isValid" class="rsvp-submit" class="rsvp-center" mat-raised-button
+                (click)="addGuest()">Add Extra Guest</button>
+        </div>
+        <div class="rsvp-row fixed-bottom">
+            <button [disabled]="isValid" class="rsvp-submit" class="rsvp-center" mat-raised-button
+                (click)="submitForm()">submit</button>
+        </div>
     </div>
+</div>
