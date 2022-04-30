@@ -1,5 +1,11 @@
 <div class="rsvp">
     <h1 class="rsvp-header noselect" i18n>{{'RSVP.RSVP'| translate}}</h1>
+    <div [hidden]="hideGoBackButton()">
+    <button (click)="goBacktoPreviousState()" class="rsvp-back">
+        <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    </div>
+   
     <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPInitial)">
         <button class="rsvp-submit initial-rsvp" mat-raised-button (click)="goto(rsvpState.RSVPinitiated)">
             Click here to RSVP
@@ -17,9 +23,6 @@
             </h1>
         </div>
         <div class="rsvp-row">
-            <button class="rsvp-back" mat-mini-fab (click)="goBackto(rsvpState.RSVPInitial)">
-                <mat-icon>keyboard_arrow_left</mat-icon>
-            </button>
             <mat-form-field class="rsvp-input" appearance="outline">
                 <input matInput required type="text" [formControl]="lastNameFormControl"
                     (keyup.enter)="submitLastName()">
@@ -27,7 +30,7 @@
             <div class="rsvp-row">
                 <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button
                     (click)="submitLastName()">
-                    submit
+                        submit <i class="fa fa-spinner fa-spin" *ngIf="_isLoading" ></i> 
                 </button>
             </div>
         </div>
@@ -44,7 +47,9 @@
                     (keyup.enter)="submitLastName()">
             </mat-form-field>
             <button [disabled]="isLastNameValid" class="rsvp-submit" mat-raised-button
-                (click)="submitLastName()">submit</button>
+                (click)="submitLastName()">
+                    submit <i class="fa fa-spinner fa-spin" *ngIf="_isLoading"></i> 
+            </button>
         </div>
     </div>
     <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.lastNameDuplicated)">
@@ -62,19 +67,15 @@
                             </div>
                         </div>
                     </div>
-                    <button class="rsvp-submit" mat-raised-button (click)="selectParty(party)">select</button>
+                    <button class="rsvp-submit" mat-raised-button (click)="selectParty(party)">
+                            select <i class="fa fa-spinner fa-spin" *ngIf="_isLoading" ></i> 
+                    </button>
                 </div>
                 <hr>
             </div>
         </div>
-        <button class="rsvp-back" mat-mini-fab (click)="goBackto(rsvpState.RSVPinitiated)">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-        </button>
     </div>
     <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.guestsRSVPinitiated)">
-        <button class="rsvp-back" mat-mini-fab (click)="goBackto(rsvpState.RSVPinitiated)">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-        </button>
         <div class="rsvp-guest-initiated-block">
             <div *ngFor="let guest of _guests; let i=index">
                 <div class="rsvp-row">
@@ -162,7 +163,9 @@
         </div>
         <div class="rsvp-row fixed-bottom">
             <button [disabled]="isValid" class="rsvp-submit" class="rsvp-center" mat-raised-button
-                (click)="submitForm()">submit</button>
+                (click)="submitForm()">
+                    submit <i class="fa fa-spinner fa-spin" *ngIf="_isLoading" ></i> 
+            </button>
         </div>
     </div>
 </div>

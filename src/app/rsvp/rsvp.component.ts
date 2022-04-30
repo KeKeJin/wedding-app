@@ -120,8 +120,6 @@ export class RsvpComponent {
 
   _state = RSVPState.RSVPInitial;
 
-  _state_to_change_to = RSVPState.RSVPInitial;
-
   _guestLastNameNotFound = '';
 
   _guestsFromSheets?: any;
@@ -412,8 +410,30 @@ export class RsvpComponent {
   }
 
 
-  goBackto(state: RSVPState) {
-    this._state = state;
+  goBacktoPreviousState() {
+    switch(this._state) {
+      case RSVPState.guestsRSVPCompleted:
+      case RSVPState.RSVPinitiated: {
+        this._state = RSVPState.RSVPInitial;
+        break
+      }
+      case RSVPState.guestsRSVPinitiated: {
+        this._state = RSVPState.RSVPinitiated;
+        break
+      }
+      case RSVPState.lastNameDuplicated: {
+        this._state = RSVPState.RSVPinitiated;
+        break
+      }
+      case RSVPState.lastNameNotVerified: {
+        this._state = RSVPState.RSVPinitiated;
+        break
+      }
+    }
+  }
+
+  hideGoBackButton() {
+    return this._state == RSVPState.RSVPInitial;
   }
 
   determineAnimationState(state: RSVPState) {

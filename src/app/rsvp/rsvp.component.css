@@ -5,8 +5,8 @@
     position: relative;
     height: 100vh;
     overflow: hidden;
-    /* background-image: url('../../assets/A7408937.jpg'); */
-    /* background-image: url('http://sweetinz.catanisthemes.com/wp-content/uploads/2018/05/orange-background_04.jpg'); */
+    background-image: url('../../assets/floral.jpg');
+    background-size: cover;
 }
 
 .rsvp-guest {
@@ -80,9 +80,15 @@ mat-spinner {
 
 .rsvp-back {
     position: absolute;
-    left: -1ex;
+    left: 10vw;
+    width: 5vh;
+    height: 5vh;
     top: 50vh;
     z-index: 10;
+    background: var(--color1);
+    color: white;
+    border-color: white;
+    border-radius: 50%;
 }
 
 .rsvp-button:hover {
@@ -132,6 +138,7 @@ mat-spinner {
     flex-direction: column;
     justify-content: center;
     background-color: white;
+    overflow: scroll;
 }   
 
 .mat-flat-button, .mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent {
