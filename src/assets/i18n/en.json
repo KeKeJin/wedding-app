@@ -58,7 +58,8 @@
     },
     "REGISTRY": {
         "REGISTRY": "Registry",
-        "REGISTRY_TEXT": "Your presence in celebrating with us is the greatest gift we could have.",
+        "REGISTRY_TEXT_1": "Your presence in celebrating with us is the greatest gift we could asked for.",
+        "REGISTRY_TEXT_2": "If you'd like to contribute to adding to our new home, please use the link below.",
         "REGISTRY_BUTTON_TEXT": "Jon & Ke's Wish List"
     }
   }

@@ -58,7 +58,8 @@
     },
     "REGISTRY": {
         "REGISTRY": "心愿单",
-        "REGISTRY_TEXT": "您与我们一起庆祝是我们所能拥有的最好礼物",
+        "REGISTRY_TEXT_1": "您与我们一起庆祝是我们最好的礼物",
+        "REGISTRY_TEXT_2": "如果您愿意帮助我们搭建我们的新家，请点开下面的链接",
         "REGISTRY_BUTTON_TEXT": "我们的心愿单"
     }
   }
