@@ -152,16 +152,16 @@
   }
 
 .doodle {
-    width: 20vw;
+    width: 40vw;
     left: 0;
     position: relative;
     z-index: 3;
-    margin-top: -10vw;
+    margin-top: -20vw;
 }
 
 @media only screen and (max-width: 500px) {
     .doodle {
-        width: 50vw;
+        width: 80vw;
         left: 0;
         margin-top: -30vw;
     }

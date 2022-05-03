@@ -12,4 +12,12 @@ export class TravelComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  shouldChangeMenu() {
+    if ( window.innerWidth <= 500) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

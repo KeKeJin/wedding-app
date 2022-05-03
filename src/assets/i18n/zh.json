@@ -49,7 +49,19 @@
         "WEDDING_BODY": "我们邀请亲朋好友见证我们的婚礼。"
     },
     "TRAVEL": {
-        "TRAVEL": "旅行"
+        "TRAVEL": "旅行",
+        "SNA": "SNA",
+        "ONT": "ONT",
+        "LAX" : "LAX",
+        "LGB": "LGB",
+        "SNA_NAME": "John Wayne - Orange County Airport (SNA)",
+        "SNA_INFO": "南加州有很多机场，但是国内航班中，属距离尼克森总统图书馆20英里的John Wayne - Orange County Airport (SNA) 机场最方便快捷。",
+        "ONT_NAME": "Ontario International Airport (ONT)",
+        "ONT_INFO": "Ontario International Airport (ONT) 也是不错的选择。距离尼克斯总统图书案约30英里.",
+        "LGB_NAME": "Long Beach Airport (LGB)",
+        "LGB_INFO": "Long Beach Airport 距离尼克斯总统图书馆约30英里。机场较小，但是出行很方便。",
+        "LAX_NAME" : "Los Angeles International Airport (LAX)",
+        "LAX_INFO": "Los Angeles International Airport (LAX) 距离尼克斯总统图书馆约45英里。这里有很多国际航班，但是因为机场很大旅客很多，出入机场并不是很便利。洛杉矶的交通状况较复杂，如果您住在洛杉矶或附近区域，请为自己预留足够的时间。"
     },
     "RSVP": {
         "RSVP": "赐复",

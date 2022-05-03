@@ -50,7 +50,19 @@
         "WEDDING_BODY": "We invite friends and family to witness the beginning of our marriage."
     },
     "TRAVEL": {
-        "TRAVEL": "Travel"
+        "TRAVEL": "Travel",
+        "SNA_NAME": "John Wayne - Orange County Airport",
+        "SNA": "SNA",
+        "SNA_INFO": "Southern California has many airports but John Wayne - Orange County Airport (SNA) is the easiest for domestic flights and is about 20 miles from The Richard Nixon Library.",
+        "ONT": "ONT",
+        "ONT_NAME": "Ontario International Airport ",
+        "ONT_INFO": "Ontario International Airport (ONT) is another airport option in the area. It is located about 30 miles from the Richard Nixon Library。",
+        "LGB": "LGB",
+        "LGB_NAME": "Long Beach Airport",
+        "LGB_INFO": "Long Beach Airport is located about 30 miles from the Richard Nixon Library. It is a smaller airport that is very easy to navigate in and out of.",
+        "LAX" : "LAX",
+        "LAX_NAME" : "Los Angeles International Airport",
+        "LAX_INFO": "Los Angeles International Airport (LAX) is located 45 miles from the Richard Nixon Library. As many of you know, it is a huge airport and will be the most difficult to travel to and from. The traffic in LA is extremely unpredictable so please give yourself enough time if you choose to explore or stay in the Los Angeles area."
     },
     "RSVP": {
         "RSVP": "RSVP",
@@ -58,8 +70,8 @@
     },
     "REGISTRY": {
         "REGISTRY": "Registry",
-        "REGISTRY_TEXT_1": "Your presence in celebrating with us is the greatest gift we could asked for.",
-        "REGISTRY_TEXT_2": "If you'd like to contribute to adding to our new home, please use the link below.",
+        "REGISTRY_TEXT_1": "Your presence celebrating with us is the greatest gift we could ask for.",
+        "REGISTRY_TEXT_2": "If you'd like to help us build our new home, please use the link below.",
         "REGISTRY_BUTTON_TEXT": "Jon & Ke's Wish List"
     }
   }
