@@ -14,55 +14,77 @@
     position: relative;
 }
 .travel-wrapper {
-    position: relative;
+    /* position: relative;
     display: block;
-    height:200vh;
+    height:200vh; */
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    gap: 2vh 2vw;
 }
 
 .travel-block {
-    width: 20vw;
-    max-height: 80vh;
-    overflow: scroll;
+    /* width: 20vw; */
+    /* max-height: 80vh;
+    overflow: scroll; */
+    /* display: grid;
+    grid-template-columns: 20% 20% 20% ;
+    grid-template-rows: 20% 20% 20% 20% 20%; */
 }
 
 .travel-block-1 {
-    position: absolute;
+    /* position: absolute;
     top: 0;
-    left: 15vw;
+    left: 15vw; */
+    grid-column: 2;
+    grid-row: 1
 }
 
 .travel-block-2 {
-    position: absolute;
+    /* position: absolute;
     top: 30vh;
-    left: 40vw;
+    left: 40vw; */
+    grid-column: 3;
+    grid-row: 2
 }
 
 .travel-block-3 {
-    position: absolute;
+    /* position: absolute;
     top: 60vh;
-    left: 65vw;
+    left: 65vw; */
+    grid-column: 4;
+    grid-row: 3
 }
 
 .travel-block-4 {
-    position: absolute;
+    /* position: absolute;
     top: 120vh;
-    left: 40vw;
+    left: 40vw; */
+    grid-column: 3;
+    grid-row: 4
+
 }
 
 .travel-block-5 {
-    position: absolute;
+    /* position: absolute;
     top: 150vh;
-    left: 15vw;
+    left: 15vw; */
+    grid-column: 2;
+    grid-row: 5
+
 }
 
 .travel-background-1 {
-    position: absolute;
-    top: 30vh;
-    left: -10vw;
-    display: block;
-    max-width: 50vw;
+    max-width: 100vw;
+    margin-left: -40vw;
+    margin-top: -50vh;
 }
 
+.travel-block-6 {
+    max-width: 50vw;
+    grid-column: 1;
+    grid-row: 3;
+}
 .travel-title {
     color: var(--color1);
     font-family: var(--font1);
@@ -85,6 +107,9 @@
     line-height: 1.5rem;
 }
 
+ul {
+    list-style: none;
+}
 .travel-more-info {
     /* width: 20vw;
     max-width: 20vw;
