@@ -21,6 +21,9 @@
     grid-template-columns: 20% 20% 20% 20% 20%;
     grid-template-rows: 20% 20% 20% 20% 20%;
     gap: 2vh 2vw;
+    min-height: 0;  /* NEW */
+    min-width: 0;   /* NEW; needed for Firefox */
+    overflow-x: hidden;
 }
 
 .travel-block {
@@ -75,16 +78,44 @@
 }
 
 .travel-background-1 {
-    max-width: 100vw;
-    margin-left: -40vw;
-    margin-top: -50vh;
+    max-width: 60vw;
+    margin-left: -20vw;
+}
+
+
+.travel-background-2 {
+    max-width: 40vw;
+    margin: auto;
+
+}
+
+.travel-background-3 {
+    max-width: 40vw;
+    margin-right: 0;
+
+
 }
 
 .travel-block-6 {
-    max-width: 50vw;
-    grid-column: 1;
-    grid-row: 3;
+    max-width: 30vw;
+    grid-column: 1 / 3;
+    grid-row: 2 / 5
 }
+
+.travel-block-7 {
+    max-width: 30vw;
+    grid-column: 4 / 6;
+
+    grid-row: 1 / 3;
+}
+
+.travel-block-8 {
+    max-width: 30vw;
+    grid-column: 4 / 6;
+    grid-row: 4 / 6;
+
+}
+
 .travel-title {
     color: var(--color1);
     font-family: var(--font1);
@@ -222,6 +253,14 @@ a {
     }
 
     .travel-background-1 {
+        display: none;
+    }
+
+    .travel-background-2 {
+        display: none;
+    }
+
+    .travel-background-3 {
         display: none;
     }
 }
