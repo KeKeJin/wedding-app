@@ -55,7 +55,7 @@
     background-color:var(--color1);
     top: 0;
     bottom: 0;
-    left: 50vw;
+    left: calc(50vw - 1.5px);
   }
 
   
@@ -68,7 +68,7 @@
     z-index: 100;
     margin:auto;
     position: absolute;
-    left: calc(50vw - 13.5px);
+    left: calc(50vw - 12.5px);
   }
   .our-story-title {
       color: var(--color1);
