@@ -24,15 +24,6 @@
     overflow-y: hidden;
 }
 
-.travel-block {
-    /* width: 20vw; */
-    /* max-height: 80vh;
-    overflow: scroll; */
-    /* display: grid;
-    grid-template-columns: 20% 20% 20% ;
-    grid-template-rows: 20% 20% 20% 20% 20%; */
-}
-
 .travel-block-1 {
     grid-column: 2;
     grid-row: 1

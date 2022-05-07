@@ -385,16 +385,16 @@ export class RsvpComponent {
     guest.willAttend = false;
   }
 
-  guestKidsMealToggle(guest: Guest) {
-    guest.kidsMeal = !guest.kidsMeal;
+  guestKidsMealToggle(guest: Guest, isCorrect: boolean) {
+    guest.kidsMeal = isCorrect;
   }
 
-  guestVeganToggle(guest: Guest) {
-    guest.vegan = !guest.vegan;
+  guestVeganToggle(guest: Guest, isCorrect: boolean) {
+    guest.vegan = isCorrect;
   }
 
-  guestGlutonFreeToggle(guest: Guest) {
-    guest.glutonFree = !guest.glutonFree;
+  guestGlutonFreeToggle(guest: Guest, isCorrect: boolean) {
+    guest.glutonFree = isCorrect;
   }
 
   isGuestAttending(guest: Guest) {
