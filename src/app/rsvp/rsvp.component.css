@@ -9,12 +9,23 @@
     background-size: cover;
 }
 
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}
+
 .rsvp-guest {
     display: block;
     flex-direction: column;
     align-items: flex-start;
 }
 
+.position-relative {
+    position: relative;
+}
 .rsvp-text {
     color: black
 }
@@ -27,6 +38,101 @@
     padding-bottom: 5vh;
     align-items: center;
 }
+
+.rsvp-guest-basic {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-template-rows: 20% 20%;
+    gap: 2vh 2vw;
+    min-height: 0;  /* NEW */
+    min-width: 0;   /* NEW; needed for Firefox */
+}
+
+.rsvp-guest-info {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20%;
+    gap: 2vh 2vw;
+    min-height: 0;  /* NEW */
+    min-width: 0;   /* NEW; needed for Firefox */
+}
+
+.rsvp-guest-basic-name {
+    grid-column: 1 / 3;
+    grid-row: 1
+}
+
+.rsvp-guest-basic-email {
+    grid-column: 3 / 5;
+    grid-row: 1;
+}
+
+.rsvp-guest-question {
+    grid-column: 1 / 3;
+}
+
+.rsvp-guest-question-basic {
+    grid-row: 2;
+}
+.rsvp-guest-question-yes {
+    grid-column: 3;
+}
+
+.rsvp-guest-question-no {
+    grid-column: 4;
+}
+
+.rsvp-guest-info-question1 {
+    grid-row: 1;
+}
+
+.rsvp-guest-info-question2 {
+    grid-row: 2;
+}
+
+.rsvp-guest-info-question3 {
+    grid-row: 3;
+}
+
+.rsvp-guest-info-additional {
+    grid-column: 1 / 5;
+    grid-row: 4;
+}
+
+.rsvp-extra-guest-basic {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-template-rows: 25%;
+    gap: 2vh 2vw;
+    min-height: 0;  /* NEW */
+    min-width: 0;   /* NEW; needed for Firefox */
+    display: relative;
+}
+
+.rsvp-remove-guest {
+    position: absolute;
+    right: 0;
+    color: grey;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.rsvp-extra-guest-first-name {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.rsvp-extra-guest-last-name {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.rsvp-extra-guest-email {
+    grid-column: 3 / 5;
+    grid-row: 1;
+}
+
 
 .rsvp-spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
     stroke: var(--color1);
@@ -51,7 +157,7 @@ mat-spinner {
     font-family: var(--font9);
 }
 .rsvp-input {
-    width: 40%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -61,7 +167,7 @@ mat-spinner {
 }
 
 .rsvp-textarea {
-    width: 40%;
+    width: 100%;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -85,10 +191,14 @@ mat-spinner {
     height: 5vh;
     top: 50vh;
     z-index: 10;
-    background: var(--color1);
-    color: white;
-    border-color: white;
+    color: grey;
+    border: none;
     border-radius: 50%;
+    background-color: transparent;
+}
+
+i {
+    font-size: 2rem;
 }
 
 .rsvp-button:hover {
@@ -129,12 +239,12 @@ mat-spinner {
     border-radius: 5px;
     padding: 10px;
     text-align: center;
-    position:absolute;
+    position: absolute;
+    height: 60vh;
     top: 5vh;
     left: 0;
     right: 0;
     bottom: 5vh;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: white;
@@ -148,10 +258,11 @@ mat-spinner {
 .rsvp-guest-initiated-block {
     position: absolute;
     overflow: scroll;
-    top:0;
-    left: 0;
+    top:10vh;
+    left: 10vw;
+    right: 10vw;
     bottom: 10vh;
-    right:0
+    width: 80vw;
 }
 
 .fixed-bottom {
@@ -163,4 +274,8 @@ mat-spinner {
     max-width: 50vw;
     height: 25vh;
     margin: auto
+}
+
+.rsvp-promp {
+    font-family: var(--font9);
 }
