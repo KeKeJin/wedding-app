@@ -6,11 +6,18 @@
         </button>
     </div>
 
+    <div [hidden]="hideGoForwardButton()">
+        <button (click)="gotoNextState()" class="rsvp-forward">
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa fa-spinner fa-spin" *ngIf="_isLoading"></i>
+        </button>
+    </div>
+
     <div class="position-relative">
-        <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPInitial)">
-            <button class="rsvp-submit initial-rsvp" mat-raised-button (click)="goto(rsvpState.RSVPinitiated)">
-                Click here to RSVP
-            </button>
+        <div class="rsvp-block rsvp-initial-container" [@inandout]="determineAnimationState(rsvpState.RSVPInitial)">
+                <button class="rsvp-submit initial-rsvp" mat-raised-button (click)="goto(rsvpState.RSVPinitiated)">
+                    Click here to RSVP
+                </button>
         </div>
         <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.guestsRSVPCompleted)">
             <h1> Congradulations! </h1>
@@ -29,20 +36,14 @@
                         (keyup.enter)="saveLastNamePromptCode()">
                 </mat-form-field>
             </div>
-            <div class="rsvp-row">
-                <button [disabled]="isLastNameNotValid" class="rsvp-submit" mat-raised-button
-                    (click)="saveLastNamePromptCode()">
-                    submit <i class="fa fa-spinner fa-spin" *ngIf="_isLoading"></i>
-                </button>
-            </div>
         </div>
 
         <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPenterCode)">
             <div class="rsvp-row">
-                <h1 class="rsvp-instruction"> Please enter the number printed on the right corner of your invitation
-                    envolope.
+                <h1 class="rsvp-instruction"> Please enter the RSVP code printed on the inside of your invitation
+                    envolope, underneath the envolope flap. This helps us identify our guests. 
                     <br>
-                    This helps us identify our guests.
+                    If you cannot find the code, please email priscillaechu@gmail.com.
                 </h1>
             </div>
             <div class="rsvp-row">
@@ -51,27 +52,25 @@
                         (keyup.enter)="submitLastName()">
                 </mat-form-field>
             </div>
-            <div class="rsvp-row">
-                <button [disabled]="isCodeFormatValid" class="rsvp-submit" mat-raised-button (click)="submitLastName()">
-                    submit <i class="fa fa-spinner fa-spin" *ngIf="_isLoading"></i>
-                </button>
-            </div>
         </div>
 
         <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.lastNameNotVerified)">
             <div class="rsvp-row">
                 <h1 class="rsvp-instruction">
-                    We could not find a guess with the last name {{_guestLastNameNotFound}}, please
-                    try again below or contact us at </h1>
+                    Sorry, we are having trouble verifying you, please
+                    try again below or contact us at priscillaechu@gmail.com.</h1>
             </div>
             <div class="rsvp-row">
-                <mat-form-field class="rsvp-input" appearance="outline">
+                <mat-form-field class="rsvp-initiated-input" appearance="outline">
+                    <mat-label>Last Name</mat-label>
                     <input matInput required type="text" [formControl]="lastNameFormControl"
-                        (keyup.enter)="saveLastNamePromptCode()">
+                        (keyup.enter)="focusCode()">
                 </mat-form-field>
-                <button [disabled]="isCodeFormatValid" class="rsvp-submit" mat-raised-button (click)="submitLastName()">
-                    submit <i class="fa fa-spinner fa-spin" *ngIf="_isLoading"></i>
-                </button>
+                <mat-form-field ngDefaultControl class="rsvp-initiated-input " appearance="outline">
+                    <mat-label>RSVP code</mat-label>
+                    <input id='rsvp-invitation-code' matInput required type="text" [formControl]="invitationCodeFormControl"
+                        (keyup.enter)="submitLastName()">
+                </mat-form-field>
             </div>
         </div>
         <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.guestsRSVPinitiated)">
@@ -245,12 +244,6 @@
                 <button [disabled]="!isNotValid" class="rsvp-submit" class="rsvp-center" mat-raised-button
                     (click)="addGuest()">Add
                     Extra Guest</button>
-            </div>
-            <div class="rsvp-row">
-                <button [disabled]="!isNotValid" class="rsvp-submit" class="rsvp-center" mat-raised-button
-                    (click)="submitForm()">
-                    submit <i class="fa fa-spinner fa-spin" *ngIf="_isLoading"></i>
-                </button>
             </div>
 
         </div>

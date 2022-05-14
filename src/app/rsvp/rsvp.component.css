@@ -191,11 +191,33 @@ mat-spinner {
     height: 5vh;
     top: 50vh;
     z-index: 10;
-    color: grey;
+    color: #b5b5b5;
     border: none;
     border-radius: 50%;
     background-color: transparent;
 }
+
+.rsvp-back:hover {
+    color: gray;
+}
+
+.rsvp-forward {
+    position: absolute;
+    right: 10vw;
+    width: 5vh;
+    height: 5vh;
+    top: 50vh;
+    z-index: 10;
+    color: #b5b5b5;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.rsvp-forward:hover {
+    color: gray;
+}
+
 
 i {
     font-size: 2rem;
@@ -272,8 +294,13 @@ i {
 
 .initial-rsvp {
     max-width: 50vw;
-    height: 25vh;
-    margin: auto
+    margin: auto;
+
+}
+
+.rsvp-initial-container {
+    display: flex;
+    align-items: center;
 }
 
 .rsvp-promp {

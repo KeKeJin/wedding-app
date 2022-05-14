@@ -69,7 +69,6 @@ const RSVPStateMachine= new Map([
     next: [
       RSVPState.RSVPinitiated, 
       RSVPState.lastNameNotVerified, 
-      RSVPState.lastNameDuplicated,
       RSVPState.guestsRSVPinitiated,
       RSVPState.guestsRSVPCompleted,
       RSVPState.RSVPenterCode
@@ -81,7 +80,6 @@ const RSVPStateMachine= new Map([
       RSVPState.RSVPenterCode,
       RSVPState.guestsRSVPinitiated, 
       RSVPState.lastNameNotVerified,  
-      RSVPState.lastNameDuplicated,
       RSVPState.guestsRSVPCompleted
     ]
   }],
@@ -93,28 +91,19 @@ const RSVPStateMachine= new Map([
     next: [
       RSVPState.guestsRSVPinitiated, 
       RSVPState.lastNameNotVerified,  
-      RSVPState.lastNameDuplicated,
       RSVPState.guestsRSVPCompleted
     ]
   }],
   ["lastNameNotVerified", {
     previous: [
       RSVPState.RSVPinitiated, 
+      RSVPState.RSVPInitial,
       RSVPState.RSVPenterCode,
-      RSVPState.RSVPInitial],
+    ],
     next: [
       RSVPState.guestsRSVPinitiated, 
-      RSVPState.guestsRSVPCompleted, 
-      RSVPState.lastNameDuplicated]
-  }],
-  ["lastNameDuplicated", {
-    previous: [
-      RSVPState.RSVPinitiated, 
-      RSVPState.lastNameNotVerified, 
-      RSVPState.RSVPInitial],
-    next: [
-      RSVPState.guestsRSVPinitiated, 
-      RSVPState.guestsRSVPCompleted],
+      RSVPState.guestsRSVPCompleted
+    ]
   }],
   ["guestsRSVPinitiated", {
     previous: [
@@ -132,7 +121,6 @@ const RSVPStateMachine= new Map([
       RSVPState.RSVPInitial, 
       RSVPState.guestsRSVPinitiated,
       RSVPState.RSVPenterCode,
-      RSVPState.lastNameDuplicated,
       RSVPState.lastNameNotVerified
     ],
     next: []
@@ -429,10 +417,12 @@ export class RsvpComponent {
     })
     const respondTest = await respond.text();
     if (respondTest == 'false') {
+      this.lastNameFormControl = new FormControl('');
+      this.invitationCodeFormControl = new FormControl('', Validators.pattern('^[0-9]*$'));
       this.goto(RSVPState.lastNameNotVerified);
       this._guestLastNameNotFound = lastname;
       this._isLoading = false;
-      return Promise.reject();
+      return;
     }
     else {
       this.clearForm();
@@ -488,10 +478,6 @@ export class RsvpComponent {
         this._state = RSVPState.RSVPinitiated;
         break
       }
-      case RSVPState.lastNameDuplicated: {
-        this._state = RSVPState.RSVPinitiated;
-        break
-      }
       case RSVPState.lastNameNotVerified: {
         this._state = RSVPState.RSVPinitiated;
         break
@@ -503,9 +489,55 @@ export class RsvpComponent {
     }
   }
 
+  gotoNextState() {
+    switch(this._state) {
+      case RSVPState.RSVPInitial: {
+        this._state = RSVPState.RSVPinitiated;
+        break
+      }
+      case RSVPState.RSVPinitiated: {
+        this.saveLastNamePromptCode();
+        break
+      }
+      case RSVPState.RSVPenterCode: {
+        this.submitLastName();
+        break
+      }
+      case RSVPState.lastNameNotVerified: {
+        this.submitLastName();
+        break
+      }
+      case RSVPState.guestsRSVPinitiated: {
+        this.submitForm();
+        break
+      }
+    }
+  }
+
   hideGoBackButton() {
     return this._state == RSVPState.RSVPInitial;
   }
+
+  hideGoForwardButton() {
+    if (this._state == RSVPState.guestsRSVPCompleted || this._state == RSVPState.RSVPInitial){
+      return true;
+    } else if (this._state == RSVPState.RSVPinitiated) {
+        return !this.lastNameFormControl.valid;
+      }
+      else if (this._state == RSVPState.RSVPenterCode) {
+        return !this.invitationCodeFormControl.valid;
+      }
+      else if (this._state == RSVPState.lastNameNotVerified) {
+        return !this.invitationCodeFormControl.valid;
+      }
+      else {
+        return false;
+      }
+    }
+
+    focusCode() {
+      document.getElementById('rsvp-invitation-code')?.focus();
+    }
 
   determineAnimationState(state: RSVPState) {
     if (RSVPStateMachine.get(this._state)?.previous.includes(state)) {
