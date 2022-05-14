@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 export interface Guest {
   guestName: string,
@@ -19,13 +19,48 @@ export interface Guest {
   guestsGuest: boolean
 }
 
+export interface OriginalGuest {
+  guestName: string,
+  guestId: number,
+  partyId: number,
+  lastName: string,
+  firstName: string,
+  extraGuest: number,
+  kidsMeal: boolean,
+  vegan: boolean,
+  glutonFree: boolean,
+  willAttend: boolean,
+  email: FormControl,
+  message: FormControl,
+  responseTime: string,
+  guestsGuest: boolean
+}
+
+export interface GuestsGuest {
+  guestName: string,
+  guestId: number,
+  partyId: number,
+  lastName: FormControl,
+  firstName: FormControl,
+  extraGuest: number,
+  kidsMeal: boolean,
+  vegan: boolean,
+  glutonFree: boolean,
+  willAttend: boolean,
+  email: FormControl,
+  message: FormControl,
+  responseTime: string,
+  guestsGuest: boolean
+}
+
 export enum RSVPState {
   "RSVPInitial" = "RSVPInitial",        // -> RSVPinitiated
   "RSVPinitiated" = "RSVPinitiated",      // -> lastNameNotVerified, lastNameDuplicated, guestsRSVPinitiated
   "lastNameNotVerified" = "lastNameNotVerified",// -> lastNameNotVerified, lastNameDuplicated, guestsRSVPinitiated
   "lastNameDuplicated" = "lastNameDuplicated", // -> guestsRSVPinitiated
   "guestsRSVPinitiated" = "guestsRSVPinitiated", // -> guestsRSVPCompleted
-  "guestsRSVPCompleted" =  "guestsRSVPCompleted"
+  "guestsRSVPCompleted" =  "guestsRSVPCompleted",
+  "RSVPenterCode" = "RSVPenterCode"
 }
 
 const RSVPStateMachine= new Map([
@@ -36,11 +71,25 @@ const RSVPStateMachine= new Map([
       RSVPState.lastNameNotVerified, 
       RSVPState.lastNameDuplicated,
       RSVPState.guestsRSVPinitiated,
-      RSVPState.guestsRSVPCompleted
+      RSVPState.guestsRSVPCompleted,
+      RSVPState.RSVPenterCode
     ]
   }],
   ["RSVPinitiated", {
     previous: [RSVPState.RSVPInitial],
+    next: [
+      RSVPState.RSVPenterCode,
+      RSVPState.guestsRSVPinitiated, 
+      RSVPState.lastNameNotVerified,  
+      RSVPState.lastNameDuplicated,
+      RSVPState.guestsRSVPCompleted
+    ]
+  }],
+  ["RSVPenterCode", {
+    previous: [
+      RSVPState.RSVPInitial,
+      RSVPState.RSVPinitiated
+    ],
     next: [
       RSVPState.guestsRSVPinitiated, 
       RSVPState.lastNameNotVerified,  
@@ -51,6 +100,7 @@ const RSVPStateMachine= new Map([
   ["lastNameNotVerified", {
     previous: [
       RSVPState.RSVPinitiated, 
+      RSVPState.RSVPenterCode,
       RSVPState.RSVPInitial],
     next: [
       RSVPState.guestsRSVPinitiated, 
@@ -69,9 +119,11 @@ const RSVPStateMachine= new Map([
   ["guestsRSVPinitiated", {
     previous: [
       RSVPState.RSVPinitiated, 
+      RSVPState.RSVPenterCode,
       RSVPState.lastNameDuplicated, 
       RSVPState.lastNameNotVerified, 
-      RSVPState.RSVPInitial],
+      RSVPState.RSVPInitial
+    ],
     next: [RSVPState.guestsRSVPCompleted]
   }],
   ["guestsRSVPCompleted", {
@@ -79,6 +131,7 @@ const RSVPStateMachine= new Map([
       RSVPState.RSVPinitiated, 
       RSVPState.RSVPInitial, 
       RSVPState.guestsRSVPinitiated,
+      RSVPState.RSVPenterCode,
       RSVPState.lastNameDuplicated,
       RSVPState.lastNameNotVerified
     ],
@@ -116,98 +169,150 @@ export class RsvpComponent {
 
   rsvpState = RSVPState;
 
-  _URL = "https://script.google.com/macros/s/AKfycbwGeYrv2TJ_WBfwip8-FAix1HDZkEAUaPyIQALFEnGu7cTDG_8idCZmPyasoHoQqsB3/exec"
+  _URL = "https://script.google.com/macros/s/AKfycbyH4qAqFCbd-V94mBkyImRqraEnFIWZnrmtYW4yeRkCnl2WDdmEf80_bdmlwyfaLnKT/exec";
 
   _state = RSVPState.RSVPInitial;
 
   _guestLastNameNotFound = '';
 
-  _guestsFromSheets?: any;
-
   _guests?: Guest[];
 
-  _extraGuests: Guest[] = [];
+  _originalGuests: OriginalGuest[] = [];
 
-  _guestsGuestCount: number = 0;
+  _extraGuests: GuestsGuest[] = [];
 
   _isLoading: boolean = false;
 
   _extraGuestCount: number = 0;
 
-  _extraGuestAdded: number = 0;
-
-  guestsFormGroups: FormGroup[];
-
-  extraGuestsFormGroups: FormGroup[] = [];
+  partyId: number = 0;
 
   guestFG: FormGroup;
 
   lastNameFormControl = new FormControl('');
+
+  invitationCodeFormControl = new FormControl('', Validators.pattern('^[0-9]*$'));
+
   _SHEETID = '1D8BHWpdjsce4buteqRaNyaRaz1WNG59Y7yKSWm4FiOE';
 
   objectKeys = Object.keys;
   constructor(public fb: FormBuilder, public cdr: ChangeDetectorRef) {
     this.guestFG = this.fb.group({});
-    this.guestsFormGroups = [];
   }
 
   calculateExtraGuestCount() {
-    return this._guests!.forEach(guest => {
+    return this._originalGuests!.forEach(guest => {
       this._extraGuestCount += guest.extraGuest;
     })
   }
 
+  clearForm() {
+    this._extraGuests = [];
+  }
+
   createGroup() {
-    const group = this.fb.group({});
+    let originalGuests: OriginalGuest[] = [];
+    let extraGuests: GuestsGuest[] = [];
     this._guests!.forEach((guest, i) => {
       if (!guest.guestsGuest) {
-        const guestFb = this.createFormGroup(guest);
-        this.guestsFormGroups.push(guestFb);
+        const originalGuest = this.createOriginalGuest(guest);
+        originalGuests.push(originalGuest);
       } else {
-        const guestFb = this.createGuestsGuestFormGroup(guest);
-        this.extraGuestsFormGroups.push(guestFb);
-        const guestsGuest = this._guests?.splice(i, 1) as Guest[];
-        this._extraGuests.push(guestsGuest[0]);
+        const guestsGuest = this.createGuestsGuest(guest);
+        extraGuests.push(guestsGuest);
       }
     });
+    this._originalGuests = originalGuests;
+    this._extraGuests = extraGuests;
     this.calculateExtraGuestCount();
-    for (let i = 0; i < this._extraGuestCount; ++i) {
-      const guestFb = this.createExtraGuestFormGroup();
-      this.extraGuestsFormGroups.push(guestFb);
-    }
-    return group;
   }
 
-  createFormGroup(guest: Guest) {
-    return this.fb.group({
-      email: new FormControl(guest.email),
-      message: new FormControl(guest.message),
-    })
+  createOriginalGuest(guest: Guest): OriginalGuest {
+    let originalGuest : OriginalGuest = {
+      firstName: guest.firstName,
+      lastName: guest.lastName,
+      guestName: guest.guestName,
+      guestId: guest.guestId,
+      glutonFree: guest.glutonFree,
+      guestsGuest: false,
+      partyId: guest.partyId,
+      extraGuest: guest.extraGuest,
+      kidsMeal: guest.kidsMeal,
+      vegan: guest.vegan,
+      willAttend: guest.willAttend,
+      responseTime: new Date().toString(),
+      email: new FormControl(guest.email, Validators.email),
+      message: new FormControl(guest.message)
+    };
+    return originalGuest;
   }
 
-  createExtraGuestFormGroup() {
-    return this.fb.group({
-      lastName: new FormControl(''),
-      firstName: new FormControl(''),
-      email: new FormControl(''),
-      message: new FormControl(''),
-    })
+  createGuestsGuest(guest?: Guest): GuestsGuest {
+    let guestsGuest : GuestsGuest = {
+      firstName: new FormControl(guest?.firstName),
+      lastName: new FormControl(guest?.lastName),
+      guestName: guest?.guestName ?? '',
+      guestId: guest?.guestId ?? 0,
+      glutonFree: guest?.glutonFree ?? false,
+      guestsGuest: true,
+      partyId: guest?.partyId ?? this.partyId,
+      extraGuest: 0,
+      kidsMeal: guest?.kidsMeal ?? false,
+      vegan: guest?.vegan ?? false,
+      willAttend: true,
+      responseTime: new Date().toString(),
+      email: new FormControl(guest?.email, Validators.email),
+      message: new FormControl(guest?.message)
+    };
+    return guestsGuest;
   }
 
-  createGuestsGuestFormGroup(guest: Guest) {
-    return this.fb.group({
-      lastName: new FormControl(guest.lastName),
-      firstName: new FormControl(guest.firstName),
-      email: new FormControl(guest.email),
-      message: new FormControl(guest.message),
-    })
+  originalGuestToGuest(originalGuest: OriginalGuest) : Guest {
+    let guest : Guest = {
+      firstName: originalGuest.firstName,
+      lastName: originalGuest.lastName,
+      guestName: originalGuest.guestName,
+      guestId: originalGuest.guestId,
+      glutonFree: originalGuest.glutonFree,
+      guestsGuest: false,
+      partyId: originalGuest.partyId,
+      extraGuest: originalGuest.extraGuest,
+      kidsMeal: originalGuest.kidsMeal,
+      vegan: originalGuest.vegan,
+      willAttend: originalGuest.willAttend,
+      responseTime: originalGuest.responseTime,
+      email: originalGuest.email.value,
+      message: originalGuest.message.value
+    };
+    return guest;
+  }
+
+  guestsGuestToGuest(guestsGuest: GuestsGuest) : Guest {
+    let guest : Guest = {
+      firstName: guestsGuest.firstName.value,
+      lastName: guestsGuest.lastName.value,
+      guestName: `${guestsGuest.lastName.value}, ${guestsGuest.firstName.value}`,
+      guestId: guestsGuest.guestId,
+      glutonFree: guestsGuest.glutonFree,
+      guestsGuest: true,
+      partyId: guestsGuest.partyId ?? this.partyId,
+      extraGuest: guestsGuest.extraGuest,
+      kidsMeal: guestsGuest.kidsMeal,
+      vegan: guestsGuest.vegan,
+      willAttend: guestsGuest.willAttend,
+      responseTime: guestsGuest.responseTime,
+      email: guestsGuest.email.value,
+      message: guestsGuest.message.value
+    };
+    return guest;
   }
 
   async submitForm() {
-    this.formGroupsToGuests();
+    this.originalandGuestsGuestsToGuests();
     console.log("clicked", this._guests);
     const url = new URL(this._URL);
     url.searchParams.append('rsvpResult', JSON.stringify(this._guests));
+    console.log('guests are', JSON.stringify(this._guests))
     this._isLoading = true;
     const respond = await fetch(url.href, {
       method: 'POST'
@@ -219,7 +324,6 @@ export class RsvpComponent {
     }
     else {
       this.goto(RSVPState.guestsRSVPCompleted);
-      console.log(respondTest);
       this._isLoading = false;
       return respondTest;
     }
@@ -227,55 +331,29 @@ export class RsvpComponent {
 
 
 
-  private formGroupsToGuests() {
-    let i;
-    for (i = 0; i < this._guests!.length; i++) {
-      this._guests![i].email = this.guestsFormGroups[i].controls['email'].value;
-      this._guests![i].message = this.guestsFormGroups[i].controls['message'].value;
-      this._guests![i].responseTime = new Date().toString();
-      this._guests![i].extraGuest = 0;
-    }
+  private originalandGuestsGuestsToGuests() {
+    this._guests = [];
+    this._originalGuests?.forEach((originalGuest) => {
+      let guest = this.originalGuestToGuest(originalGuest);
+      this._guests?.push(guest);
+    });
+    this._extraGuests?.forEach((guestsGuest) => {
+      let guest = this.guestsGuestToGuest(guestsGuest);
+      this._guests?.push(guest);
+    });
     this._guests![0].extraGuest = this._extraGuestCount;
-    for (let i = 0; i < this._extraGuests!.length; i++) {
-      const firstName = this.extraGuestsFormGroups[i].controls['firstName'].value;
-      const lastName = this.extraGuestsFormGroups[i].controls['lastName'].value;
-      this._extraGuests![i].firstName = firstName;
-      this._extraGuests![i].lastName = lastName;
-      this._extraGuests![i].guestName = lastName + ', ' + firstName;
-      this._extraGuests![i].email = this.extraGuestsFormGroups[i].controls['email'].value;
-      this._extraGuests![i].message = this.extraGuestsFormGroups[i].controls['message'].value;
-      this._extraGuests![i].responseTime = new Date().toString();
-    }
-    this._guests = this._guests?.concat(this._extraGuests);
   }
 
   addGuest() {
     this._extraGuestCount--;
-    this._extraGuestAdded++;
     this._extraGuests?.push(
-      {
-        guestName: '',
-        guestId: 0,
-        partyId: this._guests![0].partyId,
-        lastName: '',
-        firstName: '',
-        extraGuest: 0,
-        kidsMeal: false,
-        vegan: false,
-        glutonFree: false,
-        willAttend: true,
-        email: '',
-        message: '',
-        responseTime: new Date().toString(),
-        guestsGuest: true
-      }
+      this.createGuestsGuest()
     )
     this.cdr.detectChanges();
   }
 
   removeGuest(i: number) {
     this._extraGuestCount++;
-    this._extraGuestAdded--;
     this._extraGuests?.splice(i, 1)
     this.cdr.detectChanges();
   }
@@ -287,48 +365,52 @@ export class RsvpComponent {
     return true;
   }
 
-  get isValid() {
+  get isNotValid() {
     return !this.guestFG.valid;
   }
 
-  get isLastNameValid() {
+  get isLastNameNotValid() {
     return !this.lastNameFormControl.valid;
   }
 
-
+  get isCodeFormatValid() {
+    return !this.invitationCodeFormControl.valid;
+  }
 
   getEmailFormControl(i: number): FormControl {
-    return this.guestsFormGroups[i].get('email') as FormControl;
+    return this._originalGuests[i].email;
   }
 
   getMessageFormControl(i: number): FormControl {
-    return this.guestsFormGroups[i].get('message') as FormControl;
+    return this._originalGuests[i].message;
   }
 
   getExtraGuestFirstNameFormControl(i: number): FormControl {
-    return this.extraGuestsFormGroups[i].get('firstName') as FormControl;
+    return this._extraGuests[i].firstName;
   }
 
   getExtraGuestLastNameFormControl(i: number): FormControl {
-    return this.extraGuestsFormGroups[i].get('lastName') as FormControl;
+    return this._extraGuests[i].lastName;
   }
 
   getExtraGuestMessageFormControl(i: number): FormControl {
-    return this.extraGuestsFormGroups[i].get('message') as FormControl;
+    return this._extraGuests[i].message;
   }
 
   getExtraGuestEmailFormControl(i: number): FormControl {
-    return this.extraGuestsFormGroups[i].get('email') as FormControl;
+    return this._extraGuests[i].email;
   }
 
-  getErrorMessage(i: number) {
-    if (this.guestsFormGroups[i].controls['email'].hasError('required')) {
-      return 'You must enter a value';
-      // search by last name, auto populate their first names,
-      // drop down on the number of attandees, populate input box 
-      // special requests:  kids meal, vegan, gluton quantity
-    }
-    return this.guestsFormGroups[i].controls['email'].hasError('email') ? 'Not a valid email' : '';
+  getEmptyErrorMessage() {
+    return 'You must enter a value';
+  }
+
+  getEmailErrorMessage() {
+    return 'please enter a valid email.'
+  }
+
+  async saveLastNamePromptCode() {
+    this.goto(RSVPState.RSVPenterCode);
   }
 
   async submitLastName() {
@@ -336,8 +418,11 @@ export class RsvpComponent {
   }
   private async getGuestsFromSheet(): Promise<any> {
     const lastname = this.lastNameFormControl.value;
+    const invitationCode = this.invitationCodeFormControl.value;
     const url = new URL(this._URL);
     url.searchParams.append('lastName', lastname);
+    url.searchParams.append('code', invitationCode);
+    this.partyId = invitationCode;
     this._isLoading = true;
     const respond = await fetch(url.href, {
       method: 'GET'
@@ -350,58 +435,40 @@ export class RsvpComponent {
       return Promise.reject();
     }
     else {
-      console.log(respondTest);
+      this.clearForm();
       this._isLoading = false;
-      this._guestsFromSheets = await JSON.parse(respondTest);
-      this.checkIfDuplicateGuests();
-    }
-  }
-
-  private checkIfDuplicateGuests() {
-      if (Object.keys(this._guestsFromSheets).length > 1) {
-        this.goto(RSVPState.lastNameDuplicated);
-      } else {
-        const partyId = this.objectKeys(this._guestsFromSheets)[0];
-        this._guests = this._guestsFromSheets[partyId];
+      this._guests = await JSON.parse(respondTest);
         this.createGroup();
         this.goto(RSVPState.guestsRSVPinitiated);
     }
   }
 
-  selectParty(groupId: string) {
-    if (this._state == RSVPState.lastNameDuplicated) {
-      this._guests = this._guestsFromSheets![groupId];
-      this.createGroup();
-      this.goto(RSVPState.guestsRSVPinitiated);
-    }
-  }
 
-
-  guestWillAttendHandler(guest: Guest) {
+  guestWillAttendHandler(guest: OriginalGuest | GuestsGuest) {
     guest.willAttend = true;
   }
 
-  guestWillNotAttendHandler(guest: Guest) {
+  guestWillNotAttendHandler(guest: OriginalGuest | GuestsGuest) {
     guest.willAttend = false;
   }
 
-  guestKidsMealToggle(guest: Guest, isCorrect: boolean) {
+  guestKidsMealToggle(guest: OriginalGuest | GuestsGuest, isCorrect: boolean) {
     guest.kidsMeal = isCorrect;
   }
 
-  guestVeganToggle(guest: Guest, isCorrect: boolean) {
+  guestVeganToggle(guest: OriginalGuest | GuestsGuest, isCorrect: boolean) {
     guest.vegan = isCorrect;
   }
 
-  guestGlutonFreeToggle(guest: Guest, isCorrect: boolean) {
+  guestGlutonFreeToggle(guest: OriginalGuest | GuestsGuest, isCorrect: boolean) {
     guest.glutonFree = isCorrect;
   }
 
-  isGuestAttending(guest: Guest) {
+  isGuestAttending(guest: OriginalGuest) {
     return guest.willAttend == true;
   }
 
-  isGuestNotAttending(guest: Guest) {
+  isGuestNotAttending(guest: OriginalGuest) {
     return guest.willAttend === false;
   }
 
@@ -426,6 +493,10 @@ export class RsvpComponent {
         break
       }
       case RSVPState.lastNameNotVerified: {
+        this._state = RSVPState.RSVPinitiated;
+        break
+      }
+      case RSVPState.RSVPenterCode: {
         this._state = RSVPState.RSVPinitiated;
         break
       }
