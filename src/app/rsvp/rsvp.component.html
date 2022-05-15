@@ -15,7 +15,8 @@
 
     <div class="position-relative">
         <div class="rsvp-block rsvp-initial-container" [@inandout]="determineAnimationState(rsvpState.RSVPInitial)">
-                <button class="rsvp-submit initial-rsvp" mat-raised-button (click)="goto(rsvpState.RSVPinitiated)">
+                <button class="rsvp-submit initial-rsvp" mat-raised-button (click)="goto(rsvpState.RSVPinitiated)"
+                (keydown.tab)="preventDefault($event)">
                     Click here to RSVP
                 </button>
         </div>
@@ -33,7 +34,7 @@
             <div class="rsvp-row">
                 <mat-form-field class="rsvp-initiated-input" appearance="outline">
                     <input matInput required type="text" [formControl]="lastNameFormControl"
-                        (keyup.enter)="saveLastNamePromptCode()">
+                        (keyup.enter)="saveLastNamePromptCode()" (keydown.tab)="preventDefault($event)" >
                 </mat-form-field>
             </div>
         </div>
@@ -49,7 +50,7 @@
             <div class="rsvp-row">
                 <mat-form-field class="rsvp-initiated-input " appearance="outline">
                     <input matInput required type="text" [formControl]="invitationCodeFormControl"
-                        (keyup.enter)="submitLastName()">
+                        (keyup.enter)="submitLastName()" (keydown.tab)="preventDefault($event)">
                 </mat-form-field>
             </div>
         </div>
@@ -64,12 +65,12 @@
                 <mat-form-field class="rsvp-initiated-input" appearance="outline">
                     <mat-label>Last Name</mat-label>
                     <input matInput required type="text" [formControl]="lastNameFormControl"
-                        (keyup.enter)="focusCode()">
+                        (keyup.enter)="focusCode()" (keydown.tab)="preventDefault($event)">
                 </mat-form-field>
                 <mat-form-field ngDefaultControl class="rsvp-initiated-input " appearance="outline">
                     <mat-label>RSVP code</mat-label>
                     <input id='rsvp-invitation-code' matInput required type="text" [formControl]="invitationCodeFormControl"
-                        (keyup.enter)="submitLastName()">
+                        (keyup.enter)="submitLastName()" (keydown.tab)="preventDefault($event)">
                 </mat-form-field>
             </div>
         </div>

@@ -539,6 +539,35 @@ export class RsvpComponent {
       document.getElementById('rsvp-invitation-code')?.focus();
     }
 
+  preventDefault(e: any) {
+    if (this._state == RSVPState.RSVPinitiated) {
+      e.preventDefault();
+    if (this.lastNameFormControl.status == 'VALID'){
+        this.saveLastNamePromptCode();
+        console.log(this.lastNameFormControl)
+      }
+    }
+    else if (this._state == RSVPState.RSVPenterCode) {
+      e.preventDefault();
+
+      if (this.invitationCodeFormControl.status == 'VALID') {
+      this.submitLastName();
+      }
+      else {
+        console.log(this.invitationCodeFormControl)
+      }
+    }
+    else if (this._state == RSVPState.lastNameNotVerified) {
+      e.preventDefault();
+      if (this.invitationCodeFormControl.status == 'VALID' &&
+      this.lastNameFormControl.status == 'VALID') {
+        this.submitLastName();
+      }
+    }
+    else if (this._state == RSVPState.RSVPInitial) {
+      e.preventDefault();
+    }
+  }
   determineAnimationState(state: RSVPState) {
     if (RSVPStateMachine.get(this._state)?.previous.includes(state)) {
       return 'left';
