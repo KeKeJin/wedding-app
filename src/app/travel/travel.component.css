@@ -20,8 +20,8 @@
     gap: 2vh 2vw;
     min-height: 0;  /* NEW */
     min-width: 0;   /* NEW; needed for Firefox */
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-x: clip;
+    overflow-y: visible;
 }
 
 .travel-block-1 {
@@ -66,6 +66,7 @@
 .travel-background-3 {
     max-width: 40vw;
     margin-right: 0;
+    z-index: 100;
 }
 
 .travel-block-6 {
@@ -83,8 +84,8 @@
 .travel-block-8 {
     max-width: 30vw;
     grid-column: 4 / 6;
-    grid-row: 4 / 6;
-
+    grid-row: 5 / 7;
+    z-index: 100;
 }
 
 .travel-title {
@@ -213,6 +214,8 @@ a {
         position: relative;
         display: block;
         height:auto;
+        overflow-x: clip !important;
+        overflow-y: visible !important;
     }
 
     .travel-background-1 {
