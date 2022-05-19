@@ -31,9 +31,9 @@
         </div>
         <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPinitiated)">
             <div class="rsvp-row">
-                <h1 class="rsvp-instruction"> Please enter your lastname.
+                <h1 class="rsvp-instruction"> Please enter your last name.
                     <br>
-                    If you're responding for an entire group, please just enter the lastname of one of your members.
+                    If you're responding for an entire group, please just enter the last name of one of your members.
                 </h1>
             </div>
             <div class="rsvp-row">
@@ -47,7 +47,7 @@
         <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPenterCode)">
             <div class="rsvp-row">
                 <h1 class="rsvp-instruction"> Please enter the RSVP code printed on the inside of your invitation
-                    envolope, underneath the envolope flap. This helps us identify our guests. 
+                    envolope, underneath the envelope flap. This helps us identify our guests. 
                     <br>
                     If you cannot find the code, please email jon.ke.hayase@gmail.com.
                 </h1>
@@ -136,7 +136,7 @@
                         <br>
 
                         <div class="rsvp-promp rsvp-guest-info-question3 rsvp-guest-question"> Do we need to prepare a
-                            gluton-free meal for you?</div>
+                            gluten-free meal for you?</div>
                         <button ngDefaultControl
                             class="rsvp-button rsvp-guest-question-yes rsvp-guest-info-answer3"
                             mat-raised-button (click)="guestGlutonFreeToggle(guest, true)"
@@ -222,7 +222,7 @@
                         <br>
 
                         <div class="rsvp-promp rsvp-guest-info-question3 rsvp-guest-question"> Do we need to prepare a
-                            gluton-free meal for you?</div>
+                            gluten-free meal for you?</div>
                         <button ngDefaultControl
                             class="rsvp-button rsvp-guest-info-answer3 rsvp-guest-question-yes"
                             mat-raised-button (click)="guestGlutonFreeToggle(guest, true )"
