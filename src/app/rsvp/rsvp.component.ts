@@ -515,7 +515,7 @@ export class RsvpComponent {
   }
 
   hideGoBackButton() {
-    return this._state == RSVPState.RSVPInitial;
+    return (this._state == RSVPState.RSVPInitial || this._isLoading == true);
   }
 
   hideGoForwardButton() {

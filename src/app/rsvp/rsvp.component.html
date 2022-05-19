@@ -20,15 +20,20 @@
                     Click here to RSVP
                 </button>
         </div>
-        <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.guestsRSVPCompleted)">
-            <h1> Thank you for the response! </h1>
+        <div class="rsvp-block rsvp-initial-container" [@inandout]="determineAnimationState(rsvpState.guestsRSVPCompleted)">
+            <div class="rsvp-row">
+            <h1 class="rsvp-instruction">
+                Your response has been recorded.
+                <br>
+                You can always edit your response before June 30.
+            </h1>
+            </div>
         </div>
         <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPinitiated)">
             <div class="rsvp-row">
-                <h1 class="rsvp-instruction"> Please enter the last name of one member of your party below.
+                <h1 class="rsvp-instruction"> Please enter your lastname.
                     <br>
-                    If you're responding for you and a guest (or your family),
-                    you'll be able to RSVP for your entire group on the next page.
+                    If you're responding for an entire group, please just enter the lastname of one of your members.
                 </h1>
             </div>
             <div class="rsvp-row">
