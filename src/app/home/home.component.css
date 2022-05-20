@@ -15,8 +15,7 @@ img {
     background-image: url("./../../assets/0N4A7715-Edit.jpg");
     /* Set a specific height */
     min-height: 100vh; 
-
-    background-size: cover;
+    object-fit: cover;
   }
 
 .sticky {
@@ -101,7 +100,6 @@ img {
         background-image: url("./../../assets/0N4A7715-Edit.jpg");
         /* Set a specific height */
         min-height: 100vh; 
-    
         /* Create the parallax scrolling effect */
         background-attachment: fixed;
         background-position: center;
