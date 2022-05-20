@@ -77,15 +77,8 @@
   .rsvp-parallax {
     background-image: url('../../assets/caleb-riston-kAfTkGOuis8-unsplash.jpg');
     min-height: 100vh;
-    width: 100vw;
-    height: 100vh;
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-    z-index: 0;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
-    top: 0;
   }
 }
