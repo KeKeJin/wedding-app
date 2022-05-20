@@ -75,10 +75,11 @@
 @supports (-webkit-touch-callout: none) {
   /* CSS specific to iOS devices */ 
   .rsvp-parallax {
-    background-image: url('../../assets/caleb-riston-kAfTkGOuis8-unsplash.jpg');
+    background: url('../../assets/caleb-riston-kAfTkGOuis8-unsplash.jpg') no-repeat center;
     min-height: 100vh;
+    max-height: 100vh;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    /* background-size: cover; */
+    background-size: cover !important;
   }
 }
