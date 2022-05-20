@@ -79,6 +79,6 @@
     min-height: 100vh;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    background-size: cover;
+    /* background-size: cover; */
   }
 }
