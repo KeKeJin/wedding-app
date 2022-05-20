@@ -78,5 +78,8 @@
     background-image: url('../../assets/caleb-riston-kAfTkGOuis8-unsplash.jpg');
     min-height: 100vh; 
     background-size: cover;
+    background-attachment: none;
+    background-position: none;
+    background-repeat: none;
   }
 }
