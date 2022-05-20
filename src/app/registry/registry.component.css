@@ -71,3 +71,12 @@
       background-size: cover;
     }
 }
+
+@supports (-webkit-touch-callout: none) {
+  /* CSS specific to iOS devices */ 
+  .rsvp-parallax {
+    background-image: url('../../assets/caleb-riston-kAfTkGOuis8-unsplash.jpg');
+    min-height: 100vh; 
+    background-size: cover;
+  }
+}
