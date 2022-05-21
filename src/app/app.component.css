@@ -24,8 +24,13 @@
     background-color: white;
 }
 
+::ng-deep html {
+    overflow-x: hidden;
+}
+
 ::ng-deep body {
     margin: 0px !important;
+    overflow-x: hidden;
 }
 
 @font-face {
