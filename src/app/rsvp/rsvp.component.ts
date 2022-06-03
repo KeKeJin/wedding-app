@@ -157,7 +157,7 @@ export class RsvpComponent {
 
   rsvpState = RSVPState;
 
-  _URL = "https://script.google.com/macros/s/AKfycbyH4qAqFCbd-V94mBkyImRqraEnFIWZnrmtYW4yeRkCnl2WDdmEf80_bdmlwyfaLnKT/exec";
+  _URL = "https://script.google.com/macros/s/AKfycbxikKnXIFh1LKqCJ-6pN5OmPFa6jsBuUuacSM4QsWljPDpTZIfg-zU_9r39P2Ta4hcF/exec";
 
   _state = RSVPState.RSVPInitial;
 
