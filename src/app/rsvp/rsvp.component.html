@@ -72,6 +72,8 @@
                     <input matInput required type="text" [formControl]="lastNameFormControl"
                         (keyup.enter)="focusCode()" (keydown.tab)="preventDefault($event)">
                 </mat-form-field>
+            </div>
+            <div class="rsvp-row">
                 <mat-form-field ngDefaultControl class="rsvp-initiated-input " appearance="outline">
                     <mat-label>RSVP code</mat-label>
                     <input id='rsvp-invitation-code' matInput required type="text" [formControl]="invitationCodeFormControl"
