@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export interface Guest {
   guestName: string,
@@ -204,7 +205,7 @@ export class RsvpComponent {
   addingGuestButtonClicked = false;
 
   objectKeys = Object.keys;
-  constructor(public fb: FormBuilder, public cdr: ChangeDetectorRef) {
+  constructor(public fb: FormBuilder, public cdr: ChangeDetectorRef, public dialog: MatDialog) {
     this.guestFG = this.fb.group({});
   }
 
@@ -358,12 +359,12 @@ export class RsvpComponent {
     this._extraGuests?.push(
       this.createGuestsGuest()
     )
-    this.goto(RSVPState.guestsRSVPinitiated);
     this.cdr.detectChanges();
   }
 
   removeGuest(i: number) {
     this._extraGuestCount++;
+    this._guestRespondedCount--;
     this._extraGuests?.splice(i, 1)
     this.cdr.detectChanges();
   }
@@ -537,14 +538,14 @@ export class RsvpComponent {
       }
       case RSVPState.guestsRSVPinitiated: {
         this._guestRespondedCount += 1;
-        if (this._guestRespondedCount == this._guests?.length) {
+        console.log("current guest id: ", this._guestRespondedCount);
+        console.log("total guests ", this._originalGuests?.length + this._extraGuests.length )
+        if (this._guestRespondedCount == this._originalGuests?.length + this._extraGuests.length) {
           if (this.allowExtraGuest) {
-            // pop up dialog. hi do you want to add extra guest?
-            window.alert('do you want to bring extra guest?')
+            this.openDialog();
           } else {
             this.submitForm();
           }
-            
         }
         break
       }
@@ -633,5 +634,36 @@ determineAnimationStateForGuestsRSVPinitiated(index: number) {
       }
     }
     return 'guest-right';
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogMoreGuestDialog, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "yes") {
+        this.addGuest();
+      } else {
+        this.submitForm();
+      }
+    });
+  }
+
+}
+
+
+@Component({
+  selector: 'dialog-more-guests',
+  templateUrl: './dialog-more-guests.html',
+})
+export class DialogMoreGuestDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogMoreGuestDialog>,
+    // @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
