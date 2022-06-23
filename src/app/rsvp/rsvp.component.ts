@@ -111,9 +111,11 @@ const RSVPStateMachine= new Map([
       RSVPState.RSVPenterCode,
       RSVPState.lastNameDuplicated, 
       RSVPState.lastNameNotVerified, 
-      RSVPState.RSVPInitial
+      RSVPState.RSVPInitial,
     ],
-    next: [RSVPState.guestsRSVPCompleted]
+    next: [
+      RSVPState.guestsRSVPCompleted
+    ]
   }],
   ["guestsRSVPCompleted", {
     previous: [
@@ -147,9 +149,23 @@ const RSVPStateMachine= new Map([
       state('middle', style({
         opacity: 1,
       })),
+      state(
+        'guest-left', 
+        style({
+          opacity: 0,
+          transform: 'translateX(-200vw)',
+        })
+      ),
+      state('guest-right', style({
+        opacity: 0,
+      })),
+      state('guest-middle', style({
+        opacity: 1,
+        transform: 'translateX(-100vw)'
+      })),
       transition('*=>*', animate('1000ms ease-out')),
-      transition('void=>*', animate('1000ms ease-out')),
-      transition('*=>void', animate('1000ms ease-out')),
+      // transition('void=>*', animate('1000ms ease-out')),
+      // transition('*=>void', animate('1000ms ease-out')),
     ]),
   ]
 })
@@ -182,6 +198,10 @@ export class RsvpComponent {
   invitationCodeFormControl = new FormControl('', Validators.pattern('^[0-9]*$'));
 
   _SHEETID = '1D8BHWpdjsce4buteqRaNyaRaz1WNG59Y7yKSWm4FiOE';
+
+  _guestRespondedCount = -1;
+
+  addingGuestButtonClicked = false;
 
   objectKeys = Object.keys;
   constructor(public fb: FormBuilder, public cdr: ChangeDetectorRef) {
@@ -333,10 +353,12 @@ export class RsvpComponent {
   }
 
   addGuest() {
+    this.addingGuestButtonClicked = true;
     this._extraGuestCount--;
     this._extraGuests?.push(
       this.createGuestsGuest()
     )
+    this.goto(RSVPState.guestsRSVPinitiated);
     this.cdr.detectChanges();
   }
 
@@ -430,6 +452,7 @@ export class RsvpComponent {
       this._guests = await JSON.parse(respondTest);
         this.createGroup();
         this.goto(RSVPState.guestsRSVPinitiated);
+        this._guestRespondedCount = 0;
     }
   }
 
@@ -475,7 +498,12 @@ export class RsvpComponent {
         break
       }
       case RSVPState.guestsRSVPinitiated: {
-        this._state = RSVPState.RSVPinitiated;
+        if (this._guestRespondedCount > 0) {
+          this._guestRespondedCount -= 1;
+        }
+        else {
+          this._state = RSVPState.RSVPinitiated;
+        }
         break
       }
       case RSVPState.lastNameNotVerified: {
@@ -508,7 +536,16 @@ export class RsvpComponent {
         break
       }
       case RSVPState.guestsRSVPinitiated: {
-        this.submitForm();
+        this._guestRespondedCount += 1;
+        if (this._guestRespondedCount == this._guests?.length) {
+          if (this.allowExtraGuest) {
+            // pop up dialog. hi do you want to add extra guest?
+            window.alert('do you want to bring extra guest?')
+          } else {
+            this.submitForm();
+          }
+            
+        }
         break
       }
     }
@@ -581,5 +618,20 @@ export class RsvpComponent {
     else {
       return 'left'
     }
+  }
+
+determineAnimationStateForGuestsRSVPinitiated(index: number) {
+  if (this._state == RSVPState.guestsRSVPinitiated) {
+      if (index < this._guestRespondedCount) {
+        return 'guest-left';
+      }
+      else if (index > this._guestRespondedCount) {
+        return 'guest-right';
+      }
+      else if (index == this._guestRespondedCount) {
+        return 'guest-middle';
+      }
+    }
+    return 'guest-right';
   }
 }
