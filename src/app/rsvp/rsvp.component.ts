@@ -574,29 +574,29 @@ export class RsvpComponent {
     }
 
   preventDefault(e: any) {
-    // if (this._state == RSVPState.RSVPinitiated) {
-    //   e.preventDefault();
-    // if (this.lastNameFormControl.status == 'VALID'){
-    //     this.saveLastNamePromptCode();
-    //   }
-    // }
-    // else if (this._state == RSVPState.RSVPenterCode) {
-    //   e.preventDefault();
+    if (this._state == RSVPState.RSVPinitiated) {
+      e.preventDefault();
+    if (this.lastNameFormControl.status == 'VALID'){
+        this.saveLastNamePromptCode();
+      }
+    }
+    else if (this._state == RSVPState.RSVPenterCode) {
+      e.preventDefault();
 
-    //   if (this.invitationCodeFormControl.status == 'VALID') {
-    //   this.submitLastName();
-    //   }
-    // }
-    // else if (this._state == RSVPState.lastNameNotVerified) {
-    //   e.preventDefault();
-    //   if (this.invitationCodeFormControl.status == 'VALID' &&
-    //   this.lastNameFormControl.status == 'VALID') {
-    //     this.submitLastName();
-    //   }
-    // }
-    // else if (this._state == RSVPState.RSVPInitial) {
-    //   e.preventDefault();
-    // }
+      if (this.invitationCodeFormControl.status == 'VALID') {
+      this.submitLastName();
+      }
+    }
+    else if (this._state == RSVPState.lastNameNotVerified) {
+      e.preventDefault();
+      if (this.invitationCodeFormControl.status == 'VALID' &&
+      this.lastNameFormControl.status == 'VALID') {
+        this.submitLastName();
+      }
+    }
+    else if (this._state == RSVPState.RSVPInitial) {
+      e.preventDefault();
+    }
   }
   determineAnimationState(state: RSVPState) {
     if (RSVPStateMachine.get(this._state)?.previous.includes(state)) {
