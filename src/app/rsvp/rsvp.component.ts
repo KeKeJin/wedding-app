@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export interface Guest {
   guestName: string,
@@ -111,9 +112,11 @@ const RSVPStateMachine= new Map([
       RSVPState.RSVPenterCode,
       RSVPState.lastNameDuplicated, 
       RSVPState.lastNameNotVerified, 
-      RSVPState.RSVPInitial
+      RSVPState.RSVPInitial,
     ],
-    next: [RSVPState.guestsRSVPCompleted]
+    next: [
+      RSVPState.guestsRSVPCompleted
+    ]
   }],
   ["guestsRSVPCompleted", {
     previous: [
@@ -147,9 +150,23 @@ const RSVPStateMachine= new Map([
       state('middle', style({
         opacity: 1,
       })),
+      state(
+        'guest-left', 
+        style({
+          opacity: 0,
+          transform: 'translateX(-200vw)',
+        })
+      ),
+      state('guest-right', style({
+        opacity: 0,
+      })),
+      state('guest-middle', style({
+        opacity: 1,
+        transform: 'translateX(-100vw)'
+      })),
       transition('*=>*', animate('1000ms ease-out')),
-      transition('void=>*', animate('1000ms ease-out')),
-      transition('*=>void', animate('1000ms ease-out')),
+      // transition('void=>*', animate('1000ms ease-out')),
+      // transition('*=>void', animate('1000ms ease-out')),
     ]),
   ]
 })
@@ -183,8 +200,12 @@ export class RsvpComponent {
 
   _SHEETID = '1D8BHWpdjsce4buteqRaNyaRaz1WNG59Y7yKSWm4FiOE';
 
+  _guestRespondedCount = -1;
+
+  addingGuestButtonClicked = false;
+
   objectKeys = Object.keys;
-  constructor(public fb: FormBuilder, public cdr: ChangeDetectorRef) {
+  constructor(public fb: FormBuilder, public cdr: ChangeDetectorRef, public dialog: MatDialog) {
     this.guestFG = this.fb.group({});
   }
 
@@ -297,10 +318,8 @@ export class RsvpComponent {
 
   async submitForm() {
     this.originalandGuestsGuestsToGuests();
-    console.log("clicked", this._guests);
     const url = new URL(this._URL);
     url.searchParams.append('rsvpResult', JSON.stringify(this._guests));
-    console.log('guests are', JSON.stringify(this._guests))
     this._isLoading = true;
     const respond = await fetch(url.href, {
       method: 'POST'
@@ -333,6 +352,7 @@ export class RsvpComponent {
   }
 
   addGuest() {
+    this.addingGuestButtonClicked = true;
     this._extraGuestCount--;
     this._extraGuests?.push(
       this.createGuestsGuest()
@@ -342,6 +362,7 @@ export class RsvpComponent {
 
   removeGuest(i: number) {
     this._extraGuestCount++;
+    this._guestRespondedCount--;
     this._extraGuests?.splice(i, 1)
     this.cdr.detectChanges();
   }
@@ -430,6 +451,7 @@ export class RsvpComponent {
       this._guests = await JSON.parse(respondTest);
         this.createGroup();
         this.goto(RSVPState.guestsRSVPinitiated);
+        this._guestRespondedCount = 0;
     }
   }
 
@@ -467,7 +489,7 @@ export class RsvpComponent {
   }
 
 
-  goBacktoPreviousState() {
+  goBacktoPreviousState(e: any) {
     switch(this._state) {
       case RSVPState.guestsRSVPCompleted:
       case RSVPState.RSVPinitiated: {
@@ -475,7 +497,12 @@ export class RsvpComponent {
         break
       }
       case RSVPState.guestsRSVPinitiated: {
-        this._state = RSVPState.RSVPinitiated;
+        if (this._guestRespondedCount > 0) {
+          this._guestRespondedCount -= 1;
+        }
+        else {
+          this._state = RSVPState.RSVPinitiated;
+        }
         break
       }
       case RSVPState.lastNameNotVerified: {
@@ -489,7 +516,7 @@ export class RsvpComponent {
     }
   }
 
-  gotoNextState() {
+  gotoNextState(e: any) {
     switch(this._state) {
       case RSVPState.RSVPInitial: {
         this._state = RSVPState.RSVPinitiated;
@@ -508,7 +535,14 @@ export class RsvpComponent {
         break
       }
       case RSVPState.guestsRSVPinitiated: {
-        this.submitForm();
+        this._guestRespondedCount += 1;
+        if (this._guestRespondedCount == this._originalGuests?.length + this._extraGuests.length) {
+          if (this.allowExtraGuest) {
+            this.openDialog();
+          } else {
+            this.submitForm();
+          }
+        }
         break
       }
     }
@@ -544,7 +578,6 @@ export class RsvpComponent {
       e.preventDefault();
     if (this.lastNameFormControl.status == 'VALID'){
         this.saveLastNamePromptCode();
-        console.log(this.lastNameFormControl)
       }
     }
     else if (this._state == RSVPState.RSVPenterCode) {
@@ -552,9 +585,6 @@ export class RsvpComponent {
 
       if (this.invitationCodeFormControl.status == 'VALID') {
       this.submitLastName();
-      }
-      else {
-        console.log(this.invitationCodeFormControl)
       }
     }
     else if (this._state == RSVPState.lastNameNotVerified) {
@@ -581,5 +611,51 @@ export class RsvpComponent {
     else {
       return 'left'
     }
+  }
+
+determineAnimationStateForGuestsRSVPinitiated(index: number) {
+  if (this._state == RSVPState.guestsRSVPinitiated) {
+      if (index < this._guestRespondedCount) {
+        return 'guest-left';
+      }
+      else if (index > this._guestRespondedCount) {
+        return 'guest-right';
+      }
+      else if (index == this._guestRespondedCount) {
+        return 'guest-middle';
+      }
+    }
+    return 'guest-right';
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogMoreGuestDialog, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "yes") {
+        this.addGuest();
+      } else {
+        this.submitForm();
+      }
+    });
+  }
+
+}
+
+
+@Component({
+  selector: 'dialog-more-guests',
+  templateUrl: './dialog-more-guests.html',
+})
+export class DialogMoreGuestDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogMoreGuestDialog>,
+    // @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

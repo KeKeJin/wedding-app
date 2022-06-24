@@ -1,13 +1,13 @@
 <div class="rsvp">
     <h1 class="rsvp-header noselect" i18n>{{'RSVP.RSVP'| translate}}</h1>
     <div [hidden]="hideGoBackButton()">
-        <button (click)="goBacktoPreviousState()" class="rsvp-back">
+        <button (click)="goBacktoPreviousState($event)" class="rsvp-back">
             <i class="fa-solid fa-arrow-left"></i>
         </button>
     </div>
 
     <div [hidden]="hideGoForwardButton()">
-        <button (click)="gotoNextState()" class="rsvp-forward">
+        <button (click)="gotoNextState($event)" class="rsvp-forward">
             <i class="fa-solid fa-arrow-right"></i>
             <i class="fa fa-spinner fa-spin" *ngIf="_isLoading"></i>
         </button>
@@ -15,18 +15,19 @@
 
     <div class="position-relative">
         <div class="rsvp-block rsvp-initial-container" [@inandout]="determineAnimationState(rsvpState.RSVPInitial)">
-                <button class="rsvp-submit initial-rsvp" mat-raised-button (click)="goto(rsvpState.RSVPinitiated)"
+            <button class="rsvp-submit initial-rsvp" mat-raised-button (click)="goto(rsvpState.RSVPinitiated)"
                 (keydown.tab)="preventDefault($event)">
-                    Click here to RSVP
-                </button>
+                Click here to RSVP
+            </button>
         </div>
-        <div class="rsvp-block rsvp-initial-container" [@inandout]="determineAnimationState(rsvpState.guestsRSVPCompleted)">
+        <div class="rsvp-block rsvp-initial-container"
+            [@inandout]="determineAnimationState(rsvpState.guestsRSVPCompleted)">
             <div class="rsvp-row">
-            <h1 class="rsvp-instruction">
-                Your response has been recorded.
-                <br>
-                You can always edit your response before June 30.
-            </h1>
+                <h1 class="rsvp-instruction">
+                    Your response has been recorded.
+                    <br>
+                    You can always edit your response before June 30.
+                </h1>
             </div>
         </div>
         <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPinitiated)">
@@ -39,7 +40,7 @@
             <div class="rsvp-row">
                 <mat-form-field class="rsvp-initiated-input" appearance="outline">
                     <input matInput required type="text" [formControl]="lastNameFormControl"
-                        (keyup.enter)="saveLastNamePromptCode()" (keydown.tab)="preventDefault($event)" >
+                        (keyup.enter)="saveLastNamePromptCode()" (keydown.tab)="preventDefault($event)">
                 </mat-form-field>
             </div>
         </div>
@@ -47,7 +48,7 @@
         <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.RSVPenterCode)">
             <div class="rsvp-row">
                 <h1 class="rsvp-instruction"> Please enter the RSVP code printed on the inside of your invitation
-                    envolope, underneath the envelope flap. This helps us identify our guests. 
+                    envolope, underneath the envelope flap. This helps us identify our guests.
                     <br>
                     If you cannot find the code, please email jon.ke.hayase@gmail.com.
                 </h1>
@@ -69,27 +70,28 @@
             <div class="rsvp-row">
                 <mat-form-field class="rsvp-initiated-input" appearance="outline">
                     <mat-label>Last Name</mat-label>
-                    <input matInput required type="text" [formControl]="lastNameFormControl"
-                        (keyup.enter)="focusCode()" (keydown.tab)="preventDefault($event)">
+                    <input matInput required type="text" [formControl]="lastNameFormControl" (keyup.enter)="focusCode()"
+                        (keydown.tab)="preventDefault($event)">
                 </mat-form-field>
             </div>
             <div class="rsvp-row">
                 <mat-form-field ngDefaultControl class="rsvp-initiated-input " appearance="outline">
                     <mat-label>RSVP code</mat-label>
-                    <input id='rsvp-invitation-code' matInput required type="text" [formControl]="invitationCodeFormControl"
-                        (keyup.enter)="submitLastName()" (keydown.tab)="preventDefault($event)">
+                    <input id='rsvp-invitation-code' matInput required type="text"
+                        [formControl]="invitationCodeFormControl" (keyup.enter)="submitLastName()"
+                        (keydown.tab)="preventDefault($event)">
                 </mat-form-field>
             </div>
         </div>
-        <div class="rsvp-block" [@inandout]="determineAnimationState(rsvpState.guestsRSVPinitiated)">
-            <div *ngIf="_originalGuests != []">
-                <div *ngFor="let guest of _originalGuests; let i=index">
+        <div *ngFor="let guest of _originalGuests; let i=index" class="rsvp-guest-block">
+            <div class="rsvp-block" [@inandout]="determineAnimationStateForGuestsRSVPinitiated(i)">
+                <div *ngIf="_originalGuests != []">
                     <div class="rsvp-guest-basic">
                         <h1 class="rsvp-name rsvp-guest-basic-name">{{guest.firstName}} {{guest.lastName}}</h1>
-                        <mat-form-field ngDefaultControl class="rsvp-input rsvp-name rsvp-guest-basic-email" appearance="outline">
+                        <mat-form-field ngDefaultControl class="rsvp-input rsvp-name rsvp-guest-basic-email"
+                            appearance="outline">
                             <mat-label>Email Address</mat-label>
-                            <input matInput type="email" [formControl]="guest.email"
-                                name="email" required>
+                            <input matInput type="email" [formControl]="guest.email" name="email" required>
                             <mat-error *ngIf="guest.email.invalid">{{getEmailErrorMessage()}}
                             </mat-error>
                         </mat-form-field>
@@ -110,28 +112,25 @@
                             (click)="guestWillNotAttendHandler(guest)">No</button>
                     </div>
                     <div *ngIf="isGuestAttending(guest)" class="rsvp-guest rsvp-guest-info">
-
                         <div class="rsvp-promp rsvp-guest-info-question1 rsvp-guest-question"> Do we need to prepare a
                             kids meal for you?</div>
                         <button type="boolean" ngDefaultControl
-                            class="rsvp-button rsvp-guest-question-yes rsvp-guest-info-answer1"
-                            mat-raised-button (click)="guestKidsMealToggle(guest, true)"
+                            class="rsvp-button rsvp-guest-question-yes rsvp-guest-info-answer1" mat-raised-button
+                            (click)="guestKidsMealToggle(guest, true)"
                             [class.highlight-button]="guest.kidsMeal">Yes</button>
                         <button type="boolean" ngDefaultControl
-                            class="rsvp-button rsvp-guest-question-no rsvp-guest-info-answer1"
-                            mat-raised-button (click)="guestKidsMealToggle(guest, false)"
+                            class="rsvp-button rsvp-guest-question-no rsvp-guest-info-answer1" mat-raised-button
+                            (click)="guestKidsMealToggle(guest, false)"
                             [class.highlight-button]="!guest.kidsMeal">No</button>
                         <div class="rsvp-promp rsvp-guest-question rsvp-guest-info-question2"> Do we need to prepare a
                             vegetarian meal for you?</div>
 
                         <br>
 
-                        <button ngDefaultControl
-                            class="rsvp-button rsvp-guest-info-answer2 rsvp-guest-question-yes"
+                        <button ngDefaultControl class="rsvp-button rsvp-guest-info-answer2 rsvp-guest-question-yes"
                             mat-raised-button (click)="guestVeganToggle(guest, true)"
                             [class.highlight-button]="guest.vegan">Yes</button>
-                        <button ngDefaultControl
-                            class="rsvp-button rsvp-guest-info-answer2 rsvp-guest-question-no"
+                        <button ngDefaultControl class="rsvp-button rsvp-guest-info-answer2 rsvp-guest-question-no"
                             mat-raised-button (click)="guestVeganToggle(guest, false)"
                             [class.highlight-button]="!guest.vegan">No</button>
 
@@ -139,12 +138,10 @@
 
                         <div class="rsvp-promp rsvp-guest-info-question3 rsvp-guest-question"> Do we need to prepare a
                             gluten-free meal for you?</div>
-                        <button ngDefaultControl
-                            class="rsvp-button rsvp-guest-question-yes rsvp-guest-info-answer3"
+                        <button ngDefaultControl class="rsvp-button rsvp-guest-question-yes rsvp-guest-info-answer3"
                             mat-raised-button (click)="guestGlutonFreeToggle(guest, true)"
                             [class.highlight-button]="guest.glutonFree">Yes</button>
-                        <button ngDefaultControl
-                            class="rsvp-button rsvp-guest-question-no rsvp-guest-info-answer3"
+                        <button ngDefaultControl class="rsvp-button rsvp-guest-question-no rsvp-guest-info-answer3"
                             mat-raised-button (click)="guestGlutonFreeToggle(guest, false)"
                             [class.highlight-button]="!guest.glutonFree">No</button>
 
@@ -162,27 +159,28 @@
                     <br>
                 </div>
             </div>
-            <div *ngIf="_extraGuests != []">
-                <div *ngFor="let guest of _extraGuests; let i=index">
+        </div>
+        <div *ngIf="_extraGuests != []">
+            <div *ngFor="let guest of _extraGuests; let i=index" class="rsvp-guest-block">
+                <div class="rsvp-block"
+                    [@inandout]="determineAnimationStateForGuestsRSVPinitiated(i+_originalGuests.length)">
                     <div class="rsvp-extra-guest-basic">
                         <mat-form-field class="rsvp-input rsvp-name rsvp-extra-guest-first-name" appearance="outline">
                             <mat-label>First Name</mat-label>
-                            <input ngDefaultControl matInput [formControl]="guest.firstName"
-                                name="first_name" required>
+                            <input ngDefaultControl matInput [formControl]="guest.firstName" name="first_name" required>
                             <mat-error *ngIf="guest.firstName.invalid">{{getEmptyErrorMessage()}}
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="rsvp-input rsvp-name rsvp-extra-guest-last-name" appearance="outline">
                             <mat-label>Last Name</mat-label>
-                            <input ngDefaultControl matInput [formControl]="guest.lastName"
-                                name="last_name" required>
+                            <input ngDefaultControl matInput [formControl]="guest.lastName" name="last_name" required>
                             <mat-error *ngIf="guest.lastName.invalid">{{getEmptyErrorMessage()}}
                             </mat-error>
                         </mat-form-field>
-                        <mat-form-field ngDefaultControl class="rsvp-input rsvp-name rsvp-extra-guest-email" appearance="outline">
+                        <mat-form-field ngDefaultControl class="rsvp-input rsvp-name rsvp-extra-guest-email"
+                            appearance="outline">
                             <mat-label>Email Address</mat-label>
-                            <input matInput type="email" [formControl]="guest.email"
-                                name="email" required>
+                            <input matInput type="email" [formControl]="guest.email" name="email" required>
                             <mat-error *ngIf="guest.email.invalid">{{getEmailErrorMessage()}}
                             </mat-error>
                         </mat-form-field>
@@ -200,24 +198,22 @@
                             kids
                             meal for you?</div>
                         <button type="boolean" ngDefaultControl
-                            class="rsvp-button rsvp-guest-info-answer1 rsvp-guest-question-yes"
-                            mat-raised-button (click)="guestKidsMealToggle(guest, true)"
+                            class="rsvp-button rsvp-guest-info-answer1 rsvp-guest-question-yes" mat-raised-button
+                            (click)="guestKidsMealToggle(guest, true)"
                             [class.highlight-button]="guest.kidsMeal">Yes</button>
                         <button type="boolean" ngDefaultControl
-                            class="rsvp-button rsvp-guest-info-answer1 rsvp-guest-question-no"
-                            mat-raised-button (click)="guestKidsMealToggle(guest, false)"
+                            class="rsvp-button rsvp-guest-info-answer1 rsvp-guest-question-no" mat-raised-button
+                            (click)="guestKidsMealToggle(guest, false)"
                             [class.highlight-button]="!guest.kidsMeal">No</button>
 
                         <br>
 
                         <div class="rsvp-promp rsvp-guest-info-question2 rsvp-guest-question"> Do we need to prepare a
                             vegetarian meal for you?</div>
-                        <button ngDefaultControl
-                            class="rsvp-button rsvp-guest-info-answer2 rsvp-guest-question-yes"
+                        <button ngDefaultControl class="rsvp-button rsvp-guest-info-answer2 rsvp-guest-question-yes"
                             mat-raised-button (click)="guestVeganToggle(guest, true)"
                             [class.highlight-button]="guest.vegan">Yes</button>
-                        <button ngDefaultControl
-                            class="rsvp-button rsvp-guest-info-answer2 rsvp-guest-question-no"
+                        <button ngDefaultControl class="rsvp-button rsvp-guest-info-answer2 rsvp-guest-question-no"
                             mat-raised-button (click)="guestVeganToggle(guest, false)"
                             [class.highlight-button]="!guest.vegan">No</button>
 
@@ -225,12 +221,10 @@
 
                         <div class="rsvp-promp rsvp-guest-info-question3 rsvp-guest-question"> Do we need to prepare a
                             gluten-free meal for you?</div>
-                        <button ngDefaultControl
-                            class="rsvp-button rsvp-guest-info-answer3 rsvp-guest-question-yes"
+                        <button ngDefaultControl class="rsvp-button rsvp-guest-info-answer3 rsvp-guest-question-yes"
                             mat-raised-button (click)="guestGlutonFreeToggle(guest, true )"
                             [class.highlight-button]="guest.glutonFree">Yes</button>
-                        <button ngDefaultControl
-                            class="rsvp-button rsvp-guest-info-answer3 rsvp-guest-question-no"
+                        <button ngDefaultControl class="rsvp-button rsvp-guest-info-answer3 rsvp-guest-question-no"
                             mat-raised-button (click)="guestGlutonFreeToggle(guest, false)"
                             [class.highlight-button]="!guest.glutonFree">No</button>
 
@@ -239,8 +233,7 @@
                         <mat-form-field ngDefaultControl class="rsvp-textarea rsvp-name rsvp-guest-info-additional"
                             appearance="outline">
                             <mat-label>Additional Requests</mat-label>
-                            <textarea matInput type="text"
-                                [formControl]="guest.message"></textarea>
+                            <textarea matInput type="text" [formControl]="guest.message"></textarea>
                         </mat-form-field>
                     </div>
                     <br>
@@ -248,13 +241,15 @@
                     <br>
                 </div>
             </div>
-            <div *ngIf="allowExtraGuest">
-                <button class="rsvp-submit" class="rsvp-center" mat-raised-button
-                    (click)="addGuest()">Add Extra Guest</button>
-            </div>
-
         </div>
+             <!-- <div *ngIf="allowExtraGuest" class="rsvp-block">
+                <div class="rsvp-promp"> To respond for your guest: </div>
+                <br>
+                <button class="rsvp-submit" class="rsvp-center" mat-raised-button (click)="addGuest()">Add Extra
+                    Guest</button>
+            </div>  -->
+
     </div>
 
     <img class="rsvp-corner-floral" src="./../../assets/25.png">
-</div>
+</div> 
