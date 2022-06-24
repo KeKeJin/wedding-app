@@ -490,7 +490,6 @@ export class RsvpComponent {
 
 
   goBacktoPreviousState(e: any) {
-    this.preventDefault(e);
     switch(this._state) {
       case RSVPState.guestsRSVPCompleted:
       case RSVPState.RSVPinitiated: {
@@ -518,7 +517,6 @@ export class RsvpComponent {
   }
 
   gotoNextState(e: any) {
-    this.preventDefault(e);
     switch(this._state) {
       case RSVPState.RSVPInitial: {
         this._state = RSVPState.RSVPinitiated;
