@@ -318,10 +318,8 @@ export class RsvpComponent {
 
   async submitForm() {
     this.originalandGuestsGuestsToGuests();
-    console.log("clicked", this._guests);
     const url = new URL(this._URL);
     url.searchParams.append('rsvpResult', JSON.stringify(this._guests));
-    console.log('guests are', JSON.stringify(this._guests))
     this._isLoading = true;
     const respond = await fetch(url.href, {
       method: 'POST'
@@ -538,8 +536,6 @@ export class RsvpComponent {
       }
       case RSVPState.guestsRSVPinitiated: {
         this._guestRespondedCount += 1;
-        console.log("current guest id: ", this._guestRespondedCount);
-        console.log("total guests ", this._originalGuests?.length + this._extraGuests.length )
         if (this._guestRespondedCount == this._originalGuests?.length + this._extraGuests.length) {
           if (this.allowExtraGuest) {
             this.openDialog();
@@ -582,7 +578,6 @@ export class RsvpComponent {
       e.preventDefault();
     if (this.lastNameFormControl.status == 'VALID'){
         this.saveLastNamePromptCode();
-        console.log(this.lastNameFormControl)
       }
     }
     else if (this._state == RSVPState.RSVPenterCode) {
@@ -590,9 +585,6 @@ export class RsvpComponent {
 
       if (this.invitationCodeFormControl.status == 'VALID') {
       this.submitLastName();
-      }
-      else {
-        console.log(this.invitationCodeFormControl)
       }
     }
     else if (this._state == RSVPState.lastNameNotVerified) {
