@@ -55,7 +55,7 @@ export class AppComponent {
           label: 'RSVP',
           link: './rsvp',
           index: 9
-          }, 
+          }
     ];
     translate.addLangs(['en', 'zh']);
     translate.setDefaultLang('en');
@@ -73,7 +73,6 @@ export class AppComponent {
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
         this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
-        console.log("link: ", this.activeLinkIndex)
     });
   }
 
@@ -98,7 +97,6 @@ export class AppComponent {
   isInViewport(element: HTMLElement): boolean {
     var rect = element.getBoundingClientRect();
     var html = document.documentElement;
-    console.log(rect)
     return (
         rect.top >= 0 &&
         rect.left >= 0 &&
@@ -111,6 +109,15 @@ export class AppComponent {
     if ( window.innerWidth <= 500) {
       return true;
     } else {
+      return false;
+    }
+  }
+
+  get isRehearsalDinner() {
+    if (window.location.href.includes('rehearsal-dinner')) {
+      return true;
+    }
+    else {
       return false;
     }
   }

@@ -25,6 +25,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog'
+import { RehearsalDinnerComponent } from './rehearsal-dinner/rehearsal-dinner.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -41,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RsvpComponent,
     AboutUsComponent,
     CountDownComponent,
+    RehearsalDinnerComponent
   ],
   imports: [
     BrowserModule,
