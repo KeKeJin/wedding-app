@@ -7,6 +7,7 @@ import { TravelComponent } from './travel/travel.component';
 import { RegistryComponent } from './registry/registry.component';
 import { RsvpComponent } from './rsvp/rsvp.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { RehearsalDinnerComponent } from './rehearsal-dinner/rehearsal-dinner.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component:  HomeComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'travel', component: TravelComponent},
   { path: 'registry', component: RegistryComponent},
   { path: 'rsvp', component: RsvpComponent},
+  { path: 'rehearsal-dinner', component: RehearsalDinnerComponent},
 ];
 export const appRouting = RouterModule.forRoot(routes);
 @NgModule({

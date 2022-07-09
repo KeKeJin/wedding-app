@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { TravelComponent } from './travel/travel.component';
 import { RegistryComponent } from './registry/registry.component';
-import { RsvpComponent } from './rsvp/rsvp.component';
+import { DialogMoreGuestDialog, RsvpComponent } from './rsvp/rsvp.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
@@ -24,6 +24,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog'
+import { RehearsalDinnerComponent } from './rehearsal-dinner/rehearsal-dinner.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -32,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    DialogMoreGuestDialog,
     HomeComponent,
     ScheduleComponent,
     TravelComponent,
@@ -39,11 +42,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     RsvpComponent,
     AboutUsComponent,
     CountDownComponent,
+    RehearsalDinnerComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatOptionModule,

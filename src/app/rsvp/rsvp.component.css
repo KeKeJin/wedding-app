@@ -12,6 +12,11 @@
     bottom: -50vh;
 }
 
+.rsvp-guest-block {
+    transform: translateX(100vw);
+    z-index: 110;
+}
+
 ::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
 ::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
 
@@ -23,6 +28,7 @@
 .position-relative {
     position: relative;
     overflow-x: clip;
+    z-index: 110;
     /* -webkit-overflow: hidden; */
     /* transform: translate3d(0, 0, 0); */
 }

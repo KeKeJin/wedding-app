@@ -1,65 +1,72 @@
-<div *ngIf="shouldChangeMenu()">
-    <div class="hamburger-nav-bar">
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" class="hamburger-menu" >
-        <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(home, '/home')">
-            <span class="hamburger-menu-text" >{{'APP.HOME' | translate}}</span>
-        </button>
-        <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(schedule, '/schedule')">
-            <span class="hamburger-menu-text">{{'APP.SCHEDULE' | translate}}</span>
-        </button>
-        <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(us, '/us')">
-            <span class="hamburger-menu-text">{{'APP.ABOUT_US' | translate}}</span>
+<div>
+    <div [hidden]="isRehearsalDinner">
+    <div *ngIf="shouldChangeMenu()">
+        <div class="hamburger-nav-bar">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>menu</mat-icon>
             </button>
-        <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(travel, '/travel')">
-            <span class="hamburger-menu-text">{{'APP.TRAVEL' | translate}}</span>
-        </button>
-        <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(rsvp, '/rsvp')">
-        <span class="hamburger-menu-text">{{'APP.RSVP' | translate}}</span>
-        </button> 
-        <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(registry, '/registry')">
-        <span class="hamburger-menu-text">{{'APP.REGISTRY' | translate}}</span>
-        </button>
-        </mat-menu>
-        <label class="hamburger-menu-switcher">
+            <mat-menu #menu="matMenu" class="hamburger-menu" >
+            <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(home, '/home')">
+                <span class="hamburger-menu-text" >{{'APP.HOME' | translate}}</span>
+            </button>
+            <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(schedule, '/schedule')">
+                <span class="hamburger-menu-text">{{'APP.SCHEDULE' | translate}}</span>
+            </button>
+            <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(us, '/us')">
+                <span class="hamburger-menu-text">{{'APP.ABOUT_US' | translate}}</span>
+                </button>
+            <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(travel, '/travel')">
+                <span class="hamburger-menu-text">{{'APP.TRAVEL' | translate}}</span>
+            </button>
+            <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(rsvp, '/rsvp')">
+            <span class="hamburger-menu-text">{{'APP.RSVP' | translate}}</span>
+            </button> 
+            <button mat-menu-item class="hamburger-menu-item" (click)="scrollToElement(registry, '/registry')">
+            <span class="hamburger-menu-text">{{'APP.REGISTRY' | translate}}</span>
+            </button>
+            </mat-menu>
+            <label class="hamburger-menu-switcher">
+                <input type="checkbox" (change)="onLanguageToggled()">
+                <span class="slider tab-slider"> EN  文</span>
+            </label>
+        </div>
+
+    </div>
+    <div *ngIf="!shouldChangeMenu()">
+        <div class="nav-bar">
+            <button mat-flat-button class="tab" (click)="scrollToElement(home, '/home')">{{'APP.HOME' | translate}}</button>
+            <button mat-flat-button class="tab" (click)="scrollToElement(schedule, '/schedule')">{{'APP.SCHEDULE' | translate}}</button>
+            <button mat-flat-button class="tab" (click)="scrollToElement(us, '/us')">{{'APP.ABOUT_US' | translate}}</button>
+            <button mat-flat-button class="tab" (click)="scrollToElement(travel, '/travel')">{{'APP.TRAVEL' | translate}}</button>
+            <button mat-flat-button class="tab" (click)="scrollToElement(rsvp, '/rsvp')">{{'APP.RSVP' | translate}}</button>
+            <button mat-flat-button class="tab" (click)="scrollToElement(registry, '/registry')">{{'APP.REGISTRY' | translate}}</button>
+            <label class="switch mat-icon-button">
             <input type="checkbox" (change)="onLanguageToggled()">
-            <span class="slider tab-slider"> EN  文</span>
-        </label>
+            <span class="slider tab-slider">EN  文</span>
+            </label>
+        </div>
     </div>
 
-</div>
-<div *ngIf="!shouldChangeMenu()">
-    <div class="nav-bar">
-        <button mat-flat-button class="tab" (click)="scrollToElement(home, '/home')">{{'APP.HOME' | translate}}</button>
-        <button mat-flat-button class="tab" (click)="scrollToElement(schedule, '/schedule')">{{'APP.SCHEDULE' | translate}}</button>
-        <button mat-flat-button class="tab" (click)="scrollToElement(us, '/us')">{{'APP.ABOUT_US' | translate}}</button>
-        <button mat-flat-button class="tab" (click)="scrollToElement(travel, '/travel')">{{'APP.TRAVEL' | translate}}</button>
-        <button mat-flat-button class="tab" (click)="scrollToElement(rsvp, '/rsvp')">{{'APP.RSVP' | translate}}</button>
-        <button mat-flat-button class="tab" (click)="scrollToElement(registry, '/registry')">{{'APP.REGISTRY' | translate}}</button>
-        <label class="switch mat-icon-button">
-        <input type="checkbox" (change)="onLanguageToggled()">
-        <span class="slider tab-slider">EN  文</span>
-        </label>
+    <div #home>
+        <app-home></app-home>
     </div>
+    <div #schedule>
+        <app-schedule ></app-schedule>
+    </div>
+    <div #us>
+        <app-about-us></app-about-us>
+    </div>
+    <div #travel>
+        <app-travel></app-travel>
+    </div>
+    <div #rsvp>
+        <app-rsvp></app-rsvp>
+    </div>
+    <div #registry>
+        <app-registry></app-registry>
+    </div>
+</div> 
+<div [hidden]="!isRehearsalDinner">
+<app-rehearsal-dinner></app-rehearsal-dinner>
 </div>
-
-<div #home>
-    <app-home></app-home>
-</div>
-<div #schedule>
-    <app-schedule ></app-schedule>
-</div>
-<div #us>
-    <app-about-us></app-about-us>
-</div>
-<div #travel>
-    <app-travel></app-travel>
-</div>
-<div #rsvp>
-    <app-rsvp></app-rsvp>
-</div>
-<div #registry>
-    <app-registry></app-registry>
 </div>
