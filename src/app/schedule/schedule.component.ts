@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScheduleComponent implements OnInit {
 
-  date = new Date('2022-07-30T17:30:00-08:00');
+  date = new Date('2022-07-30T17:30:00-07:00');
   constructor() { }
 
   ngOnInit(): void {
